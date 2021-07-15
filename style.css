@@ -2,10 +2,20 @@
     text-align: center;
     }
 h1 {
+  color:darkgoldenrod;
       text-align: center;
+      font-family: 'Times New Roman', Times, serif;
     }
+.navbar {
+  background-color: darkgoldenrod;
+}
+.btn {
+font-family: 'Times New Roman', Times, serif;
+color: darkgoldenrod;
+border-color: darkgoldenrod;
+}
 body {
-        background-color:darkblue;
+        background-color:white;
       }
 h5 {
         text-align: center;
@@ -17,3 +27,7 @@ h3 {
       {
         border-left-color: black;
       }
+.barra {
+  background-color: #1A0C75;
+  
+}
