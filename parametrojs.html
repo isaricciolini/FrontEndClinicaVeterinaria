@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ! adicionado o js para pegar parametros do link -->
+    <script src="jsparameters.js"></script>
+
+    <title>Centro Veterinário</title>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Exemplo de consulta de parâmetro no JS:</h3>
+        <p>Abra esta página e coloque o parâmetro nome no final do link.</p>
+        <p>Ex: parametrojs.html?nome=Ronaldo</p>
+        <p>Se o parâmetro for informando corretamente, você verá o valor do nome no parágrafo abaixo.</p>
+        <p>O nome é <span id="nome"></span></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- ! aqui está o JS para exibir o nome informado no parâmetro dentro da frase no HTML -->
+    <script>
+        var spanNome = document.querySelector("#nome");
+        parametro = getParam("nome");
+        if (parametro)
+            spanNome.innerHTML = parametro;
+        else
+            spanNome.innerHTML = "(você não informou o parâmetro corretamente)";
+    </script>
+</body>
+
+</html>
