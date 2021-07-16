@@ -1,33 +1,53 @@
 .centralizado {
-    text-align: center;
-    }
+  text-align: center;
+}
+
+.container-fluid {
+  overflow: hidden;
+}
+
 h1 {
-  color:darkgoldenrod;
-      text-align: center;
-      font-family: 'Times New Roman', Times, serif;
-    }
+  color: darkgoldenrod;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .navbar {
   background-color: darkgoldenrod;
 }
+
 .btn {
-font-family: 'Times New Roman', Times, serif;
-color: darkgoldenrod;
-border-color: darkgoldenrod;
+  font-family: 'Times New Roman', Times, serif;
+  color: darkgoldenrod;
+  border-color: darkgoldenrod;
 }
+
 body {
-        background-color:white;
-      }
+  background-color: white;
+}
+
 h5 {
-        text-align: center;
-      }
+  text-align: center;
+}
+
 h3 {
-        text-align: center;
-      }
-.borda
-      {
-        border-left-color: black;
-      }
-.barra {
-  background-color: #1A0C75;
-  
+  text-align: center;
+}
+
+.borda {
+  border-left-color: black;
+}
+
+._barralateral {
+  background-image: linear-gradient(180deg, #3a37df 0%, rgb(231, 71, 22) 80%);
+  min-height: 100vh;
+  margin-left: 0rem;
+  transition: margin 0.25s ease-out;
+}
+
+._botaosidebar {
+  font-family: 'Times New Roman', Times, serif;
+  color: darkgoldenrod;
+  background-color: #212123;
+  border-color: darkgoldenrod;
 }
