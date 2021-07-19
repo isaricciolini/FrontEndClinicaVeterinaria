@@ -148,7 +148,7 @@ function excluirAnimal(codAnimal) {
             pesquisarAnimais();
         }
     };
-    xhttp.open('DELETE', `${url}/${codAnimal}`, true);
+    xhttp.open('DELETE', `${url}?codAnimal=${codAnimal}`, true);
     xhttp.send();
 }
 
