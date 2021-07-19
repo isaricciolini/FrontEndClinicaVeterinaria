@@ -12,9 +12,36 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-</style>
+    <style>
+        .table-responsive {
+            display: block;
+            position: relative;
+            width: 100%;
+        }
 
+        #my_form {
+            display: none;
+        }
+
+        #my_form2 {
+            display: none;
+        }
+
+        #my_form3 {
+            display: none;
+        }
+
+
+        .btn {
+            font-family: 'Times New Roman', Times, serif;
+            color: darkgoldenrod;
+            border-color: darkgoldenrod;
+            text-align: center;
+        }
+
+    </style>
     <title>Centro Veterinário</title>
 </head>
 
@@ -62,12 +89,180 @@
                 <hr>
                 <h1>Veterinários</h1>
                 <hr>
-                <div>
+                <button type="button" id="btn_form" class="btn btn-dark">Cadastrar</button>
+                <button type="button" id="btn_form2" class="btn btn-dark">Alterar</button>
+                <button type="button" id="btn_form3" class="btn btn-dark">Excluir</button>
+                <br>
+                <div class="tabelas col-sm-6">
+                    <form id="my_form" method="get" action=".">
+                        <br>
+                        <div class="form-group my-3">
+                            <label>Nome Completo:</label>
+                            <input name="textNovoNomeVeterinario" type="text" id="textNovoNomeVeterinario" size="40">
+                        </div>
+                        <div class="form-group my-3">
+                            <label>Data de Nascimento:
+                                <input name="textNovoNascimento" type="date" id="textNovoNascimento" size="40"></label>
+                        </div>
+                        <br>
+                        <div class="form-group my-3">
+                            <label>CPF:
+                                <input name="textNovoCPF" type="text" id="textNovoCPF" size="30"></label>
+                        </div>
+
+                        <div class="form-group my-3" style="float:right">
+                            <label>Telefone:
+                                <input name="textNovoTelefone" type="text" id="textNovoTelefone" size="30"></label>
+                        </div>
+                        <br>
+                        <div class="form-group my-3">
+                            <label>Email:
+                                <input name="textNovoEmail" type="text" id="textNovoEmail" size="40"
+                                    placeholder="nome@exemplo.com"></label>
+                        </div>
+
+                        <div class="form-group my-3" style="float:right">
+                            <label>CRMV:
+                                <input name="textNovoCRMV" type="text" id="textNovoCRMV" size="30"
+                                    placeholder="12345-AB"></label>
+                        </div>
+
+                        <div class="form-group my-3" method="get" action=".">
+                            <label>CEP:
+                                <input name="textNovoCEP" type="text" id="textNovoCEP" value="" size="10" maxlength="9"
+                                    onblur="pesquisacep(this.value);" /></label>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <label>Rua:
+                                <input name="textNovoRua" type="text" id="textNovoRua" size="60"></label>
+                        </div>
+
+                        <div class="form-group my-3" style="float:right">
+                            <label>Número:
+                                <input name="textNovoNumero" type="text" id="textNovoNumero" size="10"></label>
+                        </div>
+
+                        <div class="form-group my-3" style="float:right">
+                            <label>Complemento:
+                                <input name="textNovoComplemento" type="text" id="textNovoComplemento"
+                                    size="20"></label>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <label>Bairro:
+                                <input name="textNovoBairro" type="text" id="textNovoBairro" size="60"></label>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <label>Cidade:
+                                <input name="textNovoCidade" type="text" id="textNovoCidade" size="60"></label>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-dark my-4" onclick="cadastrarVeterinario()">Enviar</button>
+                    </form>
+                </div>
+
+
+                <br>
+                <div class="tabelas">
+                    <form id="my_form2" method="get" action="." class="tabelas">
+                        <div class="form-group sm-6">
+                            <label>CodVeterinario:
+                                <input name="textCodVeterinario" type="number" id="textCodVeterinario"
+                                    size="60" /></label>
+                        </div>
+                        <br>
+                        <div class="form-group sm-6">
+                            <label>Nome Completo:
+                                <input name="textNomeVeterinarioAlterar" type="text" id="textNomeVeterinarioAlterar"
+                                    size="60" /></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Data de Nascimento:
+                                <input name="textNascimentoAlterar" type="date" id="textNascimentoAlterar"
+                                    size="60"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>CPF:
+                                <input name="textCPFAlterar" type="text" id="textCPFAlterar" size="60"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Telefone:
+                                <input name="textTelefoneAlterar" type="text" id="textTelefoneAlterar"
+                                    size="60"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Email:
+                                <input name="textEmailAlterar" type="text" id="textEmailAlterar" size="60"
+                                    placeholder="nome@exemplo.com"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>CRMV:
+                                <input name="textCRMVAlterar" type="text" id="textCRMVAlterar" size="60"
+                                    placeholder="12345-AB"></label>
+                        </div>
+                        <br>
+                        <div class="form-group" method="get" action=".">
+                            <label>CEP:
+                                <input name="textCEPAlterar" type="text" id="textCEPAlterar" value="" size="10"
+                                    maxlength="9" onblur="pesquisacep(this.value);" /></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Rua:
+                                <input name="textRuaAlterar" type="text" id="textRuaAlterar" size="100"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Número:
+                                <input name="textNumeroAlterar" type="text" id="textNumeroAlterar" size="20"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Complemento:
+                                <input name="textComplementoAlterar" type="text" id="textComplementoAlterar"
+                                    size="20"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Bairro:
+                                <input name="textBairroAlterar" type="text" id="textBairroAlterar" size="60"></label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Cidade:
+                                <input name="textCidadeAlterar" type="text" id="textCidadeAlterar" size="60"></label>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-dark my-4" onclick="alterarVeterinario()">Enviar</button>
+                    </form>
+                </div>
+                <br>
+                <div class="tabelas">
+                    <form id="my_form3" method="get" action=".">
+                        <div class="form-group sm-6">
+                            <label>CodVeterinario:
+                                <input name="textCodVeterinarioExcluir" type="number" id="textCodVeterinarioExcluir"
+                                    size="60"></label>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-dark my-4" onclick="excluirVeterinario()">Enviar</button>
+                    </form>
+                </div>
+                <br>
+                <div class="my-5">
                     <button type="button" class="btn btn-dark" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
                 </div>
                 <div id="divFiltro" style="display: none;">
                     <br>
                     <div class="row">
+
                         <div class="col-sm-12">
                             <label for="textFiltro" class="form-label">Filtrar resultados</label>
                             <input type="text" class="form-control" id="textFiltro"
@@ -76,10 +271,11 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-hover" id="tabela" style="scale: 0.6;">
-                    <thead>
+                <table class="table-responsive table-hover table-bordered table-sm my-4" id="tabela"
+                    style="border-radius: 0.5cm;">
+                    <thead style="text-align: center;">
                         <tr>
-                            <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(1)')">CodVeterinario</th>
+                            <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(1)')">CodVeterinário</th>
                             <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(2)')">Nome</th>
                             <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(3)')">Data Nascimento</th>
                             <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(4)')">CPF</th>
@@ -89,21 +285,22 @@
                             <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(8)')">Rua</th>
                             <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(9)')">Número</th>
                             <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(10)')">Complemento</th>
-                            <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(11)')">Bairro</th>
-                            <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(12)')">Cidade</th>
-                            <th></th>
-                            <th></th>
+                            <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(11)')">CEP</th>
+                            <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(12)')">Bairro</th>
+                            <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(13)')">Cidade</th>
                         </tr>
                     </thead>
-                    <tbody id="corpoTabela">
+                    <tbody id="corpoTabela" style="text-align: center;">
                         <!-- aqui serão listadas as consultas cadastradas no banco -->
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
+
 
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
