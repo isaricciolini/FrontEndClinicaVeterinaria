@@ -9,10 +9,14 @@ var textDeficienciaAnimal = document.getElementById('textDeficienciaAnimal');
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var codAnimalAlterar = 0;
 var textNomeAnimalAlterar = document.getElementById('textNomeAnimalAlterar');
-var textNascimentoAlterar = document.getElementById('textDateTimeNascimentoAlterar');
+var textNascimentoAlterar = document.getElementById('textNascimentoAlterar');
 var textRacaAlterar = document.getElementById('textRacaAlterar');
 var textTipoAlterar = document.getElementById('textTipoAlterar');
 var textDeficienciaAlterar = document.getElementById('textDeficienciaAlterar');
+var textCodClienteAlterar = document.getElementById('textCodClienteAlterar');
+var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
+var textCodCliente = document.getElementById('textCodCliente');
+
 
 pesquisarAnimais();
 
@@ -46,33 +50,90 @@ function pesquisarAnimais() {
     xhttp.send();
 }
 
+function abrirCadastrar() {
+    modalCadastrar.show();
+}
+
 function cadastrarAnimal() {
-    var nome = textNomeAnimal.value;
+    var nomeAnimal = textNomeAnimal.value;
     var nascimento = textNascimentoAnimal.value;
     var raca = textRacaAnimal.value;
     var tipo = textTipoAnimal.value;
     var deficiencia = textDeficienciaAnimal.value;
-    if (!nome || !nascimento || !raca || !tipo) {
+    var codCliente = textCodCliente.value;
+    if (!nomeAnimal || !nascimento || !raca || !tipo || !codCliente) {
         alert('Preencha os campos para cadastrar!');
         return;
     }
     var animal = {
-        nome: nome,
+        nomeAnimal: nomeAnimal,
         nascimento: nascimento,
         raca: raca,
-        tipo: tipo
+        tipo: tipo,
+        deficiencia: deficiencia,
+        codCliente: codCliente
     };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.Status == 200) {
-            alert(`${animal.nome} cadastrado com sucesso!`);
+        if (this.readyState == 4 && this.status == 200) {
+            alert(`${animal.nomeAnimal}cadastrado com sucesso!`);
             limpar();
             pesquisarAnimais();
-        } else if (this.readyState == 4) {
+            modalCadastrar.hide();
+        } 
+        else if (this.readyState == 4) {
             alert('Não foi possivel cadastrar animal.');
         }
     };
     xhttp.open('POST', url, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(animal));
+}
+
+function abrirAlterar(codAnimal) {
+    codAnimalAlterar = codAnimal;
+    var nomeAnimal = document.getElementById(`nomeAnimal${codAnimal}`).innerHTML;
+    var nascimento = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
+    var raca = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
+    var tipo = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
+    //var codCliente = document.getElementById(`codCliente${codAnimal}`).innerHTML;
+    textNomeAnimalAlterar.value = nomeAnimal;
+    textNascimentoAlterar.value = nascimento;
+    textRacaAlterar.value = raca;
+    textTipoAlterar.value = tipo;
+    //textCodClienteAlterar.value = codCliente;
+    modalAlterar.show();
+}
+
+function alterarAnimal() {
+    var nomeAnimal = textNomeAnimalAlterar.value;
+    var nascimentoAnimal = textNascimentoAlterar.value;
+    var racaAnimal = textRacaAlterar.value;
+    var tipoAnimal = textTipoAlterar.value; 
+    var codCliente = textCodClienteAlterar.value;
+    if (!nomeAnimal || !nascimentoAnimal || !racaAnimal || !tipoAnimal || !codCliente) {
+        alert('Preencha os campos para alterar!');
+        return;
+    }
+    var animal = {
+        nomeAnimal: nomeAnimal,
+        nascimento: nascimentoAnimal,
+        raca: racaAnimal,
+        tipo: tipoAnimal,
+        codAnimal: codAnimalAlterar,
+        codCliente: codCliente
+    };
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(`${animal.nomeAnimal} Alterado(a) com sucesso!`);
+            pesquisarAnimais();
+            modalAlterar.hide();
+        } else if (this.readyState == 4) {
+            alert('Não foi possível alterar o seu animal.');
+        }
+    };
+    xhttp.open('PUT', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(animal));
 }
@@ -89,51 +150,6 @@ function excluirAnimal(codAnimal) {
     };
     xhttp.open('DELETE', `${url}/${codAnimal}`, true);
     xhttp.send();
-}
-
-function abrirAlterar(codAnimal) {
-    codAnimalAlterar = codAnimal;
-    var nomeAnimal = document.getElementById(`nomeAnimal${codAnimal}`).innerHTML;
-    var nascimento = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
-    var raca  = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
-    var tipo = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
-    textNomeAnimalAlterar.value = nomeAnimal;
-    textNascimentoAlterar.value = nascimento;
-    textRacaAlterar.value = raca;
-    textTipoAlterar.value = tipo;
-    modalAlterar.show();
-}
-
-function alterarAnimal() {
-    var nomeAnimal = textNomeAnimalAlterar.value;
-    var nascimentoAnimal = textNascimentoAlterar.value;
-    var racaAnimal = textRacaAlterar.value;
-    var tipoAnimal = textTipoAlterar.value; 
-    if (!nomeAnimal || !nascimentoAnimal || !racaAnimal || !tipoAnimal) {
-        alert('Preencha os campos para alterar!');
-        return;
-    }
-    var animal = {
-        nomeAnimal: nomeAnimal,
-        nascimentoAnimal: nascimentoAnimal,
-        racaAnimal: racaAnimal,
-        tipoAnimal: tipoAnimal,
-        codAnimal: codAnimalAlterar
-    };
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange == function () {
-        if (this.readyState == 4 && this.Status == 200) {
-            alert(`${animal.nomeAnimal} Alterado(a) com sucesso!`);
-            limpar();
-            pesquisarAnimais();
-            modalAlterar.hide();
-        } else if (this.readyState == 4) {
-            alert('Não foi possível alterar o seu animal.');
-        }
-    };
-    xhttp.open('PUT', url, true);
-    xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(JSON.stringify(animal));
 }
 
 function limpar() {
