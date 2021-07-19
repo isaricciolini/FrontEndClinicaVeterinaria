@@ -20,26 +20,26 @@ function pesquisarAnimais() {
     corpoTabela.innerHTML = '';
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.Status == 200) {
+        if (this.readyState == 4 && this.status == 200) {
             console.log(this.response)
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
-                var animal = respota[i];
+                var animal = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td>${animal.codAnimal}</td>`;
                 linha += `<td id="nomeAnimal${animal.codAnimal}">${animal.nomeAnimal}</td>`;
-                linha += `<td id="nascimentoAnimal${animal.codAnimal}">${animal.nascimentoAnimal}</td>`;
-                linha += `<td id="racaAnimal${animal.codAnimal}">${animal.racaAnimal}</td>`;
-                linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipoAnimal}</td>`;
-                linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficienciaAnimal}</td>`;
-                linha += `<td><a onclick="abrirAlterarAnimal(${animal.codAnimal})">Alterar</a></td>`;
-                linha += `<td><a onclick="excluirAnimal(${animal.codAnimal})">Excluir</a></td>`;
+                linha += `<td id="nascimentoAnimal${animal.codAnimal}">${animal.nascimento}</td>`;
+                linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
+                linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
+                linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
+                linha += `<td><button onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
+                linha += `<td><button onclick="excluirAnimal(${animal.codAnimal})">Excluir</button></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }
-            //w3.sortHTML('#tabela','.item', 'td:nth-child(1)'); 
-        } else if (this.response == 4) {
-            corpoTabela.innerHTML = 'Erro ao pesquisar animais.';
+            w3.sortHTML('#tabela','.item', 'td:nth-child(1)'); 
+        } else if (this.readyState == 4) {
+            corpoTabela.innerHTML = 'Erro ao pesquisar animais';
         }
     };
     xhttp.open('GET', `${url}`, true);
@@ -94,13 +94,13 @@ function excluirAnimal(codAnimal) {
 function abrirAlterar(codAnimal) {
     codAnimalAlterar = codAnimal;
     var nomeAnimal = document.getElementById(`nomeAnimal${codAnimal}`).innerHTML;
-    var nascimentoAnimal = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
-    var racaAnimal  = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
-    var tipoAnimal = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
+    var nascimento = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
+    var raca  = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
+    var tipo = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
     textNomeAnimalAlterar.value = nomeAnimal;
-    textNascimentoAlterar.value = nascimentoAnimal;
-    textRacaAlterar.value = racaAnimal;
-    textTipoAlterar.value = tipoAnimal;
+    textNascimentoAlterar.value = nascimento;
+    textRacaAlterar.value = raca;
+    textTipoAlterar.value = tipo;
     modalAlterar.show();
 }
 
