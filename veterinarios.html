@@ -32,60 +32,61 @@
         #my_form3 {
             display: none;
         }
-
-
-        .btn {
-            font-family: 'Times New Roman', Times, serif;
-            color: darkgoldenrod;
-            border-color: darkgoldenrod;
-            text-align: center;
-        }
-
     </style>
-    <title>Centro Veterinário</title>
+    <title>Veterinário - Centro Veterinário</title>
 </head>
+
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand _navbartext" href="#"><img src="logo.png" width="50px" class="img-fluid mx-auto"
+                    alt="">Centro Veterinario</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCenter"
+                aria-controls="navbarCenter" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCenter">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link _navbartext" href="#">Clientes
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link _navbartext" href="#">Animais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link _navbartext" href="#">Consultas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Image and text -->
-            <nav class="navbar navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="#">
-                    <img src="logo.png" width="60" height="40" class="d-inline-block align-top" alt="">
-                    Centro Veterinário
-                </a>
-            </nav>
-            <div class="col-sm-2 my-4 _barralateral">
-                <hr>
-                <img class="centralizado img-fluid mt-5" src="logo.png" width="400" height="400">
-                <h1>Centro Veterinário</h1>
-                <hr>
-                <div class="col-sm-12 btn-group-vertical">
+            <!-- Inicio Sidebar -->
+            <div class="col-sm-2 _barralateral">
+                <div class="btn-group-vertical mt-4">
                     <div class="btn-group dropend _botaosidebar">
                         <button type="button" class="btn btn-outline-dark _botaosidebar">Consultas</button>
-
                     </div>
-                    <hr>
                     <div class="btn-group dropend _botaosidebar">
                         <button type="button" class="btn btn-outline-dark _botaosidebar">Clientes</button>
-
                     </div>
-                    <hr>
                     <div class="btn-group dropend _botaosidebar">
                         <button type="button" class="btn btn-outline-dark _botaosidebar">Animais</button>
-
                     </div>
-                    <hr>
-                    <hr>
-                    <hr>
                     <div class="btn-group dropend _botaosidebar">
                         <button type="button" class="btn btn-outline-dark _botaosidebar">Veterinários</button>
-
                     </div>
-                    <hr>
                 </div>
             </div>
-            <div class="col-sm-10 my-5">
+            <!-- Fim Sidebar -->
+            <div class="col-sm-10">
                 <hr>
                 <h1>Veterinários</h1>
                 <hr>
