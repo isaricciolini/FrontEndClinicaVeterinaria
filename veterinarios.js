@@ -32,6 +32,7 @@ var textBairroAlterar = document.getElementById('textBairroAlterar');
 var textCidadeAlterar = document.getElementById('textCidadeAlterar');
 var textCodVeterinario = document.getElementById('textCodVeterinario');
 var textCodVeterinarioExcluir = document.getElementById('textCodVeterinarioExcluir');
+var codVeterinario = textCodVeterinarioExcluir.value;
 
 
 btn.addEventListener('click', function () {
@@ -129,7 +130,6 @@ function cadastrarVeterinario() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             alert(`${novoVeterinario.nomeVeterinario} cadastrado(a) com sucesso!`);
-            limpar();
             pesquisarVeterinarios();
         } else if (this.readyState == 4) {
             alert('Não foi possível cadastrar o veterinário.');
@@ -141,7 +141,6 @@ function cadastrarVeterinario() {
 }
 
 function limpa_formulário_cep() {
-    //Limpa valores do formulário de cep.
     document.getElementById('textNovoRua').value = ("");
     document.getElementById('textNovoBairro').value = ("");
     document.getElementById('textNovoCidade').value = ("");
@@ -149,7 +148,6 @@ function limpa_formulário_cep() {
 
 function meu_callback(conteudo) {
     if (!("erro" in conteudo)) {
-        //Atualiza os campos com os valores.
         document.getElementById('textNovoRua').value = (conteudo.logradouro);
         document.getElementById('textNovoBairro').value = (conteudo.bairro);
         document.getElementById('textNovoCidade').value = (conteudo.localidade);
@@ -161,47 +159,28 @@ function meu_callback(conteudo) {
 }
 
 function pesquisacep(textNovoCEP) {
-
-    //Nova variável "cep" somente com dígitos.
     var cep = textNovoCEP.replace(/\D/g, '');
-
-    //Verifica se campo cep possui valor informado.
     if (cep != "") {
-
-        //Expressão regular para validar o CEP.
         var validacep = /^[0-9]{8}$/;
-
-        //Valida o formato do CEP.
         if (validacep.test(cep)) {
-
-            //Preenche os campos com "..." enquanto consulta webservice.
             document.getElementById('textNovoRua').value = "...";
             document.getElementById('textNovoBairro').value = "...";
             document.getElementById('textNovoCidade').value = "...";
-
-            //Cria um elemento javascript.
             var script = document.createElement('script');
-
-            //Sincroniza com o callback.
             script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
-
-            //Insere script no documento e carrega o conteúdo.
             document.body.appendChild(script);
-
-        } //end if.
+        }
         else {
-            //cep é inválido.
             limpa_formulário_cep();
             alert("Formato de CEP inválido.");
         }
-    } //end if.
+    }
     else {
-        //cep sem valor, limpa formulário.
         limpa_formulário_cep();
     }
 };
 
-function excluirVeterinario() {
+function excluirVeterinario(codVeterinario) {
     var codVeterinario = textCodVeterinarioExcluir.value;
     if (!confirm('Tem certeza que deseja excluir este veterinário?'))
         return;
@@ -212,7 +191,7 @@ function excluirVeterinario() {
             pesquisarVeterinarios();
         }
     };
-    xhttp.open('DELETE', `${url}/${codVeterinario}`, true);
+    xhttp.open('DELETE', `${url}?CodVeterinario=${codVeterinario}`, true);
     xhttp.send();
 }
 
@@ -230,7 +209,8 @@ function alterarVeterinario() {
     var complemento = textComplementoAlterar.value;
     var bairro = textBairroAlterar.value;
     var cidade = textCidadeAlterar.value;
-    if (!email || !telefone || !cpf || !nomeVeterinario || !nascimento || !crmv || !cep || !rua || !numero || !complemento || !bairro || !cidade) {
+    var codVeterinario = textCodVeterinario.value;
+    if (!codVeterinario || !email || !telefone || !cpf || !nomeVeterinario || !nascimento || !crmv || !cep || !rua || !numero || !bairro || !cidade) {
         alert('Preencha todos os dados para alterar!');
         return;
     }
@@ -247,19 +227,59 @@ function alterarVeterinario() {
         bairro: bairro,
         cidade: cidade,
         cep: cep,
-        codVeterinario: codVeterinarioAlterar
+        codVeterinario: codVeterinario
     };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             alert(`${alterarVeterinario.nomeVeterinario} alterado(a) com sucesso!`);
-            limpar();
             pesquisarVeterinarios();
         } else if (this.readyState == 4) {
             alert('Não foi possível alterar o veterinário.');
         }
     };
+    console.log(JSON.stringify(alterarVeterinario));
     xhttp.open('PUT', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(alterarVeterinario));
 }
+
+function limpaFormularioCEP() {
+    document.getElementById('textRuaAlterar').value = ("");
+    document.getElementById('textBairroAlterar').value = ("");
+    document.getElementById('textCidadeAlterar').value = ("");
+}
+
+function meu_callback2(conteudo) {
+    if (!("erro" in conteudo)) {
+        document.getElementById('textRuaAlterar').value = (conteudo.logradouro);
+        document.getElementById('textBairroAlterar').value = (conteudo.bairro);
+        document.getElementById('textCidadeAlterar').value = (conteudo.localidade);
+    }
+    else {
+        limpaFormularioCEP();
+        alert("CEP não encontrado.");
+    }
+}
+
+function pesquisaCEPAlterar(textCEPAlterar) {
+    var cep = textCEPAlterar.replace(/\D/g, '');
+    if (cep != "") {
+        var validacep = /^[0-9]{8}$/;
+        if (validacep.test(cep)) {
+            document.getElementById('textRuaAlterar').value = "...";
+            document.getElementById('textBairroAlterar').value = "...";
+            document.getElementById('textCidadeAlterar').value = "...";
+            var script = document.createElement('script');
+            script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback2';
+            document.body.appendChild(script);
+        }
+        else {
+            limpaFormularioCEP();
+            alert("Formato de CEP inválido.");
+        }
+    }
+    else {
+        limpaFormularioCEP();
+    }
+};
