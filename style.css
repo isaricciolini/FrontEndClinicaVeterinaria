@@ -6,24 +6,18 @@
   overflow: hidden;
 }
 
-h1 {
-  color: darkgoldenrod;
-  text-align: center;
-  font-family: 'Times New Roman', Times, serif;
-}
-
 .navbar {
-  background-color: darkgoldenrod;
+  background-image: linear-gradient(45deg, #343450 60%, rgb(230, 103, 65) 40%);
 }
 
 .btn {
-  font-family: 'Times New Roman', Times, serif;
   color: darkgoldenrod;
   border-color: darkgoldenrod;
 }
 
 body {
-  background-color: white;
+  background-color: rgb(182, 179, 179);
+  font-family: Helvetica, Verdana, sans-serif;
 }
 
 h5 {
@@ -38,15 +32,20 @@ h3 {
   border-left-color: black;
 }
 
+._navbartext {
+  color: rgb(186, 199, 0);
+}
+
 ._barralateral {
-  background-image: linear-gradient(180deg, #3a37df 0%, rgb(231, 71, 22) 80%);
+  background-image: linear-gradient(135deg, #343450  70%, rgb(230, 103, 65) 60%);
   min-height: 100vh;
+  width: 180px;
   margin-left: 0rem;
   transition: margin 0.25s ease-out;
+  text-align: center;
 }
 
 ._botaosidebar {
-  font-family: 'Times New Roman', Times, serif;
   color: darkgoldenrod;
   background-color: #212123;
   border-color: darkgoldenrod;
