@@ -20,7 +20,7 @@
         <div class="row">
             <!-- Image and text -->
             <nav class="navbar navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.html">
                     <img src="logo.png" width="60" height="35" class="d-inline-block align-top" alt="">
                     Centro Veterinário
                 </a>
@@ -28,35 +28,25 @@
             <div class="col-sm-2 my-4 _barralateral">
                 <hr>
                 <img class="centralizado img-fluid mt-5" src="logo.png" width="400" height="400">
-                <h1>Centro Veterinário</h1>
+                <h2>Centro Veterinário</h2>
                 <hr>
                 <div class="col-sm-12 btn-group-vertical">
-                    <div class="btn-group dropend _botaosidebar">
+                    <a class="btn-group dropend _botaosidebar" href="index.html">
                         <button type="button" class="btn btn-outline-dark _botaosidebar">Consultas</button>
-
-                    </div>
+                    </a>
                     <hr>
-                    <div class="btn-group dropend _botaosidebar">
+                    <a class="btn-group dropend _botaosidebar" href="clientes.html">
                         <button type="button" class="btn btn-outline-dark _botaosidebar">Clientes</button>
-
-                    </div>
+                    </a>
                     <hr>
-                    <div class="btn-group dropend _botaosidebar">
-                        <button type="button" class="btn btn-outline-dark _botaosidebar">Animais</button>
-
-                    </div>
-                    <hr>
-                    <hr>
-                    <hr>
-                    <div class="btn-group dropend _botaosidebar">
+                    <a class="btn-group dropend _botaosidebar" href="veterinarios.html">
                         <button type="button" class="btn btn-outline-dark _botaosidebar">Veterinários</button>
-
-                    </div>
+                    </a>
                     <hr>
                 </div>
             </div>
             <div class="col-sm-10 my-5">
-                <button type="button" class="btn btn-outline-dark my-5" onclick="abrirCadastrar()">Novo Animal</button>
+                <button type="button" class="btn btn-outline-dark my-5" onclick="abrirCadastrar()">Cadastrar Animal</button>
                 <div>
                     <button type="button" class="btn btn-dark" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
                 </div>
@@ -161,17 +151,17 @@
                                 <div class="col-sm-12 col-md-6">
                                     <label for="textNomeClienteAlterar" class="form-label">Nascimento</label>
                                     <input type="text" class="form-control" id="textNascimentoAnimal"
-                                        placeholder="Nascimento do animal">
+                                        placeholder="2021-01-01T00:00:00">
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label for="textRacaAnimal" class="form-label">Raça</label>
                                     <input type="text" class="form-control" id="textRacaAnimal"
-                                        placeholder="Raça do animal">
+                                        placeholder="Exemplo: Persa">
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label for="textTipoAnimal" class="form-label">Tipo</label>
                                     <input type="text" class="form-control" id="textTipoAnimal"
-                                        placeholder="Tipo do animal">
+                                        placeholder="Exemplo: Gato">
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label for="textDeficienciaAnimal" class="form-label">Deficiencia</label>
@@ -188,8 +178,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary"
-                                onclick="cadastrarAnimal()">Confirmar</button>
+                            <button type="button" class="btn btn-primary" onclick="cadastrarAnimal()">Confirmar</button>
                         </div>
                     </div>
                 </div>
