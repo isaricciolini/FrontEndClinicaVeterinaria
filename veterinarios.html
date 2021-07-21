@@ -21,16 +21,23 @@
             width: 100%;
         }
 
+
         #my_form {
             display: none;
+            border-radius: 25px;
+            border: solid 5px;
         }
 
         #my_form2 {
             display: none;
+            border-radius: 25px;
+            border: solid 5px;
         }
 
         #my_form3 {
             display: none;
+            border-radius: 25px;
+            border: solid 5px;
         }
     </style>
     <title>Veterinário - Centro Veterinário</title>
@@ -90,176 +97,136 @@
             <div class="col-sm-10 my-4">
                 <h1>Veterinários</h1>
                 <hr>
-                <div class="col-sm-12">
+                <div class="col-sm-12 centralizado">
                     <button type="button" id="btn_form" class="btn btn-dark">Cadastrar</button>
                     <button type="button" id="btn_form2" class="btn btn-dark">Alterar</button>
                     <button type="button" id="btn_form3" class="btn btn-dark">Excluir</button>
                     <br>
                 </div>
-                <div class="tabelas col-sm-6">
-                    <form id="my_form" method="get" action=".">
-                        <br>
-                        <div class="form-group my-3">
-                            <label>Nome Completo:</label>
-                            <input name="textNovoNomeVeterinario" type="text" id="textNovoNomeVeterinario" size="40">
-                        </div>
-                        <div class="form-group my-3">
-                            <label>Data de Nascimento:
-                                <input name="textNovoNascimento" type="date" id="textNovoNascimento" size="40"></label>
-                        </div>
-                        <br>
-                        <div class="form-group my-3">
-                            <label>CPF:
-                                <input name="textNovoCPF" type="text" id="textNovoCPF" size="30"></label>
-                        </div>
-
-                        <div class="form-group my-3" style="float:right">
-                            <label>Telefone:
-                                <input name="textNovoTelefone" type="text" id="textNovoTelefone" size="30"></label>
-                        </div>
-                        <br>
-                        <div class="form-group my-3">
-                            <label>Email:
-                                <input name="textNovoEmail" type="text" id="textNovoEmail" size="40"
-                                    placeholder="nome@exemplo.com"></label>
-                        </div>
-
-                        <div class="form-group my-3" style="float:right">
-                            <label>CRMV:
-                                <input name="textNovoCRMV" type="text" id="textNovoCRMV" size="30"
-                                    placeholder="12345-AB"></label>
-                        </div>
-
-                        <div class="form-group my-3" method="get" action=".">
-                            <label>CEP:
-                                <input name="textNovoCEP" type="text" id="textNovoCEP" value="" size="10" maxlength="9"
-                                    onblur="pesquisacep(this.value);" /></label>
-                        </div>
-
-                        <div class="form-group my-3">
-                            <label>Rua:
-                                <input name="textNovoRua" type="text" id="textNovoRua" size="60"></label>
-                        </div>
-
-                        <div class="form-group my-3" style="float:right">
-                            <label>Número:
-                                <input name="textNovoNumero" type="text" id="textNovoNumero" size="10"></label>
-                        </div>
-
-                        <div class="form-group my-3" style="float:right">
-                            <label>Complemento:
-                                <input name="textNovoComplemento" type="text" id="textNovoComplemento"
-                                    size="20"></label>
-                        </div>
-
-                        <div class="form-group my-3">
-                            <label>Bairro:
-                                <input name="textNovoBairro" type="text" id="textNovoBairro" size="60"></label>
-                        </div>
-
-                        <div class="form-group my-3">
-                            <label>Cidade:
-                                <input name="textNovoCidade" type="text" id="textNovoCidade" size="60"></label>
-                        </div>
-                        <br>
-                        <button type="button" class="btn btn-dark my-4" onclick="cadastrarVeterinario()">Enviar</button>
-                    </form>
+                <div class="borda">
+                    <div class="row">
+                        <form id="my_form" method="get" action=".">
+                            <div class="form-group my-3 centralizado">
+                                <label>Nome Completo:</label>
+                                <input name="textNovoNomeVeterinario" type="text" id="textNovoNomeVeterinario"
+                                    size="40">
+                                <label> Data de Nascimento:
+                                    <input name="textNovoNascimento" type="date" id="textNovoNascimento"
+                                        size="40"></label>
+                            </div>
+                            <div class="form-group my-3 centralizado">
+                                <label>CPF:
+                                    <input name="textNovoCPF" type="text" id="textNovoCPF" size="30"></label>
+                                <label>Telefone:
+                                    <input name="textNovoTelefone" type="text" id="textNovoTelefone" size="30"></label>
+                            </div>
+                            <div class="form-group my-3 centralizado">
+                                <label>Email:
+                                    <input name="textNovoEmail" type="text" id="textNovoEmail" size="40"
+                                        placeholder="nome@exemplo.com"></label>
+                                <label>CRMV:
+                                    <input name="textNovoCRMV" type="text" id="textNovoCRMV" size="30"
+                                        placeholder="12345-AB"></label>
+                            </div>
+                            <div class="form-group my-3" method="get" action=".">
+                                <label>CEP:
+                                    <input name="textNovoCEP" type="text" id="textNovoCEP" value="" size="10"
+                                        maxlength="9" onblur="pesquisacep(this.value);" /></label>
+                            </div>
+                            <div class="form-group my-3 centralizado">
+                                <label>Rua:
+                                    <input name="textNovoRua" type="text" id="textNovoRua" size="40"></label>
+                                <label>Número:
+                                    <input name="textNovoNumero" type="text" id="textNovoNumero" size="10"></label>
+                                <label>Complemento:
+                                    <input name="textNovoComplemento" type="text" id="textNovoComplemento"
+                                        size="10"></label>
+                            </div>
+                            <div class="form-group my-3 centralizado">
+                                <label>Bairro:
+                                    <input name="textNovoBairro" type="text" id="textNovoBairro" size="40"></label>
+                                <label>Cidade:
+                                    <input name="textNovoCidade" type="text" id="textNovoCidade" size="40"></label>
+                            </div>
+                            <div class="centralizado">
+                                <button type="button" class="btn btn-dark my-3"
+                                    onclick="cadastrarVeterinario()">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
 
                 <br>
-                <div class="tabelas">
-                    <form id="my_form2" method="get" action="." class="tabelas">
-                        <div class="form-group sm-6">
+                <div class="borda">
+                    <form id="my_form2" method="get" action=".">
+                        <div class="form-group my-3">
                             <label>CodVeterinario:
                                 <input name="textCodVeterinario" type="number" id="textCodVeterinario"
-                                    size="60" /></label>
+                                    size="10" /></label>
                         </div>
-                        <br>
-                        <div class="form-group sm-6">
+                        <div class="form-group my-3">
                             <label>Nome Completo:
                                 <input name="textNomeVeterinarioAlterar" type="text" id="textNomeVeterinarioAlterar"
-                                    size="60" /></label>
-                        </div>
-                        <br>
-                        <div class="form-group">
+                                    size="40" /></label>
                             <label>Data de Nascimento:
                                 <input name="textNascimentoAlterar" type="date" id="textNascimentoAlterar"
                                     size="60"></label>
                         </div>
-                        <br>
-                        <div class="form-group">
+                        <div class="form-group my-3">
                             <label>CPF:
-                                <input name="textCPFAlterar" type="text" id="textCPFAlterar" size="60"></label>
-                        </div>
-                        <br>
-                        <div class="form-group">
+                                <input name="textCPFAlterar" type="text" id="textCPFAlterar" size="30"></label>
                             <label>Telefone:
                                 <input name="textTelefoneAlterar" type="text" id="textTelefoneAlterar"
-                                    size="60"></label>
+                                    size="20"></label>
                         </div>
-                        <br>
-                        <div class="form-group">
+                        <div class="form-group my-3">
                             <label>Email:
-                                <input name="textEmailAlterar" type="text" id="textEmailAlterar" size="60"
+                                <input name="textEmailAlterar" type="text" id="textEmailAlterar" size="40"
                                     placeholder="nome@exemplo.com"></label>
-                        </div>
-                        <br>
-                        <div class="form-group">
                             <label>CRMV:
-                                <input name="textCRMVAlterar" type="text" id="textCRMVAlterar" size="60"
+                                <input name="textCRMVAlterar" type="text" id="textCRMVAlterar" size="10"
                                     placeholder="12345-AB"></label>
                         </div>
-                        <br>
-                        <div class="form-group" method="get" action=".">
+                        <div class="form-group my-4" method="get" action=".">
                             <label>CEP:
                                 <input name="textCEPAlterar" type="text" id="textCEPAlterar" value="" size="10"
                                     maxlength="9" onblur="pesquisaCEPAlterar(this.value);" /></label>
                         </div>
-                        <br>
-                        <div class="form-group">
+                        <div class="form-group my-3">
                             <label>Rua:
-                                <input name="textRuaAlterar" type="text" id="textRuaAlterar" size="100"></label>
-                        </div>
-                        <br>
-                        <div class="form-group">
+                                <input name="textRuaAlterar" type="text" id="textRuaAlterar" size="40"></label>
                             <label>Número:
-                                <input name="textNumeroAlterar" type="text" id="textNumeroAlterar" size="20"></label>
-                        </div>
-                        <br>
-                        <div class="form-group">
+                                <input name="textNumeroAlterar" type="text" id="textNumeroAlterar" size="10"></label>
                             <label>Complemento:
                                 <input name="textComplementoAlterar" type="text" id="textComplementoAlterar"
-                                    size="20"></label>
+                                    size="10"></label>
                         </div>
-                        <br>
-                        <div class="form-group">
+                        <div class="form-group my-3">
                             <label>Bairro:
-                                <input name="textBairroAlterar" type="text" id="textBairroAlterar" size="60"></label>
-                        </div>
-                        <br>
-                        <div class="form-group">
+                                <input name="textBairroAlterar" type="text" id="textBairroAlterar" size="40"></label>
                             <label>Cidade:
-                                <input name="textCidadeAlterar" type="text" id="textCidadeAlterar" size="60"></label>
+                                <input name="textCidadeAlterar" type="text" id="textCidadeAlterar" size="40"></label>
                         </div>
-                        <br>
-                        <button type="button" class="btn btn-dark my-4" onclick="alterarVeterinario()">Enviar</button>
+                        <div class="centralizado">
+                            <button type="button" class="btn btn-dark my-4"
+                                onclick="alterarVeterinario()">Enviar</button>
+                        </div>
                     </form>
                 </div>
                 <br>
-                <div class="tabelas">
+                <div class="borda">
                     <form id="my_form3" method="get" action=".">
-                        <div class="form-group sm-6">
+                        <div class="form-group my-3 centralizado">
                             <label>CodVeterinario:
                                 <input name="textCodVeterinarioExcluir" type="number" id="textCodVeterinarioExcluir"
-                                    size="60"></label>
+                                    size="20"></label>
+                                    <button type="button" class="btn btn-dark my-4"
+                                onclick="excluirVeterinario()">Enviar</button>
                         </div>
-                        <br>
-                        <button type="button" class="btn btn-dark my-4" onclick="excluirVeterinario()">Enviar</button>
                     </form>
                 </div>
-                <br>
-                <div class="my-5">
+                <div class="my-3">
                     <button type="button" class="btn btn-dark" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
                 </div>
                 <div id="divFiltro" style="display: none;">

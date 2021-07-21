@@ -130,6 +130,7 @@ function cadastrarVeterinario() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             alert(`${novoVeterinario.nomeVeterinario} cadastrado(a) com sucesso!`);
+            limparCadastro();
             pesquisarVeterinarios();
         } else if (this.readyState == 4) {
             alert('Não foi possível cadastrar o veterinário.');
@@ -188,6 +189,7 @@ function excluirVeterinario(codVeterinario) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             alert('Veterinário excluído com sucesso!');
+            limparExclusao();
             pesquisarVeterinarios();
         }
     };
@@ -233,6 +235,7 @@ function alterarVeterinario() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             alert(`${alterarVeterinario.nomeVeterinario} alterado(a) com sucesso!`);
+            limparAlteracao();
             pesquisarVeterinarios();
         } else if (this.readyState == 4) {
             alert('Não foi possível alterar o veterinário.');
@@ -283,3 +286,38 @@ function pesquisaCEPAlterar(textCEPAlterar) {
         limpaFormularioCEP();
     }
 };
+
+function limparExclusao() {
+    textCodVeterinarioExcluir.value = '';
+}
+
+function limparCadastro() {
+    textNovoNascimento.value = '';
+    textNovoCPF.value = '';
+    textNovoTelefone.value = '';
+    textNovoNomeVeterinario.value = '';
+    textNovoEmail.value = '';
+    textNovoCEP.value = '';
+    textNovoRua.value = '';
+    textNovoNumero.value = '';
+    textNovoComplemento.value = '';
+    textNovoBairro.value = '';
+    textNovoCidade.value = '';
+    textNovoCRMV.value = '';
+}
+
+function limparAlteracao() {
+    textNascimentoAlterar.value = '';
+    textCPFAlterar.value = '';
+    textTelefoneAlterar.value = '';
+    textNomeVeterinarioAlterar.value = '';
+    textEmailAlterar.value = '';
+    textCEPAlterar.value = '';
+    textRuaAlterar.value = '';
+    textNumeroAlterar.value = '';
+    textComplementoAlterar.value = '';
+    textBairroAlterar.value = '';
+    textCidadeAlterar.value = '';
+    textCRMVAlterar.value = '';
+    textCodVeterinario.value = '';
+}
