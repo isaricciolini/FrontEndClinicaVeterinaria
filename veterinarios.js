@@ -72,7 +72,7 @@ function pesquisarVeterinarios() {
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codVeterinario}">${info.nomeVeterinario}</td>`;
-                linha += `<td id="nascimento${info.codVeterinario}">${info.nascimento}</td>`;
+                linha += `<td id="nascimento${info.codVeterinario}">${info.nascimento.slice(0,10)}</td>`;
                 linha += `<td id="cpf${info.codVeterinario}">${info.cpf}</td>`;
                 linha += `<td id="telefone${info.codVeterinario}">${info.telefone}</td>`;
                 linha += `<td id="email${info.codVeterinario}">${info.email}</td>`;
@@ -241,7 +241,6 @@ function alterarVeterinario() {
             alert('Não foi possível alterar o veterinário.');
         }
     };
-    console.log(JSON.stringify(alterarVeterinario));
     xhttp.open('PUT', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(alterarVeterinario));
