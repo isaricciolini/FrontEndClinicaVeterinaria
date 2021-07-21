@@ -17,16 +17,22 @@
 
 <body>
     <!-- Inicio Sidebar/Navbar -->
-    <div class=" sidebar">
-        <a class="_navbartext" href="#"><img src="logo.png" width="50px" class="img-fluid mx-auto"
-            alt="">Centro Veterinario</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    <!-- Fim Sidebar/Navbar -->
+    <div class="sidebar" id="sidebar">
+        <div class="active">
+            <a class="fs-5" href="#"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
+                Veterinario</a>
+        </div>
+        <div class="hide" id="hide">
+            <button type="button" class="btn _botaosidebar">Consultas</button>
+            <button type="button" class="btn _botaosidebar">Clientes</button>
+            <button type="button" class="btn _botaosidebar">Animais</button>
+            <button type="button" class="btn _botaosidebar">Veterinários</button>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="navbar()">
+            <button type="button" class="btn _botaosidebar">Menu</button></a>
+        <!-- Fim Sidebar/Navbar -->
     </div>
     <div class="content" id="app">
-        
         <p class="h1 text-center">{{ pagina }}</p>
         <table class="table table-striped table-hover table-bordered" id="tabela">
             <thead>
@@ -110,6 +116,17 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="clientes.js"></script>
+
+    <script>
+        function navbar() {
+            var x = document.getElementById("hide");
+            if (x.className === "hide") {
+                x.className += " responsive";
+            } else {
+                x.className = "hide";
+            }
+        }
+    </script>
 </body>
 
 </html>

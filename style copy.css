@@ -1,46 +1,59 @@
 /* Sidebar inicio */
 .sidebar {
   margin: 0;
-  padding: 0;
+  padding: 8px 2px;
   width: 200px;
   background-image: linear-gradient(135deg, #343450  70%, rgb(230, 103, 65) 60%);
   position: fixed;
   height: 100%;
   overflow: auto;
+  text-align: center;
+}
+
+._logo{
+  width: 120px;
+}
+
+._botaosidebar {
+  color: darkgoldenrod;
+  background-color: #212123;
+  border-color: darkgoldenrod;
+  width: 120px;
+  margin: 2px 2px;
 }
 
 .sidebar a {
   display: block;
-  color: black;
-  padding: 8px;
+  color: rgb(186, 199, 0);
+  padding: 8px 8px;
   text-decoration: none;
 }
- 
-.sidebar a.active {
-  background-color: #04AA6D;
-  color: white;
-}
 
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
 
-@media screen and (max-width: 700px) {
+.sidebar a.icon {display: none;}
+
+@media screen and (max-width: 850px) {
   .sidebar {
     background-image: linear-gradient(135deg, #343450 80%, rgb(230, 103, 65) 40%);
     width: 100%;
     height: auto;
     position: relative;
   }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
+  .hide {display: none;}
+  .sidebar a.icon {
+    float: right;
+    display: block;
+  }
+  div.content {margin-left: 0 !important;}
+  ._logo {width: 50px;}
+  .active {float:left;}
 }
 
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
+@media screen and (max-width: 850px) { 
+  .hide.responsive {
+    position: relative;
+    float: left;
+    display: block;
   }
 }
 
@@ -55,12 +68,12 @@ body {
 }
 
 html, body{
-  overflow:initial !important;
+  overflow: auto;
 }
 
 div.content {
   margin-left: 200px;
-  padding: 1px 8px;
+  padding: 6px 8px;
   height: 1000px; 
   overflow: auto;
 }
