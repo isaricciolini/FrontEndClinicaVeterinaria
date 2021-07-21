@@ -33,6 +33,9 @@ var textCidadeAlterar = document.getElementById('textCidadeAlterar');
 var textCodVeterinario = document.getElementById('textCodVeterinario');
 var textCodVeterinarioExcluir = document.getElementById('textCodVeterinarioExcluir');
 var codVeterinario = textCodVeterinarioExcluir.value;
+var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
+var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
+var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 
 
 btn.addEventListener('click', function () {
@@ -95,6 +98,10 @@ function pesquisarVeterinarios() {
     xhttp.send();
 }
 
+function abrirCadastrar() {
+    modalCadastrar.show();
+}
+
 function cadastrarVeterinario() {
     var nascimento = textNovoNascimento.value;
     var cpf = textNovoCPF.value;
@@ -130,6 +137,7 @@ function cadastrarVeterinario() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             alert(`${novoVeterinario.nomeVeterinario} cadastrado(a) com sucesso!`);
+            modalCadastrar.hide();
             pesquisarVeterinarios();
         } else if (this.readyState == 4) {
             alert('Não foi possível cadastrar o veterinário.');
@@ -170,10 +178,6 @@ function pesquisacep(textNovoCEP) {
             script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
             document.body.appendChild(script);
         }
-        else {
-            limpa_formulário_cep();
-            alert("Formato de CEP inválido.");
-        }
     }
     else {
         limpa_formulário_cep();
@@ -195,6 +199,9 @@ function excluirVeterinario(codVeterinario) {
     xhttp.send();
 }
 
+function abrirAlterar() {
+    modalAlterar.show();
+}
 
 function alterarVeterinario() {
     var nomeVeterinario = textNomeVeterinarioAlterar.value;
@@ -234,6 +241,7 @@ function alterarVeterinario() {
         if (this.readyState == 4 && this.status == 200) {
             alert(`${alterarVeterinario.nomeVeterinario} alterado(a) com sucesso!`);
             pesquisarVeterinarios();
+            modalAltertar.hide();
         } else if (this.readyState == 4) {
             alert('Não foi possível alterar o veterinário.');
         }
@@ -273,10 +281,6 @@ function pesquisaCEPAlterar(textCEPAlterar) {
             var script = document.createElement('script');
             script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback2';
             document.body.appendChild(script);
-        }
-        else {
-            limpaFormularioCEP();
-            alert("Formato de CEP inválido.");
         }
     }
     else {

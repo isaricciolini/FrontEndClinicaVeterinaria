@@ -77,3 +77,13 @@ div.content {
   height: 1000px; 
   overflow: auto;
 }
+
+._botoes{
+  display: block;
+  float: right;
+}
+
+._filtrar {
+  display: block;
+  float: left;
+}
