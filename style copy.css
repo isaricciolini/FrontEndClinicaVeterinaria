@@ -57,6 +57,10 @@
   }
 }
 
+._botaosidebar:hover{
+  color:rgb(248, 171, 77)
+}
+
 /* Sidebar fim */
 
 
@@ -74,8 +78,9 @@ html, body{
 div.content {
   margin-left: 200px;
   padding: 6px 8px;
-  height: 1000px; 
+  height: auto; 
   overflow: auto;
+  margin-top: 8px;
 }
 
 ._botoes{
@@ -87,3 +92,4 @@ div.content {
   display: block;
   float: left;
 }
+

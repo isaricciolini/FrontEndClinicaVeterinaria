@@ -184,21 +184,6 @@ function pesquisacep(textNovoCEP) {
     }
 };
 
-function excluirVeterinario(codVeterinario) {
-    var codVeterinario = textCodVeterinarioExcluir.value;
-    if (!confirm('Tem certeza que deseja excluir este veterinário?'))
-        return;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            alert('Veterinário excluído com sucesso!');
-            pesquisarVeterinarios();
-        }
-    };
-    xhttp.open('DELETE', `${url}?CodVeterinario=${codVeterinario}`, true);
-    xhttp.send();
-}
-
 function abrirAlterar() {
     modalAlterar.show();
 }
@@ -287,3 +272,23 @@ function pesquisaCEPAlterar(textCEPAlterar) {
         limpaFormularioCEP();
     }
 };
+
+function abrirExcluir() {
+    modalExcluir.show();
+}
+
+function excluirVeterinario(codVeterinario) {
+    var codVeterinario = textCodVeterinarioExcluir.value;
+    if (!confirm('Tem certeza que deseja excluir este veterinário?'))
+        return;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            alert('Veterinário excluído com sucesso!');
+            pesquisarVeterinarios();
+            modalExcluir();
+        }
+    };
+    xhttp.open('DELETE', `${url}?CodVeterinario=${codVeterinario}`, true);
+    xhttp.send();
+}
