@@ -93,3 +93,7 @@ div.content {
   float: left;
 }
 
+#textFiltro{
+  max-width: 500px;
+}
+
