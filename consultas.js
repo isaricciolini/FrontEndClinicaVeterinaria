@@ -15,6 +15,7 @@ var form2 = document.getElementById('my_form2');
 var btn3 = document.getElementById('btn_form3');
 var form3 = document.getElementById('my_form3');
 var codConsultaCadastrarReceita = 0;
+var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
 var textCodAnimalAlterar = document.getElementById('textCodAnimalAlterar');
 var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
 var textDataConsultaAlterar = document.getElementById('textDataConsultaAlterar');
@@ -23,6 +24,7 @@ var textPesoAlterar = document.getElementById('textPesoAlterar');
 var textDescricaoAlterar = document.getElementById('textDescricaoAlterar');
 var dataReceita = document.getElementById('textDataReceita');
 var prescricao = document.getElementById('textPrescricao');
+var codConsultaModal = document.getElementById('textCodConsultaModal')
 
 
 
@@ -192,19 +194,21 @@ function limparAlteracao() {
     textDescricaoAlterar.value = '';
 }
 
-function cadastrarReceita(CodConsulta) {
+function cadastrarReceita() {
     var url = 'https://localhost:5001/receitas';
-    var dataReceita = textDataReceita.value;
-    var prescricao = textPrescricao.value;
+    var dataReceita = document.getElementById('textDataReceita').value;
+    var prescricao = document.getElementById('textPrescricao').value;
+    var codConsultaModal = document.getElementById('textCodConsultaModal').value;
     if (!dataReceita || !prescricao) {
         alert('Preencha todos os dados para cadastrar a receita.');
         return;
     }
-    var receita = {
+    var receitaCadastrada = {
         dataReceita: dataReceita,
         prescricao: prescricao,
-        codConsulta: codConsulta
+        codConsulta: codConsultaModal
     };
+    console.log(receitaCadastrada);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -215,14 +219,10 @@ function cadastrarReceita(CodConsulta) {
     };
     xhttp.open('POST', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(JSON.stringify(receita));
+    xhttp.send(JSON.stringify(receitaCadastrada));
 }
 
 function abrirCadastrarReceita(codConsulta) {
-    codConsultaCadastrarReceita = codConsulta;
-    var dataReceita = document.getElementById(`dataReceita${codConsulta}`).innerHTML;
-    var prescricao = document.getElementById(`prescricao${codConsulta}`).innerHTML;
-    textDataReceita.value = dataReceita;
-    textPrescricao.value = prescricao;
-    modalAlterar.show();
+    document.getElementById(`textCodConsultaModal`).value = codConsulta;
+    modalCadastrar.show();
 }
