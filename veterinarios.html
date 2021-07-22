@@ -33,15 +33,16 @@
     <div class="sidebar" id="sidebar">
         <div class="active">
             <a class="fs-5" href="#"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
-                Veterinario</a>
+                Veterinário</a>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="navbar()">
             <button type="button" class="btn _botaosidebar">Menu</button></a>
         <div class="hide" id="hide">
-            <button type="button" class="btn _botaosidebar">Consultas</button>
-            <button type="button" class="btn _botaosidebar">Clientes</button>
-            <button type="button" class="btn _botaosidebar">Animais</button>
-            <button type="button" class="btn _botaosidebar">Veterinários</button>
+            <button onclick="location.href='index.html'" type="button"  class="btn _botaosidebar">Agenda</button>
+            <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
+            <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
+            <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
+            <button onclick="location.href='veterinarios.html'" type="button" class="btn _botaosidebar">Veterinários</button>
         </div>
     </div>
     <!-- * Fim Sidebar/Navbar -->
@@ -108,17 +109,17 @@
                                 <input name="textNovoNascimento" class="form-label class=" form-label type="date"
                                     id="textNovoNascimento"></label>
                             <label>Telefone:
-                                <input name="textNovoTelefone" class="form-label type=" text"
+                                <input name="textNovoTelefone" class="form-label" type="text"
                                     id="textNovoTelefone"></label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>CPF:
-                                <input name="textNovoCPF" class="form-label type=" text" id="textNovoCPF"></label>
+                                <input name="textNovoCPF" class="form-label" type=" text" id="textNovoCPF"></label>
                             <label>Email:
-                                <input name="textNovoEmail" class="form-label type=" text" id="textNovoEmail"
+                                <input name="textNovoEmail" class="form-label" type=" text" id="textNovoEmail"
                                     placeholder="nome@exemplo.com"></label>
                             <label>CRMV:
-                                <input name="textNovoCRMV" class="form-label type=" text" id="textNovoCRMV"
+                                <input name="textNovoCRMV" class="form-label" type=" text" id="textNovoCRMV"
                                     placeholder="12345-AB"></label>
                         </div>
                         <div class="col-sm-12">
@@ -152,7 +153,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal Cadastrar -->
 
     <!-- Modal Alterar -->
     <div class="modal fade" id="modalAlterar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -160,7 +160,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Altetar</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Alterar</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -170,24 +170,24 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Nome Completo:</label>
-                            <input name="textNomeVeterinarioAlterar" class="form-label type=" text"
+                            <input name="textNomeVeterinarioAlterar" class="form-label" type=" text"
                                 id="textNomeVeterinarioAlterar">
                             <label>Data de Nascimento:
-                                <input name="textNascimentoAlterar" class="form-label class=" form-label type="date"
+                                <input name="textNascimentoAlterar" class="form-label" class=" form-label type="date"
                                     id="textNascimentoAlterar"></label>
                             <label>Telefone:
-                                <input name="textTelefoneAlterar" class="form-label type=" text"
+                                <input name="textTelefoneAlterar" class="form-label" type=" text"
                                     id="textTelefoneAlterar"></label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>CPF:
-                                <input name="textCPFAlterar" class="form-label type=" text" 
+                                <input name="textCPFAlterar" class="form-label" type=" text" 
                                 id="textCPFAlterar"></label>
                             <label>Email:
-                                <input name="textEmailAlterar" class="form-label type=" text" 
+                                <input name="textEmailAlterar" class="form-label" type=" text" 
                                 id="textEmailAlterar" placeholder="nome@exemplo.com"></label>
                             <label>CRMV:
-                                <input name="textCRMVAlterar" class="form-label type=" text" 
+                                <input name="textCRMVAlterar" class="form-label" type=" text" 
                                 id="textCRMVAlterar" placeholder="12345-AB"></label>
                         </div>
                         <div class="col-sm-12">
@@ -234,7 +234,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Exlcuir</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Excluir</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -251,7 +251,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal Excluir -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

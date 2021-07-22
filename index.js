@@ -28,12 +28,13 @@ function pesquisarConsultas() {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codConsulta}</td>`;
-                linha += `<td id="codConsulta${info.codConsulta}">${info.dataConsulta}</td>`;
+                linha += `<td id="codConsulta${info.codConsulta}">${info.dataConsulta.slice(0,10)}</td>`;
+                linha += `<td id="codConsulta${info.codConsulta}">${info.dataConsulta.slice(11,16)}</td>`;
                 linha += `<td id="nomeAnimal${info.codConsulta}">${info.nomeAnimal}</td>`;
                 linha += `<td id="nomeCliente${info.codConsulta}">${info.nomeCliente}</td>`;
                 linha += `<td id="nomeVeterinario${info.codConsulta}">${info.nomeVeterinario}</td>`;
-                linha += `<td><a onclick="abrirAlterarConsulta(${info.codConsulta})">Alterar</a></td>`;
-                linha += `<td><a onclick="excluirConsulta(${info.codConsulta})">Excluir</a></td>`;
+                linha += `<td><a btn btn-dark _filtrar onclick="abrirAlterarConsulta(${info.codConsulta})">Alterar</a></td>`;
+                linha += `<td><a btn btn-dark _filtrar onclick="excluirConsulta(${info.codConsulta})">Excluir</a></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }

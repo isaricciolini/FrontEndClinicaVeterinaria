@@ -75,15 +75,15 @@ function pesquisarVeterinarios() {
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codVeterinario}">${info.nomeVeterinario}</td>`;
-                linha += `<td id="nascimento${info.codVeterinario}">${info.nascimento}</td>`;
-                linha += `<td id="cpf${info.codVeterinario}">${info.cpf}</td>`;
+                linha += `<td id="nascimento${info.codVeterinario}">${info.nascimento.slice(0,10)}</td>`;
+                linha += `<td id="cpf${info.codVeterinario}">${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
                 linha += `<td id="telefone${info.codVeterinario}">${info.telefone}</td>`;
                 linha += `<td id="email${info.codVeterinario}">${info.email}</td>`;
                 linha += `<td id="crmv${info.codVeterinario}">${info.crmv}</td>`;
                 linha += `<td id="rua${info.codVeterinario}">${info.rua}</td>`;
                 linha += `<td id="numero${info.codVeterinario}">${info.numero}</td>`;
                 linha += `<td id="complemento${info.codVeterinario}">${info.complemento}</td>`;
-                linha += `<td id="cep${info.codVeterinario}">${info.cep}</td>`;
+                linha += `<td id="cep${info.codVeterinario}">${info.cep.replace(/(\d{5})(\d{3})/, "$1-$2")}</td>`;
                 linha += `<td id="bairro${info.codVeterinario}">${info.bairro}</td>`;
                 linha += `<td id="cidade${info.codVeterinario}">${info.cidade}</td>`;
                 linha += '</tr>';
