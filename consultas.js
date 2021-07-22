@@ -25,10 +25,6 @@ var textDescricaoAlterar = document.getElementById('textDescricaoAlterar');
 var dataReceita = document.getElementById('textDataReceita');
 var prescricao = document.getElementById('textPrescricao');
 var codConsultaModal = document.getElementById('textCodConsultaModal')
-
-
-
-
 var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
 
 btn.addEventListener('click', function () {
