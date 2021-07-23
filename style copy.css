@@ -97,3 +97,12 @@ div.content {
   max-width: 500px;
 }
 
+label {
+  margin-top: 2px;
+  display: inline-block;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+}
