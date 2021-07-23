@@ -36,8 +36,8 @@ function pesquisarAnimais() {
                 linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
-                linha += `<td><button onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
-                linha += `<td><button onclick="excluirAnimal(${animal.codAnimal})">Excluir</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="excluirAnimal(${animal.codAnimal})">Excluir</button></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }
