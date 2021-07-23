@@ -51,9 +51,9 @@
 
 @media screen and (max-width: 1500px) { 
   .hide.responsive {
+    text-align-last: center;
     position: relative;
-    float: left;
-    display: block;
+    display: inline-block;
   }
 }
 
