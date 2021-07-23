@@ -25,7 +25,7 @@
             width: 100%;
         }
     </style>
-    <title>Cliente - Centro Veterinário</title>
+    <title>Clientes - Centro Veterinário</title>
 </head>
 
 <body>
@@ -38,11 +38,12 @@
         <a href="javascript:void(0);" class="icon" onclick="navbar()">
             <button type="button" class="btn _botaosidebar">Menu</button></a>
         <div class="hide" id="hide">
-            <button onclick="location.href='index.html'" type="button"  class="btn _botaosidebar">Agenda</button>
+            <button onclick="location.href='index.html'" type="button" class="btn _botaosidebar">Agenda</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
-            <button onclick="location.href='veterinarios.html'" type="button" class="btn _botaosidebar">Veterinários</button>
+            <button onclick="location.href='veterinarios.html'" type="button"
+                class="btn _botaosidebar">Veterinários</button>
         </div>
     </div>
     <!-- * Fim Sidebar/Navbar -->
@@ -52,8 +53,6 @@
         <div class="_botoes my-2">
             <div class="btn-group" role="group" aria-label="Basic outlined example">
                 <button type="button" id="btn_form" onclick="abrirCadastrar()" class="btn btn-dark">Cadastrar</button>
-                <button type="button" id="btn_form2" onclick="abrirAlterar()" class="btn btn-dark">Alterar</button>
-                <button type="button" id="btn_form3" onclick="abrirExcluir()" class="btn btn-dark">Excluir</button>
             </div>
         </div>
 
@@ -70,18 +69,15 @@
         <table class="table table-hover text-center" id="tabela">
             <thead>
                 <tr>
-                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(1)')">Cod</th>
+                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(1)')">CodCliente</th>
                     <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(2)')">Nome</th>
                     <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(3)')">Data Nascimento</th>
                     <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(4)')">CPF</th>
                     <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(5)')">Telefone</th>
                     <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(6)')">Email</th>
-                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(7)')">Rua</th>
-                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(8)')">Número</th>
-                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(9)')">Complemento</th>
-                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(10)')">CEP</th>
-                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(11)')">Bairro</th>
-                    <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(12)')">Cidade</th>
+                    <th>Endereço</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="corpoTabela">
@@ -150,6 +146,46 @@
         </div>
     </div>
 
+    <!-- Modal Endereco -->
+    <div class="modal fade" id="modalEndereco" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Endereço</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group" method="get" action=".">
+                                <label>CEP:
+                                    <input name="textCEP" type="text" id="textCEP"  disabled/></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Rua:
+                                <input name="textRua" type="text" id="textRua" disabled></label>
+                            <label>Complemento:
+                                <input name="textComplemento" type="text" id="textComplemento" disabled></label>
+                            <label>Cidade:
+                                <input name="textCidade" type="text" id="textCidade" disabled></label>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Número:
+                                <input name="textNumero" type="text" id="textNumero" disabled></label>
+                            <label>Bairro:
+                                <input name="textBairro" type="text" id="textBairro" disabled></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Alterar -->
     <div class="modal fade" id="modalAlterar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -161,8 +197,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label>CodCliente:
-                                <input name="textCodCliente" type="number" id="textCodCliente" /></label>
+                                <input name="textCodCliente" type="hidden" id="textCodCliente" />
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Nome Completo:</label>
@@ -231,8 +266,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label>CodCliente:
-                                <input name="textCodClienteExcluir" type="number" id="textCodClienteExcluir" /></label>
+                            <label>Excluir cliente nº 
+                                <input name="textCodClienteExcluir" type="number" id="textCodClienteExcluir" disabled/></label>
                         </div>
                     </div>
                 </div>

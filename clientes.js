@@ -3,6 +3,8 @@ var corpoTabela = document.getElementById('corpoTabela');
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
+var modalEndereco = new bootstrap.Modal(document.getElementById('modalEndereco'), {});
+
 var textNovoNomeCliente = document.getElementById('textNovoNomeCliente');
 var textNovoNascimento = document.getElementById('textNovoNascimento');
 var textNovoCPF = document.getElementById('textNovoCPF');
@@ -30,29 +32,7 @@ var textCodCliente = document.getElementById('textCodCliente');
 var textCodClienteExcluir = document.getElementById('textCodClienteExcluir');
 
 
-btn.addEventListener('click', function () {
-    if (form.style.display != 'block') {
-        form.style.display = 'block';
-        return;
-    }
-    form.style.display = 'none';
-});
 
-btn2.addEventListener('click', function () {
-    if (form2.style.display != 'block') {
-        form2.style.display = 'block';
-        return;
-    }
-    form2.style.display = 'none';
-});
-
-btn3.addEventListener('click', function () {
-    if (form3.style.display != 'block') {
-        form3.style.display = 'block';
-        return;
-    }
-    form3.style.display = 'none';
-});
 
 pesquisarClientes();
 
@@ -67,17 +47,25 @@ function pesquisarClientes() {
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codCliente}</td>`;
                 linha += `<td id="nome${info.codCliente}">${info.nomeCliente}</td>`;
-                linha += `<td id="nascimento${info.codCliente}">${info.nascimento.slice(0,10)}</td>`;
-                linha += `<td id="cpf${info.codCliente}">${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
-                linha += `<td id="telefone${info.codCliente}">${info.telefone}</td>`;
+                linha += `<td>${info.nascimento.slice(0,10)}</td>`;
+                linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
+                linha += `<td>${info.telefone}</td>`;
                 linha += `<td id="email${info.codCliente}">${info.email}</td>`;
-                linha += `<td id="rua${info.codCliente}">${info.rua}</td>`;
-                linha += `<td id="numero${info.codCliente}">${info.numero}</td>`;
-                linha += `<td id="complemento${info.codCliente}">${info.complemento}</td>`;
-                linha += `<td id="cep${info.codCliente}">${info.cep.replace(/(\d{5})(\d{3})/, "$1-$2")}</td>`;
-                linha += `<td id="bairro${info.codCliente}">${info.bairro}</td>`;
-                linha += `<td id="cidade${info.codCliente}">${info.cidade}</td>`;
+                linha += `<td><button onclick="abrirEndereco(${info.codCliente})" class="btn btn-dark">Mostrar</button></td>`
+                linha += `<td><button onclick="abrirAlterar(${info.codCliente})" class="btn btn-dark">Alterar</button></td>`
+                linha += `<td><button onclick="abrirExcluir(${info.codCliente})" class="btn btn-dark">Excluir</button></td>`
                 linha += '</tr>';
+                linha += '<div style="display: none;">'
+                linha += `<p id="telefone${info.codCliente}">${info.telefone}</p>`;
+                linha += `<p id="nascimento${info.codCliente}">${info.nascimento}</p>`;
+                linha += `<p id="cpf${info.codCliente}">${info.cpf}</p>`;
+                linha += `<p id="cep${info.codCliente}">${info.cep}</p>`
+                linha += `<p id="rua${info.codCliente}">${info.rua}</p>`
+                linha += `<p id="numero${info.codCliente}">${info.numero}</p>`;
+                linha += `<p id="complemento${info.codCliente}">${info.complemento}</p>`;
+                linha += `<p id="bairro${info.codCliente}">${info.bairro}</p>`;
+                linha += `<p id="cidade${info.codCliente}">${info.cidade}</p>`;
+                linha += '</div>'
                 corpoTabela.innerHTML += linha;
             }
             w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
@@ -87,6 +75,16 @@ function pesquisarClientes() {
     };
     xhttp.open('GET', url, true);
     xhttp.send();
+}
+
+function abrirEndereco(codCliente) {
+    document.getElementById('textCEP').value =  document.getElementById(`cep${codCliente}`).innerHTML.replace(/(\d{5})(\d{3})/, "$1-$2");
+    document.getElementById('textRua').value =  document.getElementById(`rua${codCliente}`).innerHTML;
+    document.getElementById('textNumero').value =  document.getElementById(`numero${codCliente}`).innerHTML;
+    document.getElementById('textComplemento').value =  document.getElementById(`complemento${codCliente}`).innerHTML;
+    document.getElementById('textBairro').value =  document.getElementById(`bairro${codCliente}`).innerHTML;
+    document.getElementById('textCidade').value =  document.getElementById(`cidade${codCliente}`).innerHTML;
+    modalEndereco.show();
 }
 
 function abrirCadastrar() {
@@ -174,7 +172,20 @@ function pesquisacep(textNovoCEP) {
     }
 };
 
-function abrirAlterar() {
+function abrirAlterar(codCliente) {
+
+    document.getElementById('textCodCliente').value = codCliente
+    document.getElementById('textNomeClienteAlterar').value = document.getElementById(`nome${codCliente}`).innerHTML;
+    document.getElementById('textNascimentoAlterar').value = document.getElementById(`nascimento${codCliente}`).innerHTML.slice(0,10);
+    document.getElementById('textTelefoneAlterar').value = document.getElementById(`telefone${codCliente}`).innerHTML;
+    document.getElementById('textEmailAlterar').value = document.getElementById(`email${codCliente}`).innerHTML;
+    document.getElementById('textCPFAlterar').value = document.getElementById(`cpf${codCliente}`).innerHTML;
+    document.getElementById('textCEPAlterar').value =  document.getElementById(`cep${codCliente}`).innerHTML;
+    document.getElementById('textRuaAlterar').value =  document.getElementById(`rua${codCliente}`).innerHTML;
+    document.getElementById('textNumeroAlterar').value =  document.getElementById(`numero${codCliente}`).innerHTML;
+    document.getElementById('textComplementoAlterar').value =  document.getElementById(`complemento${codCliente}`).innerHTML;
+    document.getElementById('textBairroAlterar').value =  document.getElementById(`bairro${codCliente}`).innerHTML;
+    document.getElementById('textCidadeAlterar').value =  document.getElementById(`cidade${codCliente}`).innerHTML;
     modalAlterar.show();
 }
 
@@ -260,7 +271,8 @@ function pesquisaCEPAlterar(textCEPAlterar) {
     }
 };
 
-function abrirExcluir() {
+function abrirExcluir(codCliente) {
+    document.getElementById("textCodClienteExcluir").value = codCliente;
     modalExcluir.show();
 }
 
