@@ -8,12 +8,6 @@ var textDescricao = document.getElementById('textDescricao');
 var textDataConsulta = document.getElementById('textDataConsulta');
 var textHoraConsulta = document.getElementById('textHoraConsulta');
 var textCodConsulta = document.getElementById('textCodConsulta');
-var btn = document.getElementById('btn_form');
-var form = document.getElementById('my_form');
-var btn2 = document.getElementById('btn_form2');
-var form2 = document.getElementById('my_form2');
-var btn3 = document.getElementById('btn_form3');
-var form3 = document.getElementById('my_form3');
 var codConsultaCadastrarReceita = 0;
 var textCodAnimalAlterar = document.getElementById('textCodAnimalAlterar');
 var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
@@ -24,10 +18,10 @@ var textDescricaoAlterar = document.getElementById('textDescricaoAlterar');
 var dataReceita = document.getElementById('textDataReceita');
 var prescricao = document.getElementById('textPrescricao');
 var codConsultaModal = document.getElementById('textCodConsultaModal')
+
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
-var modalCadastrarConsulta = new bootstrap.Modal(document.getElementById('modalCadastrarConsulta'), {});
-var modalAlterarConsulta = new bootstrap.Modal(document.getElementById('modalAlterarConsulta'), {});
-var modalExcluirConsulta = new bootstrap.Modal(document.getElementById('modalExcluirConsulta'), {});
+var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
+var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 
 var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
 
@@ -44,12 +38,14 @@ function pesquisarConsultas() {
                 var linha = '<tr class="item">';
                 linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
                 linha += `<td id="dataConsulta${info.codConsulta}">${info.dataConsulta.slice(0, 10)}</td>`;
-                linha += `<td id="dataConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
+                linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td id="codAnimal${info.codConsulta}">${info.codAnimal}</td>`;
                 linha += `<td id="codVeterinario${info.codConsulta}">${info.codVeterinario}</td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}</td>`;
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
-                linha += `<td><a href="#" class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</a></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
+                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`
+                linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }
@@ -62,8 +58,8 @@ function pesquisarConsultas() {
     xhttp.send();
 }
 
-function abrirCadastrarConsulta() {
-modalCadastrarConsulta.show()
+function abrirCadastrar() {
+modalCadastrar.show()
 }
 
 function cadastrarConsulta() {
@@ -71,9 +67,7 @@ function cadastrarConsulta() {
     var codVeterinario = textCodVeterinario.value;
     var dataConsulta = textDataConsulta.value;
     var horaConsulta = textHoraConsulta.value;
-    var peso = textPeso.value;
-    var descricao = textDescricao.value;
-    if (!codAnimal || !codVeterinario || !dataConsulta || !horaConsulta || !peso || !descricao) {
+    if (!codAnimal || !codVeterinario || !dataConsulta || !horaConsulta) {
         alert('Preencha todos os dados para cadastrar!');
         return;
     }
@@ -81,8 +75,8 @@ function cadastrarConsulta() {
         codAnimal: codAnimal,
         codVeterinario: codVeterinario,
         dataConsulta: dataConsulta + 'T' + horaConsulta + ':00.000',
-        peso: peso,
-        descricao: descricao
+        peso: 0,
+        descricao: '-'
     };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -91,6 +85,7 @@ function cadastrarConsulta() {
             limparCadastro();
             pesquisarConsultas();
         } else if (this.readyState == 4) {
+            console.log(novaConsulta);
             alert('Não foi possível cadastrar a consulta.');
         }
     };
@@ -100,8 +95,9 @@ function cadastrarConsulta() {
     xhttp.send(JSON.stringify(novaConsulta));
 }
 
-function abrirExcluirConsulta() {
-    modalExcluirConsulta.show();
+function abrirExcluir(codConsulta) {
+    document.getElementById('textCodConsultaExcluir').value = codConsulta
+    modalExcluir.show();
 }
 
 function excluirConsulta() {
@@ -120,8 +116,13 @@ function excluirConsulta() {
     xhttp.send();
 }
 
-function abrirAlterarConsulta() {
-    modalAlterarConsulta.show();
+function abrirAlterar(codConsulta) {
+    document.getElementById('textCodConsultaAlterar').value = codConsulta
+    document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
+    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML.slice(0,10);
+    document.getElementById('textDataConsultaAlterar').value = document.getElementById(`dataConsulta${codConsulta}`).innerHTML;
+    document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
+    modalAlterar.show();
 }
 
 function alterarConsulta() {
@@ -150,6 +151,7 @@ function alterarConsulta() {
             alert('Consulta alterada com sucesso!');
             limparAlteracao();
             pesquisarConsultas();
+            modalAlterar.hide();
         } else if (this.readyState == 4) {
             alert('Não foi possível alterar a consulta.');
         }
@@ -212,5 +214,5 @@ function cadastrarReceita() {
 
 function abrirCadastrarReceita(codConsulta) {
     document.getElementById(`textCodConsultaModal`).value = codConsulta;
-    modalCadastrar.show();
+    modalCadastrarReceita.show();
 }

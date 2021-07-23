@@ -38,67 +38,17 @@
         <p class="h1 text-center">Consultas</p>
         <hr>
         <div class="_botoes my-2">
-            <button type="button" id="btn_form" onclick="abrirCadastrarConsulta()"
-                class="btn btn-dark">Cadastrar</button>
-            <button type="button" id="btn_form2" onclick="abrirAlterarConsulta()" class="btn btn-dark">Alterar</button>
-            <button type="button" id="btn_form3" onclick="abrirExcluirConsulta()" class="btn btn-dark">Excluir</button>
+            <button type="button" id="btn_form" onclick="abrirCadastrar()" class="btn btn-dark">Cadastrar</button>
         </div>
 
-        <!-- Alterar -->
-        <!-- <div class="row">
-                        <form id="my_form2" method="get" action=".">
-                            <div class="form-group my-3 centralizado">
-                                <label>CodConsulta:
-                                    <input name="textCodConsultaAlterar" type="number" id="textCodConsultaAlterar"/></label>
-                                <label>Código do Animal:</label>
-                                <input name="textCodAnimalAlterar" type="text" id="textCodAnimalAlterar" size="10">
-                                <label>Código do Veterinário:
-                                    <input name="textCodVeterinarioAlterar" type="text" id="textCodVeterinarioAlterar"
-                                        size="10"></label>
-                            </div>
-                            <div class="form-group my-3 centralizado">
-                                <label> Data Consulta:
-                                    <input name="textDataConsultaAlterar" type="date" id="textDataConsultaAlterar"
-                                        size="20"></label>
-                                <label> Hora Consulta:
-                                    <input name="textHoraConsultaAlterar" type="time" id="textHoraConsultaAlterar"
-                                        size="20"></label>
-                                <label>Peso:
-                                    <input name="textPesoAlterar" type="text" id="textPesoAlterar" size="20"
-                                        placeholder="EX: 10.200kg"></label>
-                            </div>
-                            <div class="form-group my-3 centralizado">
-                                <label>Descrição:
-                                    <input name="textDescricaoAlterar" type="text" id="textDescricaoAlterar"
-                                        size="60"></label>
-                            </div>
-                            <div class="centralizado">
-                                <button type="button" class="btn btn-dark my-3"
-                                    onclick="alterarConsulta()">Enviar</button>
-                            </div>
-                        </form>
-                    </div> -->
-        <!-- Alterar -->
-        <!-- Excluir -->
-        <!-- <div class="borda">
-                        <form id="my_form3" method="get" action=".">
-                            <div class="form-group my-3 centralizado">
-                                <label>CodConsulta:
-                                    <input name="textCodConsultaExcluir" type="number" id="textCodConsultaExcluir"
-                                        size="10"></label>
-                                <button type="button" class="btn btn-dark my-4"
-                                    onclick="excluirConsulta()">Enviar</button>
-                            </div>
-                        </form>
-                    </div> -->
-        <!-- Excluir -->
+        
 
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
         <div id="divFiltro" style="display: none;">
             <div class="row">
                 <div class="col-sm-12">
                     <input type="text" class="form-control my-2" id="textFiltro"
-                        placeholder="Pelo código, Nome, Nascimento, Raça e Tipo"
+                        placeholder="Por data, números e caracteres"
                         oninput="w3.filterHTML('#tabela', '.item', this.value)">
                 </div>
             </div>
@@ -114,6 +64,8 @@
                     <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(6)')">Peso</th>
                     <th onclick="w3.sortHTML('#tabela','.item', 'td:nth-child(7)')">Descrição</th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="corpoTabela">
@@ -122,7 +74,7 @@
         </table>
     </div>
     <!-- Modal Cadastrar Receita -->
-    <div class="modal fade" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalCadastrarReceita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -156,7 +108,7 @@
     </div>
 
     <!-- Modal Cadastrar Consulta -->
-    <div class="modal fade" id="modalCadastrarConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -171,9 +123,6 @@
                             <label>Código do Veterinário:
                                 <input name="textCodVeterinario" class="form-label" type="text"
                                     id="textCodVeterinario"></label>
-                            <label>Peso:
-                                <input name="textPeso" class="form-label" type="text" id="textPeso"
-                                    placeholder="EX: 10.200kg"></label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label> Data Consulta:
@@ -183,15 +132,10 @@
                                 <input name="textHoraConsulta" class="form-label" type="time"
                                     id="textHoraConsulta"></label>
                         </div>
-                        <div class="col-sm-12">
-                            <label>Descrição:
-                                <input name="textDescricao" class="form-label" type="text" id="textDescricao"
-                                    size="60"></label>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="cadastrarConsulta()">Confirmar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -199,7 +143,7 @@
     </div>
 
     <!-- Modal Alterar Consulta -->
-    <div class="modal fade" id="modalAlterarConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalAlterar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -209,30 +153,29 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <label>CodConsulta:
-                                <input name="textCodConsultaAlterar" type="number"
-                                    id="textCodConsultaAlterar" /></label>
+                                <input name="textCodConsultaAlterar" type="hidden"
+                                    id="textCodConsultaAlterar" />
                             <label>Código do Animal:
-                                <input name="textCodAnimal" class="form-label" type="text" id="textCodAnimal"></label>
+                                <input name="textCodAnimalAlterar" class="form-label" type="number" id="textCodAnimalAlterar" disabled></label>
                             <label>Código do Veterinário:
-                                <input name="textCodVeterinario" class="form-label" type="text"
-                                    id="textCodVeterinario"></label>
+                                <input name="textCodVeterinarioAlterar" class="form-label" type="number"
+                                    id="textCodVeterinarioAlterar" disabled></label>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <label> Data Consulta:
-                                <input name="textDataConsulta" class="form-label" type="date"
-                                    id="textDataConsulta"></label>
-                            <label> Hora Consulta:
-                                <input name="textHoraConsulta" class="form-label" type="time"
-                                    id="textHoraConsulta"></label>
+                            <label> Data:
+                                <input name="textDataConsultaAlterar" class="form-label" type="date"
+                                    id="textDataConsultaAlterar" disabled></label>
+                            <label> Hora:
+                                <input name="textHoraConsultaAlterar" class="form-label" type="time"
+                                    id="textHoraConsultaAlterar" disabled></label>
                             <label>Peso:
-                                <input name="textPeso" class="form-label" type="text" id="textPeso"
+                                <input name="textPesoAlterar" class="form-label" type="text" id="textPesoAlterar"
                                     placeholder="EX: 10.200kg"></label>
                         </div>
                         <div class="col-sm-12">
                             <label>Descrição:
-                                <input name="textDescricao" class="form-label" type="text" id="textDescricao"
-                                    size="60"></label>
+                                <input name="textDescricaoAlterar" class="form-label" type="text" id="textDescricaoAlterar"
+                                    size="40"></label>
                         </div>
                     </div>
                 </div>
@@ -245,7 +188,7 @@
     </div>
 
     <!-- Modal Excluir Consulta -->
-    <div class="modal fade" id="modalExcluirConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -255,8 +198,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label>CodConsulta:
-                                <input name="textCodConsultaExcluir" type="number" id="textCodConsultaExcluir"></label>
+                            <label>Excluir consulta nº 
+                                <input name="textCodConsultaExcluir" type="number" id="textCodConsultaExcluir" disabled></label>
                         </div>
                     </div>
                     <div class="modal-footer">

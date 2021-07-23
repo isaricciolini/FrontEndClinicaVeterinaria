@@ -38,7 +38,7 @@
         <hr>
         <div class="_botoes my-2">
             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" id="btn_form" onclick="location.href='consultas.html'" class="btn btn-dark">Adicionar Consulta</button>
+                <button type="button" id="btn_form" onclick="location.href='consultas.html'" class="btn btn-dark">Cadastrar</button>
             </div>
         </div>
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <input type="text" class="form-control my-2" id="textFiltro"
-                        placeholder="Pelo código, Nome, Nascimento, Raça e Tipo"
+                        placeholder="Por data, números e caracteres"
                         oninput="w3.filterHTML('#tabela', '.item', this.value)">
                 </div>
             </div>
@@ -82,68 +82,73 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <label for="textDataConsultaAlterar" class="form-label">Horário</label>
-                            <input type="datetime" class="form-control" id="textDataConsultaAlterar" placeholder="">
+                            <input name="textCodConsultaAlterar" type="hidden"
+                                    id="textCodConsultaAlterar" disabled/>
+                            <label> Data:
+                                <input name="textDataConsultaAlterar" class="form-label" type="date"
+                                    id="textDataConsultaAlterar"></label>
+                            <label> Hora:
+                                <input name="textHoraConsultaAlterar" class="form-label" type="time"
+                                    id="textHoraConsultaAlterar"></label>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <input type="text" class="form-control" id="textCodAnimalAlterar"
+                                disabled>
+                                <input type="text" class="form-control" id="textCodVeterinariAlterar"
+                                disabled>
+                                <input type="text" class="form-control" id="textPesoAlterar"
+                                disabled>
+                                <input type="text" class="form-control" id="textDescricaoAlterar"
+                                disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="textNomeAnimalAlterar" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="textNomeAnimalAlterar"
-                                placeholder="Nome do Animal">
+                                disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="textNomeClienteAlterar" class="form-label">Dono</label>
                             <input type="text" class="form-control" id="textNomeClienteAlterar"
-                                placeholder="Nome do Cliente">
+                                 disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <label for="textNomeVeterinarioAlterar" class="form-label">Nome</label>
+                            <label for="textNomeVeterinarioAlterar" class="form-label">Veterinário</label>
                             <input type="text" class="form-control" id="textNomeVeterinarioAlterar"
-                                placeholder="Nome do Animal">
+                                disabled>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="alterarConsulta()">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Cadastrar Consulta -->
-    <div class="modal fade" id="modalCadastrar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+    <!-- Modal Excluir Consulta -->
+    <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Alterar Consulta</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Excluir consulta</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <label for="textDataConsultaAlterar" class="form-label">Horário</label>
-                            <input type="datetime" class="form-control" id="textDataConsultaAlterar" placeholder="">
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <label for="textNomeAnimalAlterar" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="textNomeAnimalAlterar"
-                                placeholder="Nome do Animal">
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <label for="textNomeClienteAlterar" class="form-label">Dono</label>
-                            <input type="text" class="form-control" id="textNomeClienteAlterar"
-                                placeholder="Nome do Cliente">
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <label for="textNomeVeterinarioAlterar" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="textNomeVeterinarioAlterar"
-                                placeholder="Nome do Animal">
+                        <div class="col-sm-12">
+                            <label>Excluir consulta nº 
+                                <input name="textCodConsultaExcluir" type="number" id="textCodConsultaExcluir" disabled></label>
                         </div>
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="cadastrarConsulta()">Confirmar</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="excluirConsulta()">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
