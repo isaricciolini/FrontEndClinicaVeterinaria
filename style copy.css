@@ -32,7 +32,7 @@
 
 .sidebar a.icon {display: none;}
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1500px) {
   .sidebar {
     background-image: linear-gradient(135deg, #343450 80%, rgb(230, 103, 65) 40%);
     width: 100%;
@@ -49,7 +49,7 @@
   .active {float:left;}
 }
 
-@media screen and (max-width: 850px) { 
+@media screen and (max-width: 1500px) { 
   .hide.responsive {
     position: relative;
     float: left;

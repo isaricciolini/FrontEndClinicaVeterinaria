@@ -33,34 +33,11 @@ var textCidadeAlterar = document.getElementById('textCidadeAlterar');
 var textCodVeterinario = document.getElementById('textCodVeterinario');
 var textCodVeterinarioExcluir = document.getElementById('textCodVeterinarioExcluir');
 var codVeterinario = textCodVeterinarioExcluir.value;
+
+var modalEndereco = new bootstrap.Modal(document.getElementById('modalEndereco'), {});
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
-
-
-btn.addEventListener('click', function () {
-    if (form.style.display != 'block') {
-        form.style.display = 'block';
-        return;
-    }
-    form.style.display = 'none';
-});
-
-btn2.addEventListener('click', function () {
-    if (form2.style.display != 'block') {
-        form2.style.display = 'block';
-        return;
-    }
-    form2.style.display = 'none';
-});
-
-btn3.addEventListener('click', function () {
-    if (form3.style.display != 'block') {
-        form3.style.display = 'block';
-        return;
-    }
-    form3.style.display = 'none';
-});
 
 pesquisarVeterinarios();
 
@@ -75,18 +52,26 @@ function pesquisarVeterinarios() {
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codVeterinario}">${info.nomeVeterinario}</td>`;
-                linha += `<td id="nascimento${info.codVeterinario}">${info.nascimento.slice(0,10)}</td>`;
-                linha += `<td id="cpf${info.codVeterinario}">${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
-                linha += `<td id="telefone${info.codVeterinario}">${info.telefone}</td>`;
+                linha += `<td>${info.nascimento.slice(0,10)}</td>`;
+                linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
+                linha += `<td>${info.telefone}</td>`;
                 linha += `<td id="email${info.codVeterinario}">${info.email}</td>`;
                 linha += `<td id="crmv${info.codVeterinario}">${info.crmv}</td>`;
-                linha += `<td id="rua${info.codVeterinario}">${info.rua}</td>`;
-                linha += `<td id="numero${info.codVeterinario}">${info.numero}</td>`;
-                linha += `<td id="complemento${info.codVeterinario}">${info.complemento}</td>`;
-                linha += `<td id="cep${info.codVeterinario}">${info.cep.replace(/(\d{5})(\d{3})/, "$1-$2")}</td>`;
-                linha += `<td id="bairro${info.codVeterinario}">${info.bairro}</td>`;
-                linha += `<td id="cidade${info.codVeterinario}">${info.cidade}</td>`;
+                linha += `<td><button onclick="abrirEndereco(${info.codVeterinario})" class="btn btn-dark">Mostrar</button></td>`
+                linha += `<td><button onclick="abrirAlterar(${info.codVeterinario})" class="btn btn-dark">Alterar</button></td>`
+                linha += `<td><button onclick="abrirExcluir(${info.codVeterinario})" class="btn btn-dark">Excluir</button></td>`
                 linha += '</tr>';
+                linha += '<div style="display: none;">'
+                linha += `<p id="telefone${info.codVeterinario}">${info.telefone}</p>`;
+                linha += `<p id="nascimento${info.codVeterinario}">${info.nascimento}</p>`;
+                linha += `<p id="cpf${info.codVeterinario}">${info.cpf}</p>`;
+                linha += `<p id="cep${info.codVeterinario}">${info.cep}</p>`
+                linha += `<p id="rua${info.codVeterinario}">${info.rua}</p>`
+                linha += `<p id="numero${info.codVeterinario}">${info.numero}</p>`;
+                linha += `<p id="complemento${info.codVeterinario}">${info.complemento}</p>`;
+                linha += `<p id="bairro${info.codVeterinario}">${info.bairro}</p>`;
+                linha += `<p id="cidade${info.codVeterinario}">${info.cidade}</p>`;
+                linha += '</div>'
                 corpoTabela.innerHTML += linha;
             }
             w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
@@ -96,6 +81,16 @@ function pesquisarVeterinarios() {
     };
     xhttp.open('GET', url, true);
     xhttp.send();
+}
+
+function abrirEndereco(codVeterinario) {
+    document.getElementById('textCEP').value =  document.getElementById(`cep${codVeterinario}`).innerHTML.replace(/(\d{5})(\d{3})/, "$1-$2");
+    document.getElementById('textRua').value =  document.getElementById(`rua${codVeterinario}`).innerHTML;
+    document.getElementById('textNumero').value =  document.getElementById(`numero${codVeterinario}`).innerHTML;
+    document.getElementById('textComplemento').value =  document.getElementById(`complemento${codVeterinario}`).innerHTML;
+    document.getElementById('textBairro').value =  document.getElementById(`bairro${codVeterinario}`).innerHTML;
+    document.getElementById('textCidade').value =  document.getElementById(`cidade${codVeterinario}`).innerHTML;
+    modalEndereco.show();
 }
 
 function abrirCadastrar() {
@@ -184,7 +179,21 @@ function pesquisacep(textNovoCEP) {
     }
 };
 
-function abrirAlterar() {
+function abrirAlterar(codVeterinario) {
+
+    document.getElementById('textCodVeterinario').value = codVeterinario
+    document.getElementById('textNomeVeterinarioAlterar').value = document.getElementById(`nome${codVeterinario}`).innerHTML;
+    document.getElementById('textNascimentoAlterar').value = document.getElementById(`nascimento${codVeterinario}`).innerHTML.slice(0,10);
+    document.getElementById('textTelefoneAlterar').value = document.getElementById(`telefone${codVeterinario}`).innerHTML;
+    document.getElementById('textEmailAlterar').value = document.getElementById(`email${codVeterinario}`).innerHTML;
+    document.getElementById('textCPFAlterar').value = document.getElementById(`cpf${codVeterinario}`).innerHTML;
+    document.getElementById('textCRMVAlterar').value = document.getElementById(`crmv${codVeterinario}`).innerHTML;
+    document.getElementById('textCEPAlterar').value =  document.getElementById(`cep${codVeterinario}`).innerHTML;
+    document.getElementById('textRuaAlterar').value =  document.getElementById(`rua${codVeterinario}`).innerHTML;
+    document.getElementById('textNumeroAlterar').value =  document.getElementById(`numero${codVeterinario}`).innerHTML;
+    document.getElementById('textComplementoAlterar').value =  document.getElementById(`complemento${codVeterinario}`).innerHTML;
+    document.getElementById('textBairroAlterar').value =  document.getElementById(`bairro${codVeterinario}`).innerHTML;
+    document.getElementById('textCidadeAlterar').value =  document.getElementById(`cidade${codVeterinario}`).innerHTML;
     modalAlterar.show();
 }
 
@@ -226,7 +235,7 @@ function alterarVeterinario() {
         if (this.readyState == 4 && this.status == 200) {
             alert(`${alterarVeterinario.nomeVeterinario} alterado(a) com sucesso!`);
             pesquisarVeterinarios();
-            modalAltertar.hide();
+            modalAlterar.hide();
         } else if (this.readyState == 4) {
             alert('Não foi possível alterar o veterinário.');
         }
@@ -273,9 +282,11 @@ function pesquisaCEPAlterar(textCEPAlterar) {
     }
 };
 
-function abrirExcluir() {
+function abrirExcluir(codVeterinario) {
+    document.getElementById("textCodVeterinarioExcluir").value = codVeterinario;
     modalExcluir.show();
 }
+
 
 function excluirVeterinario(codVeterinario) {
     var codVeterinario = textCodVeterinarioExcluir.value;
