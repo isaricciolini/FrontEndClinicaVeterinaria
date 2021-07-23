@@ -1,4 +1,5 @@
 var url = 'https://localhost:5001/veterinarios';
+var corpoTabela = document.getElementById('corpoTabela');
 var btn = document.getElementById('btn_form');
 var form = document.getElementById('my_form');
 var btn2 = document.getElementById('btn_form2');
