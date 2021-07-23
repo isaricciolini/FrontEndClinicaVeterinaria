@@ -14,17 +14,7 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <style>
-        label {
-            margin-top: 2px;
-            display: inline-block;
-            text-align: left;
-        }
-
-        input {
-            width: 100%;
-        }
-    </style>
+    <link rel="shortcut icon" href="p_Logo-veterinaria.ico"/>
     <title>Clientes - Centro Veterinário</title>
 </head>
 
@@ -32,7 +22,7 @@
     <!-- * Inicio Sidebar/Navbar -->
     <div class="sidebar" id="sidebar">
         <div class="active">
-            <a class="fs-5" href="#"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
+            <a class="fs-5" href="index.html"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
                 Veterinário</a>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="navbar()">
@@ -101,7 +91,7 @@
                             <input name="textNovoNomeCliente" class="form-label" type=" text"
                                 id="textNovoNomeCliente">
                             <label>Data de Nascimento:
-                                <input name="textNovoNascimento" class="form-label" class=" form-label" type="date"
+                                <input name="textNovoNascimento" class="form-label" type="date"
                                     id="textNovoNascimento"></label>
                             <label>Telefone:
                                 <input name="textNovoTelefone" class="form-label" type="text"
@@ -117,24 +107,24 @@
                         <div class="col-sm-12">
                             <div class="form-group" method="get" action=".">
                                 <label>CEP:
-                                    <input name="textNovoCEP" type="text" id="textNovoCEP" value="" size="10"
+                                    <input name="textNovoCEP" type="text" class="form-label" id="textNovoCEP" value="" size="10"
                                         maxlength="9" oninput="pesquisacep(this.value)" /></label>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Rua:
-                                <input name="textNovoRua" type="text" id="textNovoRua"></label>
+                                <input name="textNovoRua" type="text" class="form-label" id="textNovoRua"></label>
                             <label>Complemento:
-                                <input name="textNovoComplemento" type="text" id="textNovoComplemento"></label>
+                                <input name="textNovoComplemento" type="text" class="form-label" id="textNovoComplemento"></label>
                             <label>Cidade:
-                                <input name="textNovoCidade" type="text" id="textNovoCidade"></label>
+                                <input name="textNovoCidade" type="text" class="form-label" id="textNovoCidade"></label>
 
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Número:
-                                <input name="textNovoNumero" type="text" id="textNovoNumero"></label>
+                                <input name="textNovoNumero" type="text" class="form-label" id="textNovoNumero"></label>
                             <label>Bairro:
-                                <input name="textNovoBairro" type="text" id="textNovoBairro"></label>
+                                <input name="textNovoBairro" type="text" class="form-label" id="textNovoBairro"></label>
                         </div>
                     </div>
                 </div>
@@ -164,18 +154,18 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Rua:
-                                <input name="textRua" type="text" id="textRua" disabled></label>
+                                <input name="textRua" type="text" class="form-label" id="textRua" disabled></label>
                             <label>Complemento:
-                                <input name="textComplemento" type="text" id="textComplemento" disabled></label>
+                                <input name="textComplemento" type="text" class="form-label" id="textComplemento" disabled></label>
                             <label>Cidade:
-                                <input name="textCidade" type="text" id="textCidade" disabled></label>
+                                <input name="textCidade" type="text" class="form-label" id="textCidade" disabled></label>
 
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Número:
-                                <input name="textNumero" type="text" id="textNumero" disabled></label>
+                                <input name="textNumero" type="text" class="form-label" id="textNumero" disabled></label>
                             <label>Bairro:
-                                <input name="textBairro" type="text" id="textBairro" disabled></label>
+                                <input name="textBairro" type="text" class="form-label" id="textBairro" disabled></label>
                         </div>
                     </div>
                 </div>
@@ -227,22 +217,22 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Rua:
-                                <input name="textRuaAlterar" type="text" 
+                                <input name="textRuaAlterar" class="form-label" type="text" 
                                 id="textRuaAlterar"></label>
                             <label>Complemento:
-                                <input name="textComplementoAlterar" type="text" 
+                                <input name="textComplementoAlterar" class="form-label" type="text" 
                                 id="textComplementoAlterar"></label>
                             <label>Cidade:
-                                <input name="textCidadeAlterar" type="text" 
+                                <input name="textCidadeAlterar" class="form-label" type="text" 
                                 id="textCidadeAlterar"></label>
 
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Número:
-                                <input name="textNumeroAlterar" type="text" 
+                                <input name="textNumeroAlterar" class="form-label" type="text" 
                                 id="textNumeroAlterar"></label>
                             <label>Bairro:
-                                <input name="textBairroAlterar" type="text" 
+                                <input name="textBairroAlterar" class="form-label" type="text" 
                                 id="textBairroAlterar"></label>
                         </div>
                     </div>
@@ -267,7 +257,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label>Excluir cliente nº 
-                                <input name="textCodClienteExcluir" type="number" id="textCodClienteExcluir" disabled/></label>
+                                <input name="textCodClienteExcluir" class="form-label" type="number" id="textCodClienteExcluir" disabled/></label>
                         </div>
                     </div>
                 </div>

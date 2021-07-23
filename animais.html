@@ -12,21 +12,24 @@
 
     <link rel="stylesheet" href="style copy.css">
 
-    <title>Centro Veterinário</title>
+    <link rel="shortcut icon" href="p_Logo-veterinaria.ico"/>
+    <title>Animais - Centro Veterinário</title>
 </head>
 
 <body>
     <!-- Inicio Sidebar/Navbar -->
     <div class="sidebar" id="sidebar">
         <div class="active">
-            <a class="fs-5" href="#"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
-                Veterinario</a>
+            <a class="fs-5" href="index.html"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
+                Veterinário</a>
         </div>
         <div class="hide" id="hide">
-            <button type="button" class="btn _botaosidebar">Consultas</button>
-            <button type="button" class="btn _botaosidebar">Clientes</button>
-            <button type="button" class="btn _botaosidebar">Animais</button>
-            <button type="button" class="btn _botaosidebar">Veterinários</button>
+            <button onclick="location.href='index.html'" type="button" class="btn _botaosidebar">Agenda</button>
+            <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
+            <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
+            <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
+            <button onclick="location.href='veterinarios.html'" type="button"
+                class="btn _botaosidebar">Veterinários</button>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="navbar()">
             <button type="button" class="btn _botaosidebar">Menu</button></a>
@@ -36,8 +39,11 @@
         <p class="h1 text-center">Animais</p>
         <hr>
         <div class="_botoes my-2">
-            <button type="button" class="btn btn-dark" onclick="abrirCadastrar()">Cadastrar
-                Animal</button>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" class="btn btn-dark" onclick="abrirCadastrar()">CadastrarAnimal</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='animaiscompleto.html'">Animais Completo</button>
+            </div>
+
         </div>
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
         <div id="divFiltro" style="display: none;">
@@ -150,7 +156,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="textCodCliente" class="form-label">Código do Cliente</label>
-                            <input type="text" class="form-control" id="textCodCliente" placeholder="Código do cliente">
+                            <input type="text" class="form-control" id="textCodCliente" placeholder="Exemplo: 1">
                         </div>
                     </div>
 
