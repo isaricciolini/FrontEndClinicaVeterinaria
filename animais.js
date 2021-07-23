@@ -25,7 +25,6 @@ function pesquisarAnimais() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.response)
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
                 var animal = resposta[i];
