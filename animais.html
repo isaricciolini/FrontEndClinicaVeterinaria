@@ -39,8 +39,11 @@
         <p class="h1 text-center">Animais</p>
         <hr>
         <div class="_botoes my-2">
-            <button type="button" class="btn btn-dark" onclick="abrirCadastrar()">Cadastrar
-                Animal</button>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" class="btn btn-dark" onclick="abrirCadastrar()">CadastrarAnimal</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='animaiscompleto.html'">Animais Completo</button>
+            </div>
+
         </div>
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
         <div id="divFiltro" style="display: none;">
