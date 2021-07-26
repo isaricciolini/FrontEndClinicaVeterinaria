@@ -119,3 +119,7 @@ label {
 input {
   width: 100%;
 }
+
+#tabela th {
+  cursor:pointer;
+}

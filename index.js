@@ -64,7 +64,6 @@ function exibirAgenda() {
                 linha += '</div>';
                 corpoTabela.innerHTML += linha;
             }
-            w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
         } else if (this.readyState == 4) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
@@ -207,12 +206,12 @@ function abrirConfirmarCadastrar(codVeterinario) {
 }
 
 function cadastrarConsulta() {
-    
+
     dataConsultaCadastrar = document.getElementById('textDataConsultaConfirmar').value;
     horaConsultaCadastrar = document.getElementById('textHoraConsultaConfirmar').value;
     codAnimalCadastrar = codAnimalConsultaCadastrar;
     codVeterinarioCadastrar = codVeterinarioConsultaCadastrar;
-    
+
 
     if (!codAnimalCadastrar || !codVeterinarioCadastrar || !dataConsultaCadastrar || !horaConsultaCadastrar) {
         alert('Preencha todos os dados para cadastrar!');
