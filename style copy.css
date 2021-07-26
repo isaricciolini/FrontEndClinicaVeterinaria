@@ -77,6 +77,7 @@ html, body{
 
 div.content {
   margin-left: 200px;
+  margin-right: 5px;
   padding: 6px 8px;
   height: auto; 
   overflow: auto;
@@ -94,6 +95,10 @@ div.content {
 }
 
 #textFiltro{
+  max-width: 500px;
+}
+
+#textFiltroClientes{
   max-width: 500px;
 }
 

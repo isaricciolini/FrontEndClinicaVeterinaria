@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="style copy.css">
 
-    <link rel="shortcut icon" href="p_Logo-veterinaria.ico"/>
+    <link rel="shortcut icon" href="p_Logo-veterinaria.ico" />
     <title>Centro Veterinário</title>
 </head>
 
@@ -26,11 +26,12 @@
         <a href="javascript:void(0);" class="icon" onclick="navbar()">
             <button type="button" class="btn _botaosidebar">Menu</button></a>
         <div class="hide" id="hide">
-            <button onclick="location.href='index.html'" type="button"  class="btn _botaosidebar">Agenda</button>
+            <button onclick="location.href='index.html'" type="button" class="btn _botaosidebar">Agenda</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
-            <button onclick="location.href='veterinarios.html'" type="button" class="btn _botaosidebar">Veterinários</button>
+            <button onclick="location.href='veterinarios.html'" type="button"
+                class="btn _botaosidebar">Veterinários</button>
         </div>
     </div>
     <!-- * Fim Sidebar/Navbar -->
@@ -39,7 +40,8 @@
         <hr>
         <div class="_botoes my-2">
             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" id="btn_form" onclick="location.href='consultas.html'" class="btn btn-dark">Cadastrar</button>
+                <button type="button" id="btn_form" onclick="abrirCadastrarDataHora()"
+                    class="btn btn-dark">Cadastrar</button>
             </div>
         </div>
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
@@ -83,43 +85,32 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <input name="textCodConsultaAlterar" type="hidden"
-                                    id="textCodConsultaAlterar" disabled/>
                             <label> Data:
-                                <input name="textDataConsultaAlterar" class="form-label" type="date"
+                                <input name="textDataConsultaAlterar" class="form-control" type="date"
                                     id="textDataConsultaAlterar"></label>
                             <label> Hora:
-                                <input name="textHoraConsultaAlterar" class="form-label" type="time"
+                                <input name="textHoraConsultaAlterar" class="form-control" type="time"
                                     id="textHoraConsultaAlterar"></label>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <input type="text" class="form-control" id="textCodAnimalAlterar"
-                                disabled>
-                                <input type="text" class="form-control" id="textCodVeterinariAlterar"
-                                disabled>
-                                <input type="text" class="form-control" id="textPesoAlterar"
-                                disabled>
-                                <input type="text" class="form-control" id="textDescricaoAlterar"
-                                disabled>
+                        <div style="display: none;">
+                            <input id="textCodConsultaAlterar" disabled>
+                            <input id="textCodAnimalAlterar" disabled>
+                            <input id="textCodVeterinarioAlterar" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="textNomeAnimalAlterar" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="textNomeAnimalAlterar"
-                                disabled>
+                            <input type="text" class="form-control" id="textNomeAnimalAlterar" disabled>
+                            <label for="textNomeVeterinarioAlterar" class="form-label">Veterinário</label>
+                            <input type="text" class="form-control" id="textNomeVeterinarioAlterar" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="textNomeClienteAlterar" class="form-label">Dono</label>
-                            <input type="text" class="form-control" id="textNomeClienteAlterar"
-                                 disabled>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <label for="textNomeVeterinarioAlterar" class="form-label">Veterinário</label>
-                            <input type="text" class="form-control" id="textNomeVeterinarioAlterar"
-                                disabled>
+                            <input type="text" class="form-control" id="textNomeClienteAlterar" disabled>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onclick="alterarConsulta()">Confirmar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary"
+                                onclick="alterarConsulta()">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -128,8 +119,8 @@
     </div>
 
     <!-- Modal Excluir Consulta -->
-    <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalExcluir" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,49 +129,260 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label>Excluir consulta nº 
-                                <input name="textCodConsultaExcluir" type="number" id="textCodConsultaExcluir" disabled></label>
+                            <label>Excluir consulta nº
+                                <input name="textCodConsultaExcluir" type="number" id="textCodConsultaExcluir"
+                                    disabled></label>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="excluirConsulta()">Confirmar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
-    
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    </div>
 
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script src="index.js"></script>
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
+    <!-- Modal Cadastrar (data e hora) -->
+    <div class="modal fade" id="modalCadastrarDataHora" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Nova Consulta</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label> Data:
+                                <input name="textDataConsultaCadastrar" class="form-control" type="date"
+                                    id="textDataConsultaCadastrar"></label>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <label> Hora:
+                                <input name="textHoraConsultaCadastrar" class="form-control" type="time"
+                                    id="textHoraConsultaCadastrar"></label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="confirmarCadastrarDataHora()">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cadastrar (lista clientes) -->
+    <div class="modal fade" id="modalListaClientes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Nova Consulta</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="clientes.html"><button class="btn btn-dark my-2">Novo Cliente</button></a>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input placeholder="Filtrar por CodCliente, Nome ou CPF"
+                                        oninput="w3.filterHTML('#tabelaClientes', '.itemClientes', this.value)">
+                                </div>
+                                <div class="col-sm-12">
+                                    <table class="table table-hover text-center" id="tabelaClientes">
+                                        <thead>
+                                            <tr>
+                                                <th>Cod</th>
+                                                <th>Nome</th>
+                                                <th>CPF</th>
+                                                <th>Adicinar a consulta</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="corpoTabelaClientes">
+                                            <!-- aqui serão listadas as consultas cadastradas no banco -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cadastrar (lista animais) -->
+    <div class="modal fade" id="modalListaAnimais" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Nova Consulta - Animais</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="Animais.html"><button class="btn btn-dark my-2">Novo Animal</button></a>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input placeholder="Filtrar por CodAnimal ou Nome"
+                                        oninput="w3.filterHTML('#tabelaAnimais', '.itemAnimais', this.value)">
+                                </div>
+                                <div class="col-sm-12">
+                                    <table class="table table-hover text-center" id="tabelaAnimais">
+                                        <thead>
+                                            <tr>
+                                                <th>Cod</th>
+                                                <th>Nome</th>
+                                                <th>Tipo</th>
+                                                <th>Raca</th>
+                                                <th>Adicinar a consulta</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="corpoTabelaAnimais">
+                                            <!-- aqui serão listadas as consultas cadastradas no banco -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Cadastrar (lista veterinarios) -->
+    <div class="modal fade" id="modalListaVeterinarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Nova Consulta - Veterinários</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input placeholder="Filtrar por CodVeterinario, Nome ou CRMV"
+                                        oninput="w3.filterHTML('#tabelaVeterinarios', '.itemVeterinarios', this.value)">
+                                </div>
+                                <div class="col-sm-12">
+                                    <table class="table table-hover text-center" id="tabelaVeterinarios">
+                                        <thead>
+                                            <tr>
+                                                <th>Cod</th>
+                                                <th>Nome</th>
+                                                <th>CRMV</th>
+                                                <th>Adicinar a consulta</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="corpoTabelaVeterinarios">
+                                            <!-- aqui serão listadas as consultas cadastradas no banco -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cadastrar Confirmar -->
+    <div class="modal fade" id="modalConfirmarCadastrar" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Nova Consulta - Confirmar</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label> Data:
+                                <input name="textDataConsultaConfirmar" class="form-control" type="date"
+                                    id="textDataConsultaConfirmar" value="0001-01-01"></label>
+                            <label> Hora:
+                                <input name="textHoraConsultaConfirmar" class="form-control" type="time"
+                                    id="textHoraConsultaConfirmar" value="00:00"></label>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="textNomeClienteCadastrar" class="form-label">Dono</label>
+                            <input type="text" class="form-control" id="textNomeClienteCadastrar" disabled>
+                            <label for="textNomeAnimalCadastrar" class="form-label">Animal</label>
+                            <input type="text" class="form-control" id="textNomeAnimalCadastrar" disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="textNomeVeterinarioCadastrar" class="form-label">Veterinário</label>
+                            <input type="text" class="form-control" id="textNomeVeterinarioCadastrar" disabled>
+                        </div>
+                        <div style="display: none;">
+                            <input id="textCodConsultaCadastrar" disabled>
+                            <input id="textCodAnimalCadastrar" disabled>
+                            <input id="textCodVeterinarioCadastrar" disabled>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="cadastrarConsulta()">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <script src="index.js"></script>
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
-    <script>
-        function navbar() {
-            var x = document.getElementById("hide");
-            if (x.className === "hide") {
-                x.className += " responsive";
-            } else {
-                x.className = "hide";
+        <script>
+            function navbar() {
+                var x = document.getElementById("hide");
+                if (x.className === "hide") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "hide";
+                }
             }
-        }
-    </script>
+        </script>
 </body>
 
 </html>
