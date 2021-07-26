@@ -89,7 +89,6 @@ function cadastrarConsulta() {
             alert('Não foi possível cadastrar a consulta.');
         }
     };
-    console.log(novaConsulta);
     xhttp.open('POST', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(novaConsulta));
