@@ -88,21 +88,6 @@ function excluirConsulta(codConsulta) {
     xhttp.send();
 }
 
-function abrirAlterarConsulta(codConsulta) {
-    modalAlterar.show();
-    document.getElementById('textCodConsultaAlterar').value = codConsulta
-    document.getElementById('textNomeVeterinarioAlterar').value = document.getElementById(`nomeVeterinario${codConsulta}`).innerHTML;
-    document.getElementById('textNomeClienteAlterar').value = document.getElementById(`nomeCliente${codConsulta}`).innerHTML;
-    document.getElementById('textNomeAnimalAlterar').value = document.getElementById(`nomeAnimal${codConsulta}`).innerHTML;
-    document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
-    document.getElementById('textDataConsultaAlterar').value = document.getElementById(`dataConsulta${codConsulta}`).innerHTML;
-    document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
-    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML;
-    document.getElementById('textPesoAlterar').value = document.getElementById(`peso${codConsulta}`).innerHTML;
-    document.getElementById('textDescricaoAlterar').value = document.getElementById(`descricao${codConsulta}`).innerHTML;
-
-}
-
 function abrirCadastrarDataHora() {
     modalCadastrarDataHora.show();
 }
@@ -258,6 +243,19 @@ function cadastrarConsulta() {
 
 }
 
+function abrirAlterarConsulta(codConsulta) {
+    modalAlterar.show();
+    document.getElementById('textCodConsultaAlterar').value = codConsulta
+    document.getElementById('textNomeVeterinarioAlterar').value = document.getElementById(`nomeVeterinario${codConsulta}`).innerHTML;
+    document.getElementById('textNomeClienteAlterar').value = document.getElementById(`nomeCliente${codConsulta}`).innerHTML;
+    document.getElementById('textNomeAnimalAlterar').value = document.getElementById(`nomeAnimal${codConsulta}`).innerHTML;
+    document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
+    document.getElementById('textDataConsultaAlterar').value = document.getElementById(`dataConsulta${codConsulta}`).innerHTML;
+    document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
+    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML;
+
+}
+
 
 function alterarConsulta() {
     var dataConsulta = textDataConsultaAlterar.value;
@@ -278,17 +276,17 @@ function alterarConsulta() {
         peso: pesoCadastrar,
         descricao: descricaoCadastrar
     };
+    console.log(JSON.stringify(consulta));
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`Consulta de ${consulta.nomeAnimal} alterado(a) com sucesso!`);
+            alert(`Consulta alterada com sucesso!`);
             exibirAgenda();
             modalAlterar.hide();
         } else if (this.readyState == 4) {
             alert('Não foi possível alterar a consulta.');
         }
     };
-    console.log(consulta);
     xhttp.open('PUT', `${url}`, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(consulta));
