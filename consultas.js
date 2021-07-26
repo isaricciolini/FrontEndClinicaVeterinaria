@@ -22,6 +22,7 @@ var codConsultaModal = document.getElementById('textCodConsultaModal')
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
+var modalCadastrarReceita = new bootstrap.Modal(document.getElementById('modalCadastrarReceita'), {});
 
 var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
 
@@ -202,6 +203,7 @@ function cadastrarReceita() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             alert('Receita cadastrada com sucesso!');
+            modalCadastrarReceita.hide();
         } else if (this.readyState == 4) {
             alert('Não foi possível cadastrar a receita.');
         }
@@ -209,6 +211,9 @@ function cadastrarReceita() {
     xhttp.open('POST', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(receitaCadastrada));
+    document.getElementById('textDataReceita').value = "";
+    document.getElementById('textPrescricao').value = "";
+
 }
 
 function abrirCadastrarReceita(codConsulta) {
