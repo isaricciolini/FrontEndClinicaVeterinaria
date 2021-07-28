@@ -241,7 +241,6 @@ function alterarVeterinario() {
             alert('Não foi possível alterar o veterinário.');
         }
     };
-    console.log(JSON.stringify(alterarVeterinario));
     xhttp.open('PUT', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(alterarVeterinario));

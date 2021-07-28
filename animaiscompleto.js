@@ -121,7 +121,6 @@ function abrirReceita(codAnimal) {
 }
 
 function excluirAnimal(codAnimal) {
-    console.log()
     if (!confirm('Tem certeza que deseja excluir este animal?'))
         return;
     var xhttp = new XMLHttpRequest();

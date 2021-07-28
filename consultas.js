@@ -86,7 +86,6 @@ function cadastrarConsulta() {
             limparCadastro();
             pesquisarConsultas();
         } else if (this.readyState == 4) {
-            console.log(novaConsulta);
             alert('Não foi possível cadastrar a consulta.');
         }
     };
@@ -198,7 +197,6 @@ function cadastrarReceita() {
         prescricao: prescricao,
         codConsulta: codConsultaModal
     };
-    console.log(receitaCadastrada);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {

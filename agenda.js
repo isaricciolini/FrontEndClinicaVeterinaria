@@ -231,11 +231,9 @@ function cadastrarConsulta() {
             modalConfirmarCadastrar.hide();
 
         } else if (this.readyState == 4) {
-            console.log(novaConsulta);
             alert('Não foi possível cadastrar a consulta.');
         }
     };
-    console.log(novaConsulta);
     xhttp.open('POST', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(novaConsulta));
@@ -275,7 +273,6 @@ function alterarConsulta() {
         peso: pesoCadastrar,
         descricao: descricaoCadastrar
     };
-    console.log(JSON.stringify(consulta));
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {

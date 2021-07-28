@@ -14,9 +14,7 @@ function logar() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             login = JSON.parse(this.response);
-            console.log(login);
             if (senhaDigitada == login.senha) {
-                console.log(this.response);
                 alert("Login realizado com sucesso!");
                 window.location = "agenda.html";
                 return false;
