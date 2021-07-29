@@ -169,8 +169,8 @@ function limparCadastro() {
     textCodVeterinario.value = '';
     textDataConsulta.value = '';
     textHoraConsulta.value = '';
-    textPeso.value = '';
-    textDescricao.value = '';
+    //textPeso.value = '';
+    //textDescricao.value = '';
 }
 
 function limparAlteracao() {
