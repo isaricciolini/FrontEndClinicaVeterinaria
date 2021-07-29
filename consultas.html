@@ -13,6 +13,27 @@
 
     <link rel="stylesheet" href="style copy.css">
 
+    <script>
+        function getCookie(usuario) {
+            let login = usuario + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(login) == 0) {
+                    return c.substring(login.length, c.length);
+                }
+            }
+            return "";
+        }
+        if (getCookie("usuario") == "") {
+            window.location = "index.html";
+        }
+    </script>
+
     <link rel="shortcut icon" href="p_Logo-veterinaria.ico"/>
     <title>Consultas - Centro Veterinário</title>
 </head>
@@ -29,7 +50,6 @@
         </div>
         <div class="hide" id="hide">
             <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
-            <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
             <button onclick="location.href='veterinarios.html'" type="button"
@@ -227,6 +247,7 @@
 
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script src="consultas.js"></script>
+        <script src="cookies.js"></script>
         <script src="sort.js"></script>
         <!-- Option 2: Separate Popper and Bootstrap JS -->
         <!--

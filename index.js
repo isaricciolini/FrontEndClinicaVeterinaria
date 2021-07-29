@@ -15,6 +15,7 @@ function logar() {
         if (this.readyState == 4 && this.status == 200) {
             login = JSON.parse(this.response);
             if (senhaDigitada == login.senha) {
+                setCookie("usuario",login.usuario)
                 alert("Login realizado com sucesso!");
                 window.location = "agenda.html";
                 return false;
@@ -63,6 +64,17 @@ function cadastrarLogin() {
     xhttp.send(JSON.stringify(novoLogin));
 }
 
+/**
+ * Grava um cookie.
+ * @param  {String} usuario Nome do cookie
+ * @param  {String} nomeUsuario Valor do cookie
+ */
+ function setCookie(usuario, nomeUsuario) {
+    const d = new Date();
+    d.setTime(d.getTime() + (24 * 60 * 60 * 1000)); // cookie válido por 24 horas
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = usuario + "=" + nomeUsuario + ";" + expires + ";path/";
+}
 
 function limpar() {
     textUsuario.value = '';

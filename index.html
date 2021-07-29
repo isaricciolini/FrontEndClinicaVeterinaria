@@ -24,6 +24,9 @@
             <a class="fs-5" href="index.html"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
                 Veterinario</a>
         </div>
+        <div class="login">
+            <button onclick="expireCookie()" type="button" class="btn _botaosidebar">Deslogar</button>
+        </div>
         <div class="hide" id="hide">
             <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
@@ -38,16 +41,20 @@
     <!-- Fim Sidebar/Navbar -->
     <div class="content" id="app">
 
-        <div class="container">
+        <div class="container text-center">
             <div class="main">
                 <h2>Área do Colaborador</h2>
                 <form id="form_id" method="post" name="myform">
-                    <label>Nome de usuário:</label>
-                    <input type="text" id="textUsuario" name="id" />
+                    <div class="row">
+                        <div class="col-sm-12">
+                    <label>Login:</label>
+                    <input type="text" id="textUsuario" name="id" class="form-label" style="width: 250px;" /></div>
+                    <div class="col-sm-12">
                     <label>Senha:</label>
-                    <input type="password" name="password" id="textSenha" />
-                    <input type="button" value="Login" id="submit" onclick="logar()" />
-
+                    <input type="password" name="password" id="textSenha" class="form-label" style="width: 243px;" /></div>
+                    <div class="col-sm-12">
+                    <input type="button" value="Login" id="submit" onclick="logar()" class="btn _botaosidebar" style="width: 250px;" /></div>
+                </div>
                     <button type="button" class="btn _botaosidebar">Esqueceu sua senha?</button>
                     <button type="button" onclick="abrirCadastrar()" class="btn _botaosidebar">Criar conta</button>
                 </form>
@@ -70,7 +77,8 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label> Usuário:
-                                    <input name="textUsuario" class="form-label" type="text" id="textUsuarioCadastrar"></label>
+                                    <input name="textUsuario" class="form-label" type="text"
+                                        id="textUsuarioCadastrar"></label>
                                 <label> Senha:
                                     <input name="textSenha" class="form-label" type="password" id="textSenhaCadastrar"
                                         placeholder="Máx. 10 caracteres"></label>
@@ -85,6 +93,7 @@
             </div>
 
             <!-- Option 1: Bootstrap Bundle with Popper -->
+
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
                 crossorigin="anonymous"></script>
@@ -101,6 +110,8 @@
             <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
             <script src="https://www.w3schools.com/lib/w3.js"></script>
             <script src="index.js"></script>
+            <script src="cookies.js"></script>
+            <script src="cookies.js"></script>
 
 
             <script>
