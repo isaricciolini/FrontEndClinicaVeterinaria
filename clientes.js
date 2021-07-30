@@ -298,7 +298,6 @@ function excluirCliente(codCliente) {
         //         if (this.readyState == 4 && this.status == 200) {
         //             var resposta = JSON.parse(this.response);
         //             app.infos = resposta;
-        //             console.log(resposta)
         //         } else if (this.readyState == 4) {
         //             corpoTabela.innerHTML = 'Erro ao pesquisar.';
         //         }
