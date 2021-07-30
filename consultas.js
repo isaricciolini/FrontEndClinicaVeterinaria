@@ -121,6 +121,8 @@ function abrirAlterar(codConsulta) {
     document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML.slice(0,10);
     document.getElementById('textDataConsultaAlterar').value = document.getElementById(`dataConsulta${codConsulta}`).innerHTML;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
+    document.getElementById('textPesoAlterar').value = document.getElementById(`peso${codConsulta}`).innerHTML;
+    document.getElementById('textDescricaoAlterar').value = document.getElementById(`descricao${codConsulta}`).innerHTML;
     modalAlterar.show();
 }
 
@@ -169,8 +171,8 @@ function limparCadastro() {
     textCodVeterinario.value = '';
     textDataConsulta.value = '';
     textHoraConsulta.value = '';
-    //textPeso.value = '';
-    //textDescricao.value = '';
+    textPesoAlterar.value = '';
+    textDescricaoAlterar.value = '';
 }
 
 function limparAlteracao() {
