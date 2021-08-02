@@ -1,3 +1,5 @@
+document.getElementById('usuario').innerHTML = `Olá <b>${getCookie('usuario')}</b>`
+
 /**
  * Grava um cookie.
  * @param  {String} usuario Nome do cookie
