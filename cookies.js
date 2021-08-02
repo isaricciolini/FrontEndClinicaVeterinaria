@@ -1,9 +1,12 @@
+if (getCookie('usuario') != "") {
+    document.getElementById('usuario').innerHTML = `Olá <b>${getCookie('usuario')}</b>`
+}
 /**
  * Grava um cookie.
  * @param  {String} usuario Nome do cookie
  * @param  {String} nomeUsuario Valor do cookie
  */
- function setCookie(usuario, nomeUsuario) {
+function setCookie(usuario, nomeUsuario) {
     const d = new Date();
     d.setTime(d.getTime() + (24 * 60 * 60 * 1000)); // cookie válido por 24 horas
     let expires = "expires=" + d.toUTCString();

@@ -23,10 +23,12 @@
         <div class="active">
             <a class="fs-5" href="index.html"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
                 Veterinario</a>
+            <h6 id="usuario" class="_texto"></h6>
         </div>
         <div class="hide" id="hide">
             <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
-            <button onclick="location.href='atendimentos.html'" type="button" class="btn _botaosidebar">Atendimentos</button>
+            <button onclick="location.href='atendimentos.html'" type="button"
+                class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
@@ -45,14 +47,19 @@
                 <form id="form_id" method="post" name="myform">
                     <div class="row">
                         <div class="col-sm-12">
-                    <label>Login:</label>
-                    <input type="text" id="textUsuario" name="id" class="form-label" style="width: 250px;" /></div>
-                    <div class="col-sm-12">
-                    <label>Senha:</label>
-                    <input type="password" name="password" id="textSenha" class="form-label" style="width: 243px;" /></div>
-                    <div class="col-sm-12">
-                    <input type="button" value="Login" id="submit" onclick="logar()" class="btn _botaosidebar" style="width: 250px;" /></div>
-                </div>
+                            <label>Login:</label>
+                            <input type="text" id="textUsuario" name="id" class="form-label" style="width: 250px;" />
+                        </div>
+                        <div class="col-sm-12">
+                            <label>Senha:</label>
+                            <input type="password" name="password" id="textSenha" class="form-label"
+                                style="width: 243px;" />
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="button" value="Login" id="submit" onclick="logar()" class="btn _botaosidebar"
+                                style="width: 250px;" />
+                        </div>
+                    </div>
                     <!-- <button type="button" class="btn _botaosidebar">Esqueceu sua senha?</button> -->
                     <button type="button" onclick="abrirCadastrar()" class="btn _botaosidebar">Criar conta</button>
                 </form>

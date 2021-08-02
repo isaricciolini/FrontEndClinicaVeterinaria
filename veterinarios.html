@@ -35,7 +35,7 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <link rel="shortcut icon" href="p_Logo-veterinaria.ico"/>
+    <link rel="shortcut icon" href="p_Logo-veterinaria.ico" />
     <title>Veterinário - Centro Veterinário</title>
 </head>
 
@@ -45,6 +45,7 @@
         <div class="active">
             <a class="fs-5" href="index.html"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
                 Veterinário</a>
+            <h6 id="usuario" class="_texto"></h6>
         </div>
         <div class="login">
             <button onclick="expireCookie()" type="button" class="btn _botaosidebar">Deslogar</button>
@@ -53,7 +54,8 @@
             <button type="button" class="btn _botaosidebar">Menu</button></a>
         <div class="hide" id="hide">
             <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
-            <button onclick="location.href='atendimentos.html'" type="button" class="btn _botaosidebar">Atendimentos</button>
+            <button onclick="location.href='atendimentos.html'" type="button"
+                class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
@@ -176,7 +178,7 @@
                         <div class="col-sm-12">
                             <div class="form-group" method="get" action=".">
                                 <label>CEP:
-                                    <input name="textCEP" type="text" id="textCEP"  disabled/></label>
+                                    <input name="textCEP" type="text" id="textCEP" disabled /></label>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -214,7 +216,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                                <input name="textCodVeterinario" type="hidden" id="textCodVeterinario" />
+                            <input name="textCodVeterinario" type="hidden" id="textCodVeterinario" />
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Nome Completo:</label>
@@ -229,8 +231,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>CPF:
-                                <input name="textCPFAlterar" class="form-label" type="text"
-                                    id="textCPFAlterar"></label>
+                                <input name="textCPFAlterar" class="form-label" type="text" id="textCPFAlterar"></label>
                             <label>Email:
                                 <input name="textEmailAlterar" class="form-label" type="text" id="textEmailAlterar"
                                     placeholder="nome@exemplo.com"></label>
@@ -282,9 +283,9 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label>Excluir veterinário nº 
-                                <input name="textCodVeterinarioExcluir" type="number"
-                                    id="textCodVeterinarioExcluir" disabled/></label>
+                            <label>Excluir veterinário nº
+                                <input name="textCodVeterinarioExcluir" type="number" id="textCodVeterinarioExcluir"
+                                    disabled /></label>
                         </div>
                     </div>
                 </div>
