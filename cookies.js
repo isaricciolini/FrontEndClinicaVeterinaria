@@ -1,5 +1,5 @@
 if (getCookie('usuario') != "") {
-    document.getElementById('usuario').innerHTML = `Olá <b>${getCookie('usuario')}</b>`
+    document.getElementById('usuario').innerHTML = `Olá, <b>${getCookie('usuario')}</b>`
 }
 /**
  * Grava um cookie.
