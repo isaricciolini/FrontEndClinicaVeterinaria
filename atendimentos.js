@@ -84,40 +84,7 @@ function pesquisarConsultas(hoje, semana) {
     xhttp.send();
 }
 
-// function abrirCadastrar() {
-//     modalCadastrar.show()
-// }
 
-// function cadastrarConsulta() {
-//     var codAnimal = textCodAnimal.value;
-//     var codVeterinario = textCodVeterinario.value;
-//     var dataConsulta = textDataConsulta.value;
-//     var horaConsulta = textHoraConsulta.value;
-//     if (!codAnimal || !codVeterinario || !dataConsulta || !horaConsulta) {
-//         alert('Preencha todos os dados para cadastrar!');
-//         return;
-//     }
-//     var novaConsulta = {
-//         codAnimal: codAnimal,
-//         codVeterinario: codVeterinario,
-//         dataConsulta: dataConsulta + 'T' + horaConsulta + ':00.000',
-//         peso: 0,
-//         descricao: '-'
-//     };
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function () {
-//         if (this.readyState == 4 && this.status == 200) {
-//             alert(`Consulta cadastrada com sucesso!`);
-//             limparCadastro();
-//             pesquisarConsultas();
-//         } else if (this.readyState == 4) {
-//             alert('Não foi possível cadastrar a consulta.');
-//         }
-//     };
-//     xhttp.open('POST', url, true);
-//     xhttp.setRequestHeader('Content-Type', 'application/json');
-//     xhttp.send(JSON.stringify(novaConsulta));
-// }
 
 function abrirExcluir(codConsulta) {
     document.getElementById('textCodConsultaExcluir').value = codConsulta
@@ -253,16 +220,13 @@ function abrirDados(codAnimal) {
         if (this.readyState == 4 && this.status == 200) {
             var animal = JSON.parse(this.response);
             var linha = `
-                <div class="card col-12 col-md-6">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dados do Animal:</h5>
+                <div class="col-12 col-md-6">
                                         <p class="card-text"><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}
                                         <b>CodAnimal: </b>${animal.codAnimal}<br>
                                         <b>Nome: </b>${animal.nomeAnimal}<br>
-                                        <b>Nascimento: </b>${animal.nascimento}<br>
+                                        <b>Nascimento: </b>${animal.nascimento.slice(0, 10)}<br>
                                         <b>Tipo: </b>${animal.tipo}<br>
                                         <b>Raça: </b>${animal.raca}</p>
-                                      </div>
                                 </div>`;
             cardBodyDados.innerHTML += linha;
         } else if (this.readyState == 4) {
@@ -283,6 +247,7 @@ function abrirTodasConsultasReceitas(codAnimal) {
             var resposta = JSON.parse(this.response)
             var topo = `<div class="card col-12 text-center">
             <p>
+            <br>
             <b>Cod.Animal: </b>${resposta.codAnimal}
             <b>Nome Animal: </b>${resposta.nomeAnimal}<br>
             <b>Nascimento: </b>${resposta.nascimento.slice(0, 10)}

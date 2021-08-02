@@ -33,7 +33,7 @@ function pesquisarAnimaisCompleto() {
                 var linha = '<tr class="item">';
                 linha += `<td>${animal.codAnimal}</td>`;
                 linha += `<td id="nomeAnimalCompleto${animal.codAnimal}">${animal.nomeAnimal}</td>`;
-                linha += `<td id="nascimentoAnimalCompleto${animal.codAnimal}">${animal.nascimento}</td>`;
+                linha += `<td id="nascimentoAnimalCompleto${animal.codAnimal}">${animal.nascimento.slice(0,10)}</td>`;
                 linha += `<td id="racaAnimalCompleto${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="tipoAnimalCompleto${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="deficienciaAnimalCompleto${animal.codAnimal}">${animal.deficiencia}</td>`;
@@ -72,7 +72,8 @@ function abrirConsulta(codAnimal) {
                                     <div class="card-body">
                                         <h5 class="card-title">Consulta ${consulta.codConsulta}</h5>
                                         <p class="card-text"><b>Cod.Veterinario: </b>${consulta.codVeterinario}<br>
-                                        <b>Data da consulta: </b>${consulta.dataConsulta}<br>
+                                        <b>Data: </b>${consulta.dataConsulta.slice(0,10)}<br>
+                                        <b>Hora: </b>${consulta.dataConsulta.slice(11,16)}<br>
                                         <b>Peso do animal: </b>${consulta.peso}Kg<br>
                                         <b>Descrição: </b>${consulta.descricao}</p>
                                       </div>
@@ -105,7 +106,8 @@ function abrirReceita(codAnimal) {
                                     <div class="card-body">
                                         <h5 class="card-tittle">Receita ${receita.codReceita}</h5>
                                         <p class="card-text"><b>Cod.Consulta: </b>${receita.codConsulta}<br>
-                                        <b>Data da receita: </b>${receita.dataReceita}<br>
+                                        <b>Data: </b>${receita.dataReceita.slice(0,10)}<br>
+                                        <b>Hora: </b>${receita.dataReceita.slice(11,16)}<br>
                                         <b>Prescrição: </b>${receita.prescricao}</p>
                                     </div>
                                 </div>`;

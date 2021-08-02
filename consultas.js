@@ -85,6 +85,7 @@ function cadastrarConsulta() {
             alert(`Consulta cadastrada com sucesso!`);
             limparCadastro();
             pesquisarConsultas();
+            modalCadastrar.hide();
         } else if (this.readyState == 4) {
             alert('Não foi possível cadastrar a consulta.');
         }

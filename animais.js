@@ -33,7 +33,7 @@ function pesquisarAnimais() {
                 var linha = '<tr class="item">';
                 linha += `<td>${animal.codAnimal}</td>`;
                 linha += `<td id="nomeAnimal${animal.codAnimal}">${animal.nomeAnimal}</td>`;
-                linha += `<td id="nascimentoAnimal${animal.codAnimal}">${animal.nascimento}</td>`;
+                linha += `<td id="nascimentoAnimal${animal.codAnimal}">${animal.nascimento.slice(0,10)}</td>`;
                 linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
@@ -132,7 +132,7 @@ function abrirAlterar(codAnimal) {
     var tipo = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
     var codCliente = document.getElementById(`codCliente${codAnimal}`).innerHTML;
     textNomeAnimalAlterar.value = nomeAnimal;
-    textNascimentoAlterar.value = nascimento;
+    textNascimentoAlterar.value = nascimento.slice(0,10);
     textRacaAlterar.value = raca;
     textTipoAlterar.value = tipo;
     textCodClienteAlterar.value = codCliente;
