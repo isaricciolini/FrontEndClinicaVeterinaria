@@ -235,16 +235,14 @@ function abrirReceitas(codConsulta) {
             for (var i = 0; i < resposta.receita.length; i++) {
                 var receita = resposta.receita[i];
                 var linha = `
-                <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-sm-6">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Receita ${receita.codReceita}</h5>
                                         <b>Data: </b>${receita.dataReceita.slice(0, 10)}<br>
                                         <b>Hora: </b>${receita.dataReceita.slice(11, 16)}<br>
                                         <b>Prescrição: </b>${receita.prescricao}</p>
                                     </div>
-                                </div>
-                            </div>`;
+                                </div>`;
                 cardBodyReceitas.innerHTML += linha;
             }
         } else if (this.readyState == 4) {
