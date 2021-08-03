@@ -17,12 +17,15 @@ var textPesoAlterar = document.getElementById('textPesoAlterar');
 var textDescricaoAlterar = document.getElementById('textDescricaoAlterar');
 var dataReceita = document.getElementById('textDataReceita');
 var prescricao = document.getElementById('textPrescricao');
-var codConsultaModal = document.getElementById('textCodConsultaModal')
+var codConsultaModal = document.getElementById('textCodConsultaModal');
+var cardBodyReceitas = document.getElementById('cardBodyReceitas');
 
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 var modalCadastrarReceita = new bootstrap.Modal(document.getElementById('modalCadastrarReceita'), {});
+var modalReceitas = new bootstrap.Modal(document.getElementById('modalReceitas'), {});
+
 
 var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
 
@@ -45,8 +48,9 @@ function pesquisarConsultas() {
                 linha += `<td id="peso${info.codConsulta}">${info.peso}</td>`;
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
-                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`
-                linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`
+                linha += `<td><button class="btn btn-dark" onclick="abrirReceitas(${info.codConsulta})">Receitas</button></td>`;
+                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`;
+                linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }
@@ -60,7 +64,7 @@ function pesquisarConsultas() {
 }
 
 function abrirCadastrar() {
-modalCadastrar.show()
+    modalCadastrar.show()
 }
 
 function cadastrarConsulta() {
@@ -119,7 +123,7 @@ function excluirConsulta() {
 function abrirAlterar(codConsulta) {
     document.getElementById('textCodConsultaAlterar').value = codConsulta
     document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
-    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML.slice(0,10);
+    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML.slice(0, 10);
     document.getElementById('textDataConsultaAlterar').value = document.getElementById(`dataConsulta${codConsulta}`).innerHTML;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
     document.getElementById('textPesoAlterar').value = document.getElementById(`peso${codConsulta}`).innerHTML;
@@ -215,6 +219,41 @@ function cadastrarReceita() {
     document.getElementById('textDataReceita').value = "";
     document.getElementById('textPrescricao').value = "";
 
+}
+
+function abrirReceitas(codConsulta) {
+    cardBodyReceitas.innerHTML = '';
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            console.log(resposta);
+            if (resposta.receita == 0 || resposta.receita == undefined) {
+                cardBodyReceitas.innerHTML = "<p>Nenhuma receita para este animal foi encontrada.</p>";
+                return;
+            }
+            for (var i = 0; i < resposta.receita.length; i++) {
+                var receita = resposta.receita[i];
+                var linha = `
+                <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card-body">
+                                        <h5 class="card-tittle">Receita ${receita.codReceita}</h5>
+                                        <b>Data: </b>${receita.dataReceita.slice(0, 10)}<br>
+                                        <b>Hora: </b>${receita.dataReceita.slice(11, 16)}<br>
+                                        <b>Prescrição: </b>${receita.prescricao}</p>
+                                    </div>
+                                </div>
+                            </div>`;
+                cardBodyReceitas.innerHTML += linha;
+            }
+        } else if (this.readyState == 4) {
+            cardBodyReceitas.innerHTML = 'Erro ao pesquisar Receita';
+        }
+    };
+    xhttp.open('GET', `https://localhost:5001/Consultas/receitas/${codConsulta}`, true);
+    xhttp.send();
+    modalReceitas.show();
 }
 
 function abrirCadastrarReceita(codConsulta) {
