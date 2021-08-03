@@ -61,10 +61,10 @@ function pesquisarConsultas(hoje, semana) {
                 linha += `<td id="dataConsulta${info.codConsulta}">${info.dataConsulta.slice(0, 10)}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirTodasConsultasReceitas(${info.codAnimal})">Consultas+Receitas</button></td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Descrição</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Exibir</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirTodasConsultasReceitas(${info.codAnimal})">Exibir</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+</button></td>`;
                 linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`
                 linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`
                 linha += '</tr>';
@@ -221,7 +221,7 @@ function abrirDados(codAnimal) {
             var animal = JSON.parse(this.response);
             var linha = `
                 <div class="col-12 col-md-6">
-                                        <p class="card-text"><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}
+                                        <p class="card-text"><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}<br>
                                         <b>CodAnimal: </b>${animal.codAnimal}<br>
                                         <b>Nome: </b>${animal.nomeAnimal}<br>
                                         <b>Nascimento: </b>${animal.nascimento.slice(0, 10)}<br>
@@ -264,8 +264,9 @@ function abrirTodasConsultasReceitas(codAnimal) {
                                         <p class="card-text"><b>Cod.Consulta: </b>${consulta.codConsulta}<br>
                                         <b>Data da consulta: </b>${consulta.dataConsulta.slice(0, 10)} ${consulta.dataConsulta.slice(11, 16)}<br>
                                         <b>Peso: </b>${consulta.peso}<br>
-                                        <b>Descrição: </b>${consulta.descricao}</p>
-                                        <button class="btn btn-dark" onclick="abrirTodasReceitas(${consulta.codConsulta})">Receitas</button>
+                                        <b>Descrição: </b>${consulta.descricao}<br>
+                                        <b>Código do Veterinário: </b>${consulta.codVeterinario}</p>
+                                        <button class="btn btn-dark" onclick="abrirTodasReceitas(${consulta.codConsulta})">Exibir Receitas</button>
                                       </div>
                                 </div>`;
                 cardBodyTodasConsultasReceitas.innerHTML += linha;
@@ -294,7 +295,7 @@ function abrirTodasReceitas(codConsulta) {
             </p></div>`
             cardBodyTodasReceitas.innerHTML += topo;
             if (resposta.receita.length == 0) {
-                cardBodyTodasReceitas.innerHTML = "<p>Nenhuma receita para esta consulta foi encontrada.</p>";
+                cardBodyTodasReceitas.innerHTML = "<p>Nenhuma receita foi cadastrada para esta consulta.</p>";
                 return;
             }
             for (var i = 0; i < resposta.receita.length; i++) {

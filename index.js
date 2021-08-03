@@ -56,6 +56,7 @@ function cadastrarLogin() {
             limparCadastro();
             modalCadastrar.hide();
         } else if (this.readyState == 4) {
+            console.log(novoLogin);
             alert('Não foi possível cadastrar o usuário e senha.');
         }
     };

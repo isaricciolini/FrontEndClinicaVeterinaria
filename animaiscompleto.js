@@ -96,7 +96,7 @@ function abrirReceita(codAnimal) {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             if (resposta == 0 || resposta == undefined) {
-                cardBodyReceita.innerHTML = "<p>Nenhuma receita para este animal foi encontrada.</p>";
+                cardBodyReceita.innerHTML = "<p>Nenhuma receita foi encontrada para este animal.</p>";
                 return;
             }
             for (var i = 0; i < resposta.length; i++) {

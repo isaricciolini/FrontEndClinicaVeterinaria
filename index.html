@@ -44,24 +44,27 @@
         <div class="container text-center">
             <div class="main">
                 <h2>Área do Colaborador</h2>
+                <br>
                 <form id="form_id" method="post" name="myform">
-                    <div class="row">
+                    <div class="row my-3">
                         <div class="col-sm-12">
                             <label>Login:</label>
                             <input type="text" id="textUsuario" name="id" class="form-label" style="width: 250px;" />
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 my-3">
                             <label>Senha:</label>
                             <input type="password" name="password" id="textSenha" class="form-label"
                                 style="width: 243px;" />
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 my-2">
                             <input type="button" value="Login" id="submit" onclick="logar()" class="btn _botaosidebar"
-                                style="width: 250px;" />
+                                style="width: 120px;" />
                         </div>
                     </div>
+                        <h6>Não possui login?</h6>
+                        <button type="button" onclick="abrirCadastrar()" class="btn _botaosidebar">Criar conta</button>
                     <!-- <button type="button" class="btn _botaosidebar">Esqueceu sua senha?</button> -->
-                    <button type="button" onclick="abrirCadastrar()" class="btn _botaosidebar">Criar conta</button>
+                    
                 </form>
             </div>
         </div>

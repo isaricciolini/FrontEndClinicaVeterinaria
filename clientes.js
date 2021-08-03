@@ -128,6 +128,7 @@ function cadastrarCliente() {
             modalCadastrar.hide();
             pesquisarClientes();
         } else if (this.readyState == 4) {
+            console.log(novoCliente);
             alert('Não foi possível cadastrar o cliente.');
         }
     };
@@ -283,12 +284,13 @@ function excluirCliente(codCliente) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
+            console.log(codCliente);
             alert('Cliente excluído com sucesso!');
+            modalExcluir.hide();
             pesquisarClientes();
-            modalExcluir();
         }
     };
-    xhttp.open('DELETE', `${url}?CodCliente=${codCliente}`, true);
+    xhttp.open('DELETE', `${url}/${codCliente}`, true);
     xhttp.send();
 }
 
