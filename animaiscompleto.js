@@ -37,8 +37,8 @@ function pesquisarAnimaisCompleto() {
                 linha += `<td id="racaAnimalCompleto${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="tipoAnimalCompleto${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="deficienciaAnimalCompleto${animal.codAnimal}">${animal.deficiencia}</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirConsulta(${animal.codAnimal})">Consulta</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirReceita(${animal.codAnimal})">Receita</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirConsulta(${animal.codAnimal})">Exibir</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirReceita(${animal.codAnimal})">Exibir</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="excluirAnimal(${animal.codAnimal})">Excluir</button></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
@@ -96,7 +96,7 @@ function abrirReceita(codAnimal) {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             if (resposta == 0 || resposta == undefined) {
-                cardBodyReceita.innerHTML = "<p>Nenhuma receita para este animal foi encontrada.</p>";
+                cardBodyReceita.innerHTML = "<p>Nenhuma receita foi encontrada para este animal.</p>";
                 return;
             }
             for (var i = 0; i < resposta.length; i++) {

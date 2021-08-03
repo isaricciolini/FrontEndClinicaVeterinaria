@@ -284,11 +284,11 @@ function excluirCliente(codCliente) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             alert('Cliente excluído com sucesso!');
+            modalExcluir.hide();
             pesquisarClientes();
-            modalExcluir();
         }
     };
-    xhttp.open('DELETE', `${url}?CodCliente=${codCliente}`, true);
+    xhttp.open('DELETE', `${url}/${codCliente}`, true);
     xhttp.send();
 }
 
