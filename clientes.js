@@ -51,7 +51,7 @@ function pesquisarClientes() {
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
                 linha += `<td>${info.telefone}</td>`;
                 linha += `<td id="email${info.codCliente}">${info.email}</td>`;
-                linha += `<td><button onclick="abrirEndereco(${info.codCliente})" class="btn btn-dark">Mostrar</button></td>`
+                linha += `<td><button onclick="abrirEndereco(${info.codCliente})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirAlterar(${info.codCliente})" class="btn btn-dark">Alterar</button></td>`
                 linha += `<td><button onclick="abrirExcluir(${info.codCliente})" class="btn btn-dark">Excluir</button></td>`
                 linha += '</tr>';
