@@ -58,7 +58,7 @@ function pesquisarVeterinarios() {
                 linha += `<td>${info.telefone}</td>`;
                 linha += `<td id="email${info.codVeterinario}">${info.email}</td>`;
                 linha += `<td id="crmv${info.codVeterinario}">${info.crmv}</td>`;
-                linha += `<td><button onclick="abrirEndereco(${info.codVeterinario})" class="btn btn-dark">Mostrar</button></td>`
+                linha += `<td><button onclick="abrirEndereco(${info.codVeterinario})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirAlterar(${info.codVeterinario})" class="btn btn-dark">Alterar</button></td>`
                 linha += `<td><button onclick="abrirExcluir(${info.codVeterinario})" class="btn btn-dark">Excluir</button></td>`
                 linha += '</tr>';
