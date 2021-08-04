@@ -220,8 +220,8 @@ function abrirDados(codAnimal) {
         if (this.readyState == 4 && this.status == 200) {
             var animal = JSON.parse(this.response);
             var linha = `
-                <div class="col-12 col-md-6">
-                                        <p class="card-text"><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}<br>
+                <div class="col-12">
+                                        <p class="card-text container"><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}<br>
                                         <b>CodAnimal: </b>${animal.codAnimal}<br>
                                         <b>Nome: </b>${animal.nomeAnimal}<br>
                                         <b>Nascimento: </b>${animal.nascimento.slice(0, 10)}<br>

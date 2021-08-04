@@ -51,6 +51,8 @@
         </div>
         <div class="hide" id="hide">
             <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
+            <button onclick="location.href='atendimentos.html'" type="button"
+                class="btn _botaosidebar text-muted">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
@@ -104,16 +106,17 @@
         </table>
     </div>
 
+    <!-- Modal Dados -->
     <div class="modal fade" id="modalDados" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Dados</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row" id="cardBodyDados">
-                        <div class="card col-12 col-md-6">
+                        <div class="card col-12">
                             <div class="card-body">
                                 <h5 class="card-title">Dados Animal</h5>
                                 <!-- Aqui serão listadas todos os dadosdo animal -->
@@ -128,6 +131,7 @@
         </div>
     </div>
 
+    <!-- Modal Todas Consultas -->
     <div class="modal fade" id="modalTodasConsultasReceitas" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -152,6 +156,7 @@
         </div>
     </div>
 
+    <!-- Modal Todas Receitas (dentro de Todas Consultas) -->
     <div class="modal fade" id="modalTodasReceitas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -176,6 +181,7 @@
         </div>
     </div>
 
+    <!-- Modal Descrição -->
     <div class="modal fade" id="modalDescricao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

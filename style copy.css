@@ -127,3 +127,7 @@ input {
 #tabela th {
   cursor:pointer;
 }
+
+#tabela td {
+  max-width: 360px;
+}
