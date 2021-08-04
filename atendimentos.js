@@ -1,4 +1,6 @@
 var url = 'https://localhost:5001/consultas';
+var textSemanasInicio = document.getElementById('textSemanasInicio')
+var textSemanasFim = document.getElementById('textSemanasFim')
 var corpoTabela = document.getElementById('corpoTabela');
 var textCodAnimal = document.getElementById('textCodAnimal');
 var textCodVeterinario = document.getElementById('textCodVeterinario');
@@ -43,6 +45,8 @@ var sdd = String(now.getDate()).padStart(2, '0');
 var smm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
 var syyyy = now.getFullYear();
 var semana = syyyy + '-' + smm + '-' + sdd;
+textSemanasInicio.value = hoje;
+textSemanasFim.value = semana; 
 
 var modalDescricao = new bootstrap.Modal(document.getElementById('modalDescricao'), {});
 
@@ -319,14 +323,9 @@ function abrirTodasReceitas(codConsulta) {
     xhttp.send();
 }
 
-function pesquisarSemanas() {
-    numWeeks = document.getElementById("textSemanas").value;
-    now = new Date();
-    now.setDate(now.getDate() + numWeeks * 7);
-    sdd = String(now.getDate()).padStart(2, '0');
-    smm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
-    syyyy = now.getFullYear();
-    semana = syyyy + '-' + smm + '-' + sdd;
+function pesquisarData() {
+    hoje = textSemanasInicio.value;
+    semana = textSemanasFim.value; 
     pesquisarConsultas(hoje, semana);
 
 }

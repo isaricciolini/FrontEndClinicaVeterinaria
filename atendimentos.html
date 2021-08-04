@@ -76,12 +76,22 @@
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
         <div id="divFiltro" style="display: none;">
             <div class="row">
-                <div class="col-sm-12">
-                    <input type="text" class="form-control my-2" id="textFiltro"
+                <div class="col-md-5 my-2">
+                    <input type="text" class="form-control" id="textFiltro"
                         placeholder="Por data, números e caracteres"
                         oninput="w3.filterHTML('#tabela', '.item', this.value)">
-                    <input type="number" class="form-control my-2" id="textSemanas" style="max-width: 90px;">
-                    <button onclick="pesquisarSemanas()" class="btn btn-dark">Semanas</button>
+                </div>
+                <div class="col-md-2 col-sm-12 my-2">
+                    <input type="date" class="form-control" id="textSemanasInicio" style="width: 170px;">
+                </div>
+                <div class="col-md-1 col-sm-12 my-2">
+                    <h6 style="padding: 6px 12px;">Até</h6>
+                </div>
+                <div class="col-md-2 col-sm-12 my-2">
+                    <input type="date" class="form-control" id="textSemanasFim" style="width: 170px;">
+                </div>
+                <div class="col-md-1 col-sm-12 my-2">
+                    <button onclick="pesquisarData()" class="btn btn-dark">🔍 Data</button>
                 </div>
             </div>
         </div>
