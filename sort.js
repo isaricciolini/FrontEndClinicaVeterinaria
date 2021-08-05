@@ -11,3 +11,8 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
       .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
       .forEach(tr => tbody.appendChild(tr) );
 })));
+function clickData() {
+    setTimeout(function(){document.getElementById("data").click();}, 1000)
+    setTimeout(function(){document.getElementById("data").click();}, 1000)
+}
+clickData();

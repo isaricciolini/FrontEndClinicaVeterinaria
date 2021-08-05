@@ -85,7 +85,7 @@
             <thead>
                 <tr>
                     <th>CodConsulta</th>
-                    <th>Data</th>
+                    <th id="data">Data</th>
                     <th>Hora</th>
                     <th>Nome</th>
                     <th>Dono</th>
@@ -215,7 +215,8 @@
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a href="clientes.html"><button class="btn btn-dark my-2">Novo Cliente</button></a>
+                                    <a href="clientes.html" target="_blank"><button class="btn btn-dark my-2">Novo Cliente</button></a>
+                                    <button class="btn btn-dark my-2" onclick="abrirCadastrarListaClientes()">Atualizar lista</button>
                                 </div>
                                 <div class="col-sm-12">
                                     <input placeholder="Filtrar por CodCliente, Nome ou CPF"
@@ -260,7 +261,8 @@
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a href="Animais.html"><button class="btn btn-dark my-2">Novo Animal</button></a>
+                                    <a href="Animais.html" target="_blank"><button class="btn btn-dark my-2">Novo Animal</button></a>
+                                    <button class="btn btn-dark my-2" onclick="abrirCadastrarListaClientes()">Voltar</button>
                                 </div>
                                 <div class="col-sm-12">
                                     <input placeholder="Filtrar por CodAnimal ou Nome"

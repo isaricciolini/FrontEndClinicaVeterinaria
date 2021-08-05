@@ -107,6 +107,7 @@ function confirmarCadastrarDataHora() {
 }
 
 function abrirCadastrarListaClientes() {
+    modalListaAnimais.hide();
     modalListaClientes.show();
     corpoTabelaClientes.innerHTML = "";
     var xhttp = new XMLHttpRequest();
