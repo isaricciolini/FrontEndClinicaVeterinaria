@@ -61,5 +61,7 @@ function expireCookie() {
     var nomeUsuario = "deslogado"
     expires = expirar;
     document.cookie = usuario + "=" + nomeUsuario + ";" + expires + ";path=/";
+    usuario = "codVeterinario"
+    document.cookie = usuario + "=" + nomeUsuario + ";" + expires + ";path=/";
     window.location = "index.html";
 }
