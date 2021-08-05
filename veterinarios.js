@@ -53,7 +53,7 @@ function pesquisarVeterinarios() {
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codVeterinario}">${info.nomeVeterinario}</td>`;
-                linha += `<td>${info.nascimento.slice(0,10)}</td>`;
+                linha += `<td>${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</td>`;
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
                 linha += `<td>${info.telefone}</td>`;
                 linha += `<td id="email${info.codVeterinario}">${info.email}</td>`;
@@ -64,8 +64,8 @@ function pesquisarVeterinarios() {
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="telefone${info.codVeterinario}">${info.telefone}</p>`;
-                linha += `<p id="nascimento${info.codVeterinario}">${info.nascimento}</p>`;
-                linha += `<p id="cpf${info.codVeterinario}">${info.cpf}</p>`;
+                linha += `<p id="nascimento${info.codVeterinario}">${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</p>`;
+                linha += `<p id="cpf${info.codVeterinario}">${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</p>`;
                 linha += `<p id="cep${info.codVeterinario}">${info.cep}</p>`
                 linha += `<p id="rua${info.codVeterinario}">${info.rua}</p>`
                 linha += `<p id="numero${info.codVeterinario}">${info.numero}</p>`;

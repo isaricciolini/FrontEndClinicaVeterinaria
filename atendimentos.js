@@ -46,6 +46,8 @@ var fim = syyyy + '-' + smm + '-' + sdd;
 textSemanasInicio.value = inicio;
 textSemanasFim.value = fim; 
 
+
+
 var modalDescricao = new bootstrap.Modal(document.getElementById('modalDescricao'), {});
 
 pesquisarConsultas(inicio, fim);
@@ -60,7 +62,7 @@ function pesquisarConsultas(inicio, fim) {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
-                linha += `<td id="dataConsulta${info.codConsulta}">${info.dataConsulta.slice(0, 10)}</td>`;
+                linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}</td>`;
@@ -215,6 +217,7 @@ function abrirCadastrarReceita(codConsulta) {
     modalCadastrarReceita.show();
 }
 
+
 function abrirDados(codAnimal) {
     cardBodyDados.innerHTML = '';
     var xhttp = new XMLHttpRequest();
@@ -226,7 +229,7 @@ function abrirDados(codAnimal) {
                                         <p class="card-text container"><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}<br>
                                         <b>CodAnimal: </b>${animal.codAnimal}<br>
                                         <b>Nome: </b>${animal.nomeAnimal}<br>
-                                        <b>Nascimento: </b>${animal.nascimento.slice(0, 10)}<br>
+                                        <b>Nascimento: </b>${(animal.nascimento.slice(8, 10)) + "/" + (animal.nascimento.slice(5, 7)) + "/" + (animal.nascimento.slice(0, 4))}<br>
                                         <b>Tipo: </b>${animal.tipo}<br>
                                         <b>Raça: </b>${animal.raca}</p>
                                 </div>`;
@@ -252,7 +255,7 @@ function abrirTodasConsultasReceitas(codAnimal) {
             <br>
             <b>Cod.Animal: </b>${resposta.codAnimal}
             <b>Nome Animal: </b>${resposta.nomeAnimal}<br>
-            <b>Nascimento: </b>${resposta.nascimento.slice(0, 10)}
+            <b>Nascimento: </b>${(resposta.nascimento.slice(8, 10)) + "/" + (resposta.nascimento.slice(5, 7)) + "/" + (resposta.nascimento.slice(0, 4))}
             <b>Tipo: </b>${resposta.tipo}
             <b>Raça: </b>${resposta.raca}
             </p></div>`
@@ -264,7 +267,7 @@ function abrirTodasConsultasReceitas(codAnimal) {
                                     <div class="card-body">
                                         <h5 class="card-title">Consultas:</h5>
                                         <p class="card-text"><b>Cod.Consulta: </b>${consulta.codConsulta}<br>
-                                        <b>Data da consulta: </b>${consulta.dataConsulta.slice(0, 10)} ${consulta.dataConsulta.slice(11, 16)}<br>
+                                        <b>Data da consulta: </b>${(consulta.dataConsulta.slice(8, 10)) + "/" + (consulta.dataConsulta.slice(5, 7)) + "/" + (consulta.dataConsulta.slice(0, 4))} ${(consulta.dataConsulta.slice(11,16) )}<br>
                                         <b>Peso: </b>${consulta.peso}<br>
                                         <b>Descrição: </b>${consulta.descricao}<br>
                                         <b>Código do Veterinário: </b>${consulta.codVeterinario}</p>
@@ -292,8 +295,8 @@ function abrirTodasReceitas(codConsulta) {
             var resposta = JSON.parse(this.response);
             var topo = `<div class="card col-12 text-center">
             <p>
-            <b>Cod.Consulta: </b>${resposta.codConsulta}
-            <b>Data Consulta: </b>${resposta.dataConsulta.slice(0, 10)}T ${resposta.dataConsulta.slice(11, 16)}<br>
+            <b>Cod.Consulta: </b>${resposta.codConsulta}<br>
+            <b>Data Consulta: </b>${(resposta.dataConsulta.slice(8, 10)) + "/" + (resposta.dataConsulta.slice(5, 7)) + "/" + (resposta.dataConsulta.slice(0, 4))} ${resposta.dataConsulta.slice(11, 16)}<br>
             </p></div>`
             cardBodyTodasReceitas.innerHTML += topo;
             if (resposta.receita.length == 0) {
@@ -307,7 +310,7 @@ function abrirTodasReceitas(codConsulta) {
                                     <div class="card-body">
                                         <h5 class="card-tittle">Receita ${receita.codReceita}</h5>
                                         <p class="card-text"><b>Cod.Consulta: </b>${receita.codConsulta}<br>
-                                        <b>Data da receita: </b>${receita.dataReceita}<br>
+                                        <b>Data da receita: </b>${(receita.dataReceita.slice(8, 10)) + "/" + (receita.dataReceita.slice(5, 7)) + "/" + (receita.dataReceita.slice(0, 4))}<br>
                                         <b>Prescrição: </b>${receita.prescricao}</p>
                                     </div>
                                 </div>`;
