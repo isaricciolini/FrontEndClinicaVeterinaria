@@ -32,27 +32,25 @@ var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
 var modalDados = new bootstrap.Modal(document.getElementById('modalDados'), {});
 var modalTodasConsultasReceitas = new bootstrap.Modal(document.getElementById('modalTodasConsultasReceitas'), {});
 var modalTodasReceitas = new bootstrap.Modal(document.getElementById('modalTodasReceitas'), {});
-var hoje = new Date();
-let numWeeks = 1;
+var inicio = new Date();
 let now = new Date();
-now.setDate(now.getDate() + numWeeks * 7);
-var dd = String(hoje.getDate()).padStart(2, '0');
-var mm = String(hoje.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = hoje.getFullYear();
-var diaSemana = 7 + parseInt(dd)
-hoje = yyyy + '-' + mm + '-' + dd;
+now.setDate(now.getDate() + 7);
+var dd = String(inicio.getDate()).padStart(2, '0');
+var mm = String(inicio.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = inicio.getFullYear();
+inicio = yyyy + '-' + mm + '-' + dd;
 var sdd = String(now.getDate()).padStart(2, '0');
 var smm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
 var syyyy = now.getFullYear();
-var semana = syyyy + '-' + smm + '-' + sdd;
-textSemanasInicio.value = hoje;
-textSemanasFim.value = semana; 
+var fim = syyyy + '-' + smm + '-' + sdd;
+textSemanasInicio.value = inicio;
+textSemanasFim.value = fim; 
 
 var modalDescricao = new bootstrap.Modal(document.getElementById('modalDescricao'), {});
 
-pesquisarConsultas(hoje, semana);
+pesquisarConsultas(inicio, fim);
 
-function pesquisarConsultas(hoje, semana) {
+function pesquisarConsultas(inicio, fim) {
     corpoTabela.innerHTML = '';
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -84,7 +82,7 @@ function pesquisarConsultas(hoje, semana) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
     };
-    xhttp.open('GET', `${url}/datas/${hoje}ate${semana}`, true);
+    xhttp.open('GET', `${url}/datas/${inicio}ate${fim}`, true);
     xhttp.send();
 }
 
@@ -104,7 +102,7 @@ function excluirConsulta() {
         if (this.readyState == 4) {
             alert('Consulta excluída com sucesso!');
             limparExclusao();
-            pesquisarConsultas();
+            pesquisarConsultas(inicio, fim);
         }
     };
     xhttp.open('DELETE', `${url}?CodConsulta=${codConsulta}`, true);
@@ -147,7 +145,7 @@ function alterarConsulta() {
         if (this.readyState == 4 && this.status == 200) {
             alert('Consulta alterada com sucesso!');
             limparAlteracao();
-            pesquisarConsultas();
+            pesquisarConsultas(inicio, fim);
             modalAlterar.hide();
         } else if (this.readyState == 4) {
             alert('Não foi possível alterar a consulta.');
@@ -324,9 +322,9 @@ function abrirTodasReceitas(codConsulta) {
 }
 
 function pesquisarData() {
-    hoje = textSemanasInicio.value;
-    semana = textSemanasFim.value; 
-    pesquisarConsultas(hoje, semana);
+    inicio = textSemanasInicio.value;
+    fim = textSemanasFim.value; 
+    pesquisarConsultas(inicio, fim);
 
 }
 
