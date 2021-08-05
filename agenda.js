@@ -111,6 +111,7 @@ function confirmarCadastrarDataHora() {
 }
 
 function abrirCadastrarListaClientes() {
+    modalListaAnimais.hide();
     modalListaClientes.show();
     corpoTabelaClientes.innerHTML = "";
     var xhttp = new XMLHttpRequest();
@@ -233,6 +234,7 @@ function cadastrarConsulta() {
         if (this.readyState == 4 && this.status == 200) {
             alert(`Consulta cadastrada com sucesso!`);
             modalConfirmarCadastrar.hide();
+            exibirAgenda();
 
         } else if (this.readyState == 4) {
             alert('Não foi possível cadastrar a consulta.');

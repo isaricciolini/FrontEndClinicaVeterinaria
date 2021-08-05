@@ -16,6 +16,7 @@ function logar() {
             login = JSON.parse(this.response);
             if (senhaDigitada == login.senha) {
                 setCookie("usuario",login.usuario)
+                setCookie("codVeterinario",login.codVeterinario)
                 alert("Login realizado com sucesso!");
                 window.location = "agenda.html";
                 return false;
