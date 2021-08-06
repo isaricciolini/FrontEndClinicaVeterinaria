@@ -70,7 +70,7 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
                 linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
-                linha += `<td>${info.nomeCliente}: | ${info.tipo} | ${info.nomeAnimal}</td>`
+                linha += `<td>${info.nomeCliente} | ${info.tipo} | ${info.nomeAnimal}</td>`
                 linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Exibir</button></td>`;
@@ -270,16 +270,17 @@ function abrirDados(codAnimal) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var animal = JSON.parse(this.response);
-            var linha = `
-                <div class="col-12">
-                                        <p class="card-text container"><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}<br>
-                                        <b>CodAnimal: </b>${animal.codAnimal}<br>
-                                        <b>Nome: </b>${animal.nomeAnimal}<br>
-                                        <b>Nascimento: </b>${(animal.nascimento.slice(8, 10)) + "/" + (animal.nascimento.slice(5, 7)) + "/" + (animal.nascimento.slice(0, 4))}<br>
-                                        <b>Tipo: </b>${animal.tipo}<br>
-                                        <b>Raça: </b>${animal.raca}</p>
-                                </div>`;
+            var linha = `<tr class="card-text container col-12">
+                 <p><b>Dono:</b> ${animal.codClienteNavigation.nomeCliente}<br>
+                 <b>CodAnimal:</b> ${animal.codAnimal}<br>
+                 <b>Nome:</b> ${animal.nomeAnimal}<br>
+                 <b>Idade:</b><span id="idadeAnimal${animal.codAnimal}"></span><br>
+                 <b>Nascimento:</b><span id="nascimentoAnimal${animal.codAnimal}">${(animal.nascimento.slice(8, 10)) + "/" + (animal.nascimento.slice(5, 7)) + "/" + (animal.nascimento.slice(0, 4))}</span><br>
+                 <b>Tipo:</b>${animal.tipo}<br>
+                 <b>Raça:</b>${animal.raca}<br></p>
+                 </tr>`;
             cardBodyDados.innerHTML += linha;
+            idade(animal.codAnimal);
         } else if (this.readyState == 4) {
             cardBodyDados.innerHTML = 'Erro ao pesquisar dados do animal';
         }
@@ -288,6 +289,37 @@ function abrirDados(codAnimal) {
     xhttp.send();
     modalDados.show();
 }
+
+function idade(codAnimal) {
+    var dataAtual = new Date();
+    var ano = dataAtual.getFullYear().toString();
+    var mes = dataAtual.getMonth().toString() + 1;
+    var dia = dataAtual.getDay().toString();
+    var nascimentoAnimal = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
+    var anoAnimal = nascimentoAnimal.slice(6,10);
+    var mesAnimal = nascimentoAnimal.slice(3,5);
+    var diaAnimal = nascimentoAnimal.slice(0,2);
+    var idade;
+    diferencaData = (ano - anoAnimal)
+    if (mesAnimal < mes) {
+        idade = diferencaData;
+    }
+    else {
+        if(diaAnimal < dia) {
+            idade = diferencaData;
+        } else {
+            idade = diferencaData + 1;
+        }
+    }
+    document.getElementById(`idadeAnimal${codAnimal}`).innerHTML = idade;
+}
+
+{/* <p><b>Dono Animal: </b>${animal.codClienteNavigation.nomeCliente}<br></p>
+                                        <p><b>CodAnimal: </b>${animal.codAnimal}<br></p>
+                                        <p><b>Nome: </b>${animal.nomeAnimal}<br></p>
+                                        <p><b>Nascimento: </b>${(animal.nascimento.slice(8, 10)) + "/" + (animal.nascimento.slice(5, 7)) + "/" + (animal.nascimento.slice(0, 4))}<br>
+                                        <p><b>Tipo: </b>${animal.tipo}<br></p>
+                                        <p><b>Raça: </b>${animal.raca}</p> */}
 
 function abrirTodasConsultasReceitas(codAnimal) {
 
@@ -311,7 +343,6 @@ function abrirTodasConsultasReceitas(codAnimal) {
                 var linha = `
                 <div class="card col-12 col-md-6">
                                     <div class="card-body">
-                                        <h5 class="card-title">Consultas:</h5>
                                         <p class="card-text"><b>Cod.Consulta: </b>${consulta.codConsulta}<br>
                                         <b>Data da consulta: </b>${(consulta.dataConsulta.slice(8, 10)) + "/" + (consulta.dataConsulta.slice(5, 7)) + "/" + (consulta.dataConsulta.slice(0, 4))} ${(consulta.dataConsulta.slice(11,16) )}<br>
                                         <b>Peso: </b>${consulta.peso}<br>
@@ -379,7 +410,6 @@ function abrirDescricao(codConsulta) {
             var linha = `
                 <div class="card col-12 col-md-6">
                                     <div class="card-body">
-                                        <h5 class="card-title">Descrição da consulta:</h5>
                                         <p class="card-text"><b>Descrição: </b>${consulta.descricao}</p>
                                       </div>
                                 </div>`;

@@ -13,7 +13,6 @@ var textTipoAlterar = document.getElementById('textTipoAlterar');
 var textDeficienciaAlterar = document.getElementById('textDeficienciaAlterar');
 var textCodClienteAlterar = document.getElementById('textCodClienteAlterar');
 var textCodCliente = document.getElementById('textCodCliente');
-var nascimentoAnimal = textNascimentoAnimal.value;
 
 var modalListaClientes = new bootstrap.Modal(document.getElementById('modalListaClientes'), {});
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
@@ -22,6 +21,14 @@ var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), 
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'));
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'));
+
+
+// var nascimentoAnimal = textNascimentoAnimal.value;
+// var anoAnimal = nascimentoAnimal.getFullYear();
+// var mesAnimal = nascimentoAnimal.getMonth();
+// var diaAnimal = nascimentoAnimal.getDay();
+
+
 
 pesquisarAnimais();
 
@@ -36,9 +43,10 @@ function pesquisarAnimais() {
                 var linha = '<tr class="item">';
                 linha += `<td>${animal.codAnimal}</td>`;
                 linha += `<td id="nomeAnimal${animal.codAnimal}">${animal.nomeAnimal}</td>`;
+                linha += `<td id="idadeAnimal${animal.codAnimal}"></td>`;
                 linha += `<td id="nascimentoAnimal${animal.codAnimal}">${(animal.nascimento.slice(8, 10)) + "/" + (animal.nascimento.slice(5, 7)) + "/" + (animal.nascimento.slice(0, 4))}</td>`;
-                linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
+                linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirExcluir(${animal.codAnimal})">Excluir</button></td>`;
@@ -47,6 +55,7 @@ function pesquisarAnimais() {
                 linha += `<p id="codCliente${animal.codAnimal}">${animal.codCliente}</p>`
                 linha += '</div>'
                 corpoTabela.innerHTML += linha;
+                idade(animal.codAnimal);
             }
             w3.sortHTML('#tabela','.item', 'td:nth-child(1)'); 
         } else if (this.readyState == 4) {
@@ -55,6 +64,30 @@ function pesquisarAnimais() {
     };
     xhttp.open('GET', `${url}`, true);
     xhttp.send();
+}
+
+function idade(codAnimal) {
+    var dataAtual = new Date();
+    var ano = dataAtual.getFullYear().toString();
+    var mes = dataAtual.getMonth().toString() + 1;
+    var dia = dataAtual.getDay().toString();
+    var nascimentoAnimal = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
+    var anoAnimal = nascimentoAnimal.slice(6,10);
+    var mesAnimal = nascimentoAnimal.slice(3,5);
+    var diaAnimal = nascimentoAnimal.slice(0,2);
+    var idade;
+    diferencaData = (ano - anoAnimal)
+    if (mesAnimal < mes) {
+        idade = diferencaData;
+    }
+    else {
+        if(diaAnimal < dia) {
+            idade = diferencaData;
+        } else {
+            idade = diferencaData + 1;
+        }
+    }
+    document.getElementById(`idadeAnimal${codAnimal}`).innerHTML = idade;
 }
 
 function abrirCadastrarListaClientes() {
