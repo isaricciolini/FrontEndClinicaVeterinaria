@@ -73,14 +73,8 @@
 
 
 
-        <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
-        <div id="divFiltro" style="display: none;">
+        <div id="divFiltro">
             <div class="row">
-                <div class="col-md-5 my-2">
-                    <input type="text" class="form-control" id="textFiltro"
-                        placeholder="Por data, números e caracteres"
-                        oninput="w3.filterHTML('#tabela', '.item', this.value)">
-                </div>
                 <div class="col-md-2 col-sm-12 my-2">
                     <input type="date" class="form-control" id="textSemanasInicio" style="width: 170px;">
                 </div>
@@ -91,7 +85,17 @@
                     <input type="date" class="form-control" id="textSemanasFim" style="width: 170px;">
                 </div>
                 <div class="col-md-1 col-sm-12 my-2">
-                    <button onclick="pesquisarData()" class="btn btn-dark">🔍 Data</button>
+                    <input type="number" class="form-control" id="textCodVeterinarioFiltro" placeholder="CodVet" style="width: 100px;">
+                </div>
+                <div class="col-md-1 col-sm-12 my-2">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button onclick="pesquisarConsultas()" class="btn btn-dark">🔍 Filtrar</button>
+                      </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="textFiltro"
+                        placeholder="Por data, números e caracteres"
+                        oninput="w3.filterHTML('#tabela', '.item', this.value)">
                 </div>
             </div>
         </div>
@@ -102,6 +106,7 @@
                     <th id="data">Data</th>
                     <th>Hora</th>
                     <th>CodAnimal</th>
+                    <th>Informações</th>
                     <th>CodVeterinário</th>
                     <th>Peso</th>
                     <th>Descrição</th>

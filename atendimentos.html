@@ -73,14 +73,11 @@
 
 
 
+
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
+
         <div id="divFiltro">
             <div class="row">
-                <div class="col-md-5 my-2">
-                    <input type="text" class="form-control" id="textFiltro"
-                        placeholder="Por data, números e caracteres"
-                        oninput="w3.filterHTML('#tabela', '.item', this.value)">
-                </div>
                 <div class="col-md-2 col-sm-12 my-2">
                     <input type="date" class="form-control" id="textSemanasInicio" style="width: 170px;">
                 </div>
@@ -91,7 +88,13 @@
                     <input type="date" class="form-control" id="textSemanasFim" style="width: 170px;">
                 </div>
                 <div class="col-md-1 col-sm-12 my-2">
-                    <button onclick="pesquisarData()" class="btn btn-dark">🔍</button>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button onclick="pesquisarConsultas()" class="btn btn-dark">🔍 Filtrar</button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="textFiltro" placeholder="Por data, números e caracteres"
+                        oninput="w3.filterHTML('#tabela', '.item', this.value)">
                 </div>
             </div>
         </div>
@@ -130,69 +133,6 @@
                         <div class="card col-12">
                             <div class="card-body">
                                 <!-- Aqui serão listadas todos os dadosdo animal -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Alerta de sucesso de operação -->
-    <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row" id="cardBodySucesso">
-                        <div class="card col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">Operação realizada com sucesso!</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Alerta Preencha os dados -->
-    <div class="modal fade" id="modalAlerta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row" id="cardBodyAlerta">
-                        <div class="card col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">Campo não informado corretamente!</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Alerta Não foi possivel realizar...  -->
-    <div class="modal fade" id="modalAlertaDeOperacao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row" id="cardBodyAlertaDeOperacao">
-                        <div class="card col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">Não foi possivel realizar a operação!</h5>
                             </div>
                         </div>
                     </div>
@@ -363,10 +303,10 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label> Data:
-                                <input name="textDataConsultaAlterar" class="form-label" type="date"
+                                <input name="textDataConsultaAlterar" class="form-label" type="text"
                                     id="textDataConsultaAlterar" disabled></label>
                             <label> Hora:
-                                <input name="textHoraConsultaAlterar" class="form-label" type="time"
+                                <input name="textHoraConsultaAlterar" class="form-label" type="text"
                                     id="textHoraConsultaAlterar" disabled></label>
                             <label>Peso:
                                 <input name="textPesoAlterar" class="form-label" type="text" id="textPesoAlterar"
@@ -410,38 +350,102 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- JavaScript (Opcional) -->
-        <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
+    <!-- Modal de Alerta de sucesso de operação -->
+    <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodySucesso">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Operação realizada com sucesso!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <script src="atendimentos.js"></script>
-        <script src="cookies.js"></script>
-        <script src="sort.js"></script>
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
+    <!-- Modal de Alerta Preencha os dados -->
+    <div class="modal fade" id="modalAlerta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlerta">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Campo não informado corretamente!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Não foi possivel realizar...  -->
+    <div class="modal fade" id="modalAlertaDeOperacao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlertaDeOperacao">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Não foi possivel realizar a operação!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="atendimentos.js"></script>
+    <script src="cookies.js"></script>
+    <script src="sort.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
-        <script>
-            function navbar() {
-                var x = document.getElementById("hide");
-                if (x.className === "hide") {
-                    x.className += " responsive";
-                } else {
-                    x.className = "hide";
-                }
+    <script>
+        function navbar() {
+            var x = document.getElementById("hide");
+            if (x.className === "hide") {
+                x.className += " responsive";
+            } else {
+                x.className = "hide";
             }
-        </script>
+        }
+    </script>
 </body>
 
 </html>

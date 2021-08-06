@@ -196,7 +196,10 @@ function abrirAlterar(codCliente) {
 function alterarCliente() {
     var nomeCliente = textNomeClienteAlterar.value;
     var nascimento = textNascimentoAlterar.value;
-    var cpf = textCPFAlterar.value;
+    var cpf = textCPFAlterar.value.slice(0,3);
+    cpf += textCPFAlterar.value.slice(4,7);
+    cpf += textCPFAlterar.value.slice(8,11);
+    cpf += textCPFAlterar.value.slice(12,14);
     var telefone = textTelefoneAlterar.value;
     var email = textEmailAlterar.value;
     var cep = textCEPAlterar.value;
@@ -315,12 +318,11 @@ function apagarDadosCliente(codCliente) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`Cliente apagado com sucesso!`);
             pesquisarClientes();
             modalExcluir.hide();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            console.log(apagarDadosCliente);
-            alert('Não foi possível apagar o cliente.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('PUT', url, true);
