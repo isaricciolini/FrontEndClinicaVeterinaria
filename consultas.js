@@ -54,6 +54,9 @@ pesquisarConsultas(inicio, fim);
 
 function pesquisarConsultas(inicio, fim) {
     corpoTabela.innerHTML = '';
+    inicio = textSemanasInicio.value;
+    fim = textSemanasFim.value;
+    codVeterinario = document.getElementById("textCodVeterinarioFiltro").value
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -80,8 +83,14 @@ function pesquisarConsultas(inicio, fim) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
     };
-    xhttp.open('GET', `${url}/datas/${inicio}ate${fim}`, true);
-    xhttp.send();
+    if(codVeterinario == null || codVeterinario == "") {
+        xhttp.open('GET', `${url}/datas/${inicio}ate${fim}`, true);
+        xhttp.send();
+    }
+    else {
+        xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${codVeterinario}`, true);
+        xhttp.send();
+    }
 }
 
 function abrirCadastrar() {
@@ -278,11 +287,4 @@ function abrirReceitas(codConsulta) {
 function abrirCadastrarReceita(codConsulta) {
     document.getElementById(`textCodConsultaModal`).value = codConsulta;
     modalCadastrarReceita.show();
-}
-
-function pesquisarData() {
-    inicio = textSemanasInicio.value;
-    fim = textSemanasFim.value; 
-    pesquisarConsultas(inicio, fim);
-
 }
