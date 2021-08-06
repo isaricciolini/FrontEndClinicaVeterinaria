@@ -74,7 +74,7 @@
 
 
         <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
-        <div id="divFiltro" style="display: none;">
+        <div id="divFiltro">
             <div class="row">
                 <div class="col-md-5 my-2">
                     <input type="text" class="form-control" id="textFiltro"
@@ -91,7 +91,7 @@
                     <input type="date" class="form-control" id="textSemanasFim" style="width: 170px;">
                 </div>
                 <div class="col-md-1 col-sm-12 my-2">
-                    <button onclick="pesquisarData()" class="btn btn-dark">🔍 Data</button>
+                    <button onclick="pesquisarData()" class="btn btn-dark">🔍</button>
                 </div>
             </div>
         </div>
@@ -123,13 +123,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Dados</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Dados do Animal</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row" id="cardBodyDados">
                         <div class="card col-12">
                             <div class="card-body">
-                                <h5 class="card-title">Dados Animal</h5>
                                 <!-- Aqui serão listadas todos os dadosdo animal -->
                             </div>
                         </div>
@@ -242,7 +241,6 @@
                     <div class="row" id="cardBodyTodasReceitas">
                         <div class="col-sm-12 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title">Receitas</h5>
                                 <!-- Aqui serão listadas as receitas anteriores da consulta -->
                             </div>
                         </div>
@@ -261,13 +259,12 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Descrições</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Descrição da Consulta</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row" id="cardBodyDescricao">
                         <div class="col-sm-12 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title">Descrição</h5>
                                 <!-- Aqui serão listadas as descrições da consulta -->
                             </div>
                         </div>
