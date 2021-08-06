@@ -2,7 +2,6 @@ var url = 'https://localhost:5001/animais';
 var corpoTabela = document.getElementById('corpoTabela');
 var textCodAnimal = document.getElementById('textCodAnimal');
 var textNomeAnimal = document.getElementById('textNomeAnimal');
-var textNascimentoAnimal = document.getElementById('textNascimentoAnimal');
 var textRacaAnimal = document.getElementById('textRacaAnimal');
 var textTipoAnimal = document.getElementById('textTipoAnimal');
 var textDeficienciaAnimal = document.getElementById('textDeficienciaAnimal');
@@ -145,7 +144,9 @@ function abrirAlterar(codAnimal) {
 
 function alterarAnimal() {
     var nomeAnimal = textNomeAnimalAlterar.value;
-    var nascimentoAnimal = textNascimentoAlterar.value;
+    var nascimentoAnimal = textNascimentoAlterar.value.slice(6,10) + "/";
+    nascimentoAnimal += textNascimentoAlterar.value.slice(3,6);
+    nascimentoAnimal += textNascimentoAlterar.value.slice(0,2);
     var racaAnimal = textRacaAlterar.value;
     var tipoAnimal = textTipoAlterar.value; 
     var codCliente = textCodClienteAlterar.value;

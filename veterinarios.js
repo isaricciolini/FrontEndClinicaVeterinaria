@@ -205,8 +205,13 @@ function abrirAlterar(codVeterinario) {
 
 function alterarVeterinario() {
     var nomeVeterinario = textNomeVeterinarioAlterar.value;
-    var nascimento = textNascimentoAlterar.value;
-    var cpf = textCPFAlterar.value;
+    var nascimento = textNascimentoAlterar.value.slice(6,10) + "/";
+    nascimento += textNascimentoAlterar.value.slice(3,6);
+    nascimento += textNascimentoAlterar.value.slice(0,2);
+    var cpf = textCPFAlterar.value.slice(0,3);
+    cpf += textCPFAlterar.value.slice(4,7);
+    cpf += textCPFAlterar.value.slice(8,11);
+    cpf += textCPFAlterar.value.slice(12,14);
     var telefone = textTelefoneAlterar.value;
     var crmv = textCRMVAlterar.value;
     var email = textEmailAlterar.value;
