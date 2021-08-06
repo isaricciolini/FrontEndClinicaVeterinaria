@@ -276,20 +276,52 @@ function abrirExcluir(codCliente) {
     modalExcluir.show();
 }
 
-function excluirCliente(codCliente) {
+// function excluirCliente(codCliente) {
+//     var codCliente = textCodClienteExcluir.value;
+//     if (!confirm('Tem certeza que deseja excluir este cliente?'))
+//         return;
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function () {
+//         if (this.readyState == 4) {
+//             alert('Cliente excluído com sucesso!');
+//             modalExcluir.hide();
+//             pesquisarClientes();
+//         }
+//     };
+//     xhttp.open('DELETE', `${url}/${codCliente}`, true);
+//     xhttp.send();
+// }
+
+function apagarDadosCliente(codCliente) {
     var codCliente = textCodClienteExcluir.value;
-    if (!confirm('Tem certeza que deseja excluir este cliente?'))
-        return;
+    var apagarDadosCliente = {
+        nomeCliente: "Padrão",
+        nascimento: "1999-09-09T00:00:00.000Z",
+        cpf: "00000000000",
+        email: "padrao@padrao.com",
+        telefone: 10000000001,
+        rua: 'Padrão',
+        numero: 101,
+        complemento: "",
+        bairro: "Padrão",
+        cidade: "Padrão",
+        cep: "00000000",
+        codCliente: codCliente
+    };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            alert('Cliente excluído com sucesso!');
-            modalExcluir.hide();
+        if (this.readyState == 4 && this.status == 200) {
+            alert(`Cliente apagado com sucesso!`);
             pesquisarClientes();
+            modalExcluir.hide();
+        } else if (this.readyState == 4) {
+            console.log(apagarDadosCliente);
+            alert('Não foi possível apagar o cliente.');
         }
     };
-    xhttp.open('DELETE', `${url}/${codCliente}`, true);
-    xhttp.send();
+    xhttp.open('PUT', url, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(apagarDadosCliente));
 }
 
         // mostrarAnimais: function (codCliente) {
