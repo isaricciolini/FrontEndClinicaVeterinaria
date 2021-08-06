@@ -54,7 +54,8 @@
                 class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
-            <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar text-muted">Animais</button>
+            <button onclick="location.href='animais.html'" type="button"
+                class="btn _botaosidebar text-muted">Animais</button>
             <button onclick="location.href='veterinarios.html'" type="button"
                 class="btn _botaosidebar">Veterinários</button>
         </div>
@@ -232,6 +233,115 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary" onclick="cadastrarAnimal()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Excluir Animal -->
+    <div class="modal fade" id="modalExcluir" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Excluir animal ?</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Excluir animal nº
+                                <input name="textCodAnimalExcluir" type="number" id="textCodAnimalExcluir"
+                                    disabled></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="excluirAnimal()">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta de sucesso de operação -->
+    <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodySucesso">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Operação realizada com sucesso!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Preencha os dados -->
+    <div class="modal fade" id="modalAlerta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlerta">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Campo não informado corretamente!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Não foi possivel realizar...  -->
+    <div class="modal fade" id="modalAlertaDeOperacao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlertaDeOperacao">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Não foi possivel realizar a operação!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta CEP NÃO ENCONTRADO  -->
+    <div class="modal fade" id="modalAlertaDeCEP" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlertaDeCEP">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">CEP NÃO ENCONTRADO!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
                 </div>
             </div>
         </div>

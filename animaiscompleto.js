@@ -18,8 +18,6 @@ var textDescricaoConsulta = document.getElementById('textDescricaoConsulta')
 var modalConsulta = new bootstrap.Modal(document.getElementById('modalConsulta'), {});
 var modalReceita = new bootstrap.Modal(document.getElementById('modalReceita'), {});
 
-
-
 pesquisarAnimaisCompleto();
 
 function pesquisarAnimaisCompleto() {
@@ -39,7 +37,6 @@ function pesquisarAnimaisCompleto() {
                 linha += `<td id="deficienciaAnimalCompleto${animal.codAnimal}">${animal.deficiencia}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirConsulta(${animal.codAnimal})">Exibir</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirReceita(${animal.codAnimal})">Exibir</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="excluirAnimal(${animal.codAnimal})">Excluir</button></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }
@@ -120,20 +117,6 @@ function abrirReceita(codAnimal) {
     xhttp.open('GET', `https://localhost:5001/Receitas/animal/${codAnimal}`, true);
     xhttp.send();
     modalReceita.show();
-}
-
-function excluirAnimal(codAnimal) {
-    if (!confirm('Tem certeza que deseja excluir este animal?'))
-        return;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            alert('Animal excluído com sucesso!');
-            pesquisarAnimaisCompleto();
-        }
-    };
-    xhttp.open('DELETE', `${url}?codAnimal=${codAnimal}`, true);
-    xhttp.send();
 }
 
 function limpar() {

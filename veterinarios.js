@@ -40,6 +40,11 @@ var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 
+var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
+var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
+var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
+var modalAlertaDeCEP = new bootstrap.Modal(document.getElementById('modalAlertaDeCEP'))
+
 pesquisarVeterinarios();
 
 function pesquisarVeterinarios() {
@@ -112,7 +117,7 @@ function cadastrarVeterinario() {
     var cidade = textNovoCidade.value;
     var crmv = textNovoCRMV.value;
     if (!nascimento || !cpf || !telefone || !email || !nomeVeterinario || !cep || !rua || !numero || !bairro || !cidade || !crmv) {
-        alert('Preencha todos os dados para cadastrar!');
+        modalAlerta.show();
         return;
     }
     var novoVeterinario = {
@@ -132,11 +137,11 @@ function cadastrarVeterinario() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`${novoVeterinario.nomeVeterinario} cadastrado(a) com sucesso!`);
             modalCadastrar.hide();
+            modalSucesso.show();
             pesquisarVeterinarios();
         } else if (this.readyState == 4) {
-            alert('Não foi possível cadastrar o veterinário.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);
@@ -158,7 +163,7 @@ function meu_callback(conteudo) {
     }
     else {
         limpa_formulário_cep();
-        alert("CEP não encontrado.");
+        ModalAlertaDeCEP.show();
     }
 }
 
@@ -213,7 +218,7 @@ function alterarVeterinario() {
     var cidade = textCidadeAlterar.value;
     var codVeterinario = textCodVeterinario.value;
     if (!codVeterinario || !email || !telefone || !cpf || !nomeVeterinario || !nascimento || !crmv || !cep || !rua || !numero || !bairro || !cidade) {
-        alert('Preencha todos os dados para alterar!');
+        modalAlerta.show();
         return;
     }
     var alterarVeterinario = {
@@ -234,11 +239,11 @@ function alterarVeterinario() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`${alterarVeterinario.nomeVeterinario} alterado(a) com sucesso!`);
             pesquisarVeterinarios();
             modalAlterar.hide();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível alterar o veterinário.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('PUT', url, true);
@@ -260,7 +265,7 @@ function meu_callback2(conteudo) {
     }
     else {
         limpaFormularioCEP();
-        alert("CEP não encontrado.");
+        modalAlertaDeCEP.show();
     }
 }
 
@@ -290,14 +295,13 @@ function abrirExcluir(codVeterinario) {
 
 function excluirVeterinario(codVeterinario) {
     var codVeterinario = textCodVeterinarioExcluir.value;
-    if (!confirm('Tem certeza que deseja excluir este veterinário?'))
-        return;
+    modalExcluir.show();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            alert('Veterinário excluído com sucesso!');
             pesquisarVeterinarios();
             modalExcluir();
+            modalSucesso.show();
         }
     };
     xhttp.open('DELETE', `${url}?CodVeterinario=${codVeterinario}`, true);

@@ -19,7 +19,10 @@ var nascimentoAnimal = textNascimentoAnimal.value;
 var modalListaClientes = new bootstrap.Modal(document.getElementById('modalListaClientes'), {});
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
-
+var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
+var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
+var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'));
+var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'));
 
 pesquisarAnimais();
 
@@ -39,7 +42,7 @@ function pesquisarAnimais() {
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="excluirAnimal(${animal.codAnimal})">Excluir</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirExcluir(${animal.codAnimal})">Excluir</button></td>`;
                 linha += '</tr>';
                 linha += '<div style="display: none">'
                 linha += `<p id="codCliente${animal.codAnimal}">${animal.codCliente}</p>`
@@ -97,7 +100,7 @@ function cadastrarAnimal() {
     var deficiencia = textDeficienciaAnimal.value;
     var codCliente = textCodCliente.value;
     if (!nomeAnimal || !nascimento || !raca || !tipo || !codCliente) {
-        alert('Preencha os campos para cadastrar!');
+        modalAlerta.show();
         return;
     }
     var animal = {
@@ -111,13 +114,13 @@ function cadastrarAnimal() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`${animal.nomeAnimal} cadastrado com sucesso!`);
             limpar();
             pesquisarAnimais();
             modalCadastrar.hide();
+            modalSucesso.show();
         } 
         else if (this.readyState == 4) {
-            alert('Não foi possivel cadastrar animal.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);
@@ -147,7 +150,7 @@ function alterarAnimal() {
     var tipoAnimal = textTipoAlterar.value; 
     var codCliente = textCodClienteAlterar.value;
     if (!nomeAnimal || !nascimentoAnimal || !racaAnimal || !tipoAnimal || !codCliente) {
-        alert('Preencha os campos para alterar!');
+        modalAlerta.show();
         return;
     }
     var animal = {
@@ -161,11 +164,11 @@ function alterarAnimal() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`${animal.nomeAnimal} Alterado(a) com sucesso!`);
             pesquisarAnimais();
             modalAlterar.hide();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível alterar o seu animal.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('PUT', url, true);
@@ -173,13 +176,18 @@ function alterarAnimal() {
     xhttp.send(JSON.stringify(animal));
 }
 
+function abrirExcluir(codAnimal) {
+    document.getElementById("textCodAnimalExcluir").value = codAnimal;
+    modalExcluir.show();
+}
+
 function excluirAnimal(codAnimal) {
-    if (!confirm('Tem certeza que deseja excluir este animal?'))
-        return;
+    var codAnimal = document.getElementById('textCodAnimalExcluir').value
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            alert('Animal excluído com sucesso!');
+            modalExcluir.hide();
+            modalSucesso.show();
             pesquisarAnimais();
         }
     };

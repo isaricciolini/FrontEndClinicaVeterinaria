@@ -26,6 +26,9 @@ var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 var modalCadastrarReceita = new bootstrap.Modal(document.getElementById('modalCadastrarReceita'), {});
+var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
+var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
+var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
 
 var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
 
@@ -96,16 +99,17 @@ function abrirExcluir(codConsulta) {
     modalExcluir.show();
 }
 
+
+
 function excluirConsulta() {
     var codConsulta = textCodConsultaExcluir.value;
-    if (!confirm('Tem certeza que deseja excluir esta consulta?'))
-        return;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            alert('Consulta excluída com sucesso!');
             limparExclusao();
             pesquisarConsultas(inicio, fim);
+            modalExcluir.hide();
+            modalSucesso.show();
         }
     };
     xhttp.open('DELETE', `${url}?CodConsulta=${codConsulta}`, true);
@@ -132,7 +136,7 @@ function alterarConsulta() {
     var peso = textPesoAlterar.value;
     var descricao = textDescricaoAlterar.value;
     if (!codAnimal || !codVeterinario || !dataConsulta || !horaConsulta || !peso || !descricao || !codConsulta) {
-        alert('Preencha todos os dados para cadastrar!');
+        modalAlerta.show();
         return;
     }
     var alterarConsulta = {
@@ -146,12 +150,12 @@ function alterarConsulta() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert('Consulta alterada com sucesso!');
             limparAlteracao();
             pesquisarConsultas(inicio, fim);
             modalAlterar.hide();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível alterar a consulta.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('PUT', url, true);
@@ -188,7 +192,7 @@ function cadastrarReceita() {
     var prescricao = document.getElementById('textPrescricao').value;
     var codConsultaModal = document.getElementById('textCodConsultaModal').value;
     if (!dataReceita || !prescricao) {
-        alert('Preencha todos os dados para cadastrar a receita.');
+        modalAlerta.show();
         return;
     }
     var receitaCadastrada = {
@@ -199,10 +203,10 @@ function cadastrarReceita() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert('Receita cadastrada com sucesso!');
             modalCadastrarReceita.hide();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível cadastrar a receita.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);
