@@ -57,6 +57,8 @@ pesquisarConsultas(inicio, fim);
 
 function pesquisarConsultas(inicio, fim) {
     corpoTabela.innerHTML = '';
+    inicio = textSemanasInicio.value;
+    fim = textSemanasFim.value; 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -327,13 +329,6 @@ function abrirTodasReceitas(codConsulta) {
     };
     xhttp.open('GET', `https://localhost:5001/Consultas/receitas/${codConsulta}`, true);
     xhttp.send();
-}
-
-function pesquisarData() {
-    inicio = textSemanasInicio.value;
-    fim = textSemanasFim.value; 
-    pesquisarConsultas(inicio, fim);
-
 }
 
 function abrirDescricao(codConsulta) {
