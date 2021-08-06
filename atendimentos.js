@@ -76,7 +76,11 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td><button class="btn btn-dark" onclick="abrirTodasConsultasReceitas(${info.codAnimal})">Exibir</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+</button></td>`;
                 linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`
-                linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`
+                if (info.peso != 0) {
+                    linha += `<td></td>`
+                } else {
+                    linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`
+                }
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="descricao${info.codConsulta}">${info.descricao}</p>`;
@@ -133,7 +137,9 @@ function alterarConsulta() {
     var codConsulta = textCodConsultaAlterar.value;
     var codAnimal = textCodAnimalAlterar.value;
     var codVeterinario = textCodVeterinarioAlterar.value;
-    var dataConsulta = textDataConsultaAlterar.value;
+    var dataConsulta = textDataConsultaAlterar.value.slice(6,10) + "/";
+    dataConsulta += textDataConsultaAlterar.value.slice(3,6);
+    dataConsulta += textDataConsultaAlterar.value.slice(0,2);
     var horaConsulta = textHoraConsultaAlterar.value;
     var peso = textPesoAlterar.value;
     var descricao = textDescricaoAlterar.value;
