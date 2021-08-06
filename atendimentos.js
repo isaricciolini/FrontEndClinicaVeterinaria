@@ -29,6 +29,7 @@ var modalCadastrarReceita = new bootstrap.Modal(document.getElementById('modalCa
 var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
+var modalReceitasHistorico = new bootstrap.Modal(document.getElementById('modalReceitasHistorico'))
 
 var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
 
@@ -73,7 +74,10 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Exibir</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirTodasConsultasReceitas(${info.codAnimal})">Exibir</button></td>`;
+                linha += `<td><div class="btn-group" role="group" aria-label="Basic example">
+                                <button onclick="abrirTodasConsultasReceitas(${info.codAnimal})" class="btn btn-dark">Consultas</button>
+                                <button onclick="abrirReceitasHistorico(${info.codAnimal})" class="btn btn-dark">Receitas</button>
+                            </div></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+</button></td>`;
                 linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`
                 if (info.peso != 0) {
@@ -98,14 +102,43 @@ function pesquisarConsultas(inicio, fim) {
     xhttp.send();
 }
 
-
+function abrirReceitasHistorico(codAnimal) {
+    cardBodyReceitasHistorico.innerHTML = '';
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            console.log(resposta)
+            if (resposta == 0 || resposta == undefined) {
+                cardBodyReceitasHistorico.innerHTML = "<p>Nenhuma receita foi encontrada.</p>";
+                return;
+            }
+            for (var i = 0; i < resposta.length; i++) {
+                var receita = resposta[i];
+                var linha = `
+                <div class="card col-12 col-md-6">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Receitas:</h5>
+                                        <p class="card-text"><b>Cod.Receita: </b>${receita.codReceita}<br>
+                                        <b>Data da Receita: </b>${(receita.dataReceita.slice(8, 10)) + "/" + (receita.dataReceita.slice(5, 7)) + "/" + (receita.dataReceita.slice(0, 4))}<br>
+                                        <b>Prescrição: </b>${receita.prescricao}<br>
+                                      </div>
+                                </div>`;
+                cardBodyReceitasHistorico.innerHTML += linha;
+            }
+        } else if (this.readyState == 4) {
+            cardBodyReceitasHistorico.innerHTML = 'Erro ao pesquisar histórico de receita';
+        }
+    };
+    xhttp.open('GET', `https://localhost:5001/Receitas/animal/${codAnimal}`, true);
+    xhttp.send();
+    modalReceitasHistorico.show();
+}
 
 function abrirExcluir(codConsulta) {
     document.getElementById('textCodConsultaExcluir').value = codConsulta
     modalExcluir.show();
 }
-
-
 
 function excluirConsulta() {
     var codConsulta = textCodConsultaExcluir.value;
