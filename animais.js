@@ -14,6 +14,7 @@ var textTipoAlterar = document.getElementById('textTipoAlterar');
 var textDeficienciaAlterar = document.getElementById('textDeficienciaAlterar');
 var textCodClienteAlterar = document.getElementById('textCodClienteAlterar');
 var textCodCliente = document.getElementById('textCodCliente');
+var nascimentoAnimal = textNascimentoAnimal.value;
 
 var modalListaClientes = new bootstrap.Modal(document.getElementById('modalListaClientes'), {});
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
@@ -36,7 +37,7 @@ function pesquisarAnimais() {
                 var linha = '<tr class="item">';
                 linha += `<td>${animal.codAnimal}</td>`;
                 linha += `<td id="nomeAnimal${animal.codAnimal}">${animal.nomeAnimal}</td>`;
-                linha += `<td id="nascimentoAnimal${animal.codAnimal}">${animal.nascimento.slice(0,10)}</td>`;
+                linha += `<td id="nascimentoAnimal${animal.codAnimal}">${(animal.nascimento.slice(8, 10)) + "/" + (animal.nascimento.slice(5, 7)) + "/" + (animal.nascimento.slice(0, 4))}</td>`;
                 linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;

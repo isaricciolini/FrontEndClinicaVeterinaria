@@ -51,7 +51,7 @@ function pesquisarClientes() {
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codCliente}</td>`;
                 linha += `<td id="nome${info.codCliente}">${info.nomeCliente}</td>`;
-                linha += `<td>${info.nascimento.slice(0,10)}</td>`;
+                linha += `<td>${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</td>`;
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
                 linha += `<td>${info.telefone}</td>`;
                 linha += `<td id="email${info.codCliente}">${info.email}</td>`;
@@ -61,8 +61,8 @@ function pesquisarClientes() {
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="telefone${info.codCliente}">${info.telefone}</p>`;
-                linha += `<p id="nascimento${info.codCliente}">${info.nascimento}</p>`;
-                linha += `<p id="cpf${info.codCliente}">${info.cpf}</p>`;
+                linha += `<p id="nascimento${info.codCliente}">${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</p>`;
+                linha += `<p id="cpf${info.codCliente}">${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</p>`;
                 linha += `<p id="cep${info.codCliente}">${info.cep}</p>`
                 linha += `<p id="rua${info.codCliente}">${info.rua}</p>`
                 linha += `<p id="numero${info.codCliente}">${info.numero}</p>`;

@@ -62,11 +62,11 @@ function pesquisarConsultas(inicio, fim) {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
-                linha += `<td id="dataConsulta${info.codConsulta}">${info.dataConsulta.slice(0, 10)}</td>`;
+                linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td id="codAnimal${info.codConsulta}">${info.codAnimal}</td>`;
                 linha += `<td id="codVeterinario${info.codConsulta}">${info.codVeterinario}</td>`;
-                linha += `<td id="peso${info.codConsulta}">${info.peso}</td>`;
+                linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirReceitas(${info.codConsulta})">Receitas</button></td>`;
@@ -259,7 +259,7 @@ function abrirReceitas(codConsulta) {
                                 <div class="col-sm-6">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Receita ${receita.codReceita}</h5>
-                                        <b>Data: </b>${receita.dataReceita.slice(0, 10)}<br>
+                                        <b>Data: </b>${(receita.dataReceita.slice(8, 10)) + "/" + (receita.dataReceita.slice(5, 7)) + "/" + (receita.dataReceita.slice(0, 4))}<br>
                                         <b>Hora: </b>${receita.dataReceita.slice(11, 16)}<br>
                                         <b>Prescrição: </b>${receita.prescricao}</p>
                                     </div>

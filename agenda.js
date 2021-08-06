@@ -50,7 +50,7 @@ function exibirAgenda() {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codConsulta}</td>`;
-                linha += `<td id="dataConsulta${info.codConsulta}">${info.dataConsulta.slice(0, 10)}</td>`;
+                linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td id="nomeAnimal${info.codConsulta}">${info.nomeAnimal}</td>`;
                 linha += `<td id="nomeCliente${info.codConsulta}">${info.nomeCliente}</td>`;
@@ -87,6 +87,10 @@ function excluirConsulta(codConsulta) {
     };
     xhttp.open('DELETE', `${url}?codConsulta=${codConsulta}`, true);
     xhttp.send();
+}
+
+function formatarData() {
+
 }
 
 function abrirCadastrarDataHora() {
