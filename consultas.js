@@ -68,6 +68,7 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td id="codAnimal${info.codConsulta}">${info.codAnimal}</td>`;
+                linha += `<td>${info.nomeVeterinario}: | ${info.nomeAnimal}</td>`
                 linha += `<td id="codVeterinario${info.codConsulta}">${info.codVeterinario}</td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
@@ -84,7 +85,7 @@ function pesquisarConsultas(inicio, fim) {
         }
     };
     if(codVeterinario == null || codVeterinario == "") {
-        xhttp.open('GET', `${url}/datas/${inicio}ate${fim}`, true);
+        xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}`, true);
         xhttp.send();
     }
     else {
