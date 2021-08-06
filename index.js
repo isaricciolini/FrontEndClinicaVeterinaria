@@ -6,6 +6,10 @@ var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar
 var textUsuarioCadastrar = document.getElementById('textUsuarioCadastrar');
 var textSenhaCadastrar = document.getElementById('textSenhaCadastrar')
 
+var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
+var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
+var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
+
 
 function logar() {
     //textUsuario = textUsuario.value;
@@ -17,7 +21,7 @@ function logar() {
             if (senhaDigitada == login.senha) {
                 setCookie("usuario",login.usuario)
                 setCookie("codVeterinario",login.codVeterinario)
-                alert("Login realizado com sucesso!");
+                //alert("Login realizado com sucesso!");
                 window.location = "agenda.html";
                 return false;
             } else {
@@ -53,7 +57,7 @@ function cadastrarLogin() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`Login cadastrado com sucesso!`);
+            //alert(`Login cadastrado com sucesso!`);
             limparCadastro();
             modalCadastrar.hide();
         } else if (this.readyState == 4) {

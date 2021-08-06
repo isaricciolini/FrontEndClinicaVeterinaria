@@ -4,6 +4,10 @@ var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 var modalEndereco = new bootstrap.Modal(document.getElementById('modalEndereco'), {});
+var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
+var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
+var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
+var modalAlertaDeCEP = new bootstrap.Modal(document.getElementById('modalAlertaDeCEP'))
 
 var textNovoNomeCliente = document.getElementById('textNovoNomeCliente');
 var textNovoNascimento = document.getElementById('textNovoNascimento');
@@ -105,7 +109,7 @@ function cadastrarCliente() {
     var bairro = textNovoBairro.value;
     var cidade = textNovoCidade.value;
     if (!nascimento || !cpf || !telefone || !email || !nomeCliente || !cep || !rua || !numero || !bairro || !cidade) {
-        alert('Preencha todos os dados para cadastrar!');
+        modalAlerta.show();
         return;
     }
     var novoCliente = {
@@ -124,11 +128,11 @@ function cadastrarCliente() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`${novoCliente.nomeCliente} cadastrado(a) com sucesso!`);
             modalCadastrar.hide();
             pesquisarClientes();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível cadastrar o cliente.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);
@@ -150,7 +154,7 @@ function meu_callback(conteudo) {
     }
     else {
         limpa_formulário_cep();
-        alert("CEP não encontrado.");
+        modalAlertaDeCEP.show();
     }
 }
 
@@ -203,7 +207,7 @@ function alterarCliente() {
     var cidade = textCidadeAlterar.value;
     var codCliente = textCodCliente.value;
     if (!codCliente || !email || !telefone || !cpf || !nomeCliente || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
-        alert('Preencha todos os dados para alterar!');
+        modalAlerta.show();
         return;
     }
     var alterarCliente = {
@@ -223,11 +227,11 @@ function alterarCliente() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`${alterarCliente.nomeCliente} alterado(a) com sucesso!`);
             pesquisarClientes();
             modalAlterar.hide();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível alterar o cliente.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('PUT', url, true);
@@ -249,7 +253,7 @@ function meu_callback2(conteudo) {
     }
     else {
         limpaFormularioCEP();
-        alert("CEP não encontrado.");
+        modalAlertaDeCEP.show();
     }
 }
 
@@ -278,35 +282,15 @@ function abrirExcluir(codCliente) {
 
 function excluirCliente(codCliente) {
     var codCliente = textCodClienteExcluir.value;
-    if (!confirm('Tem certeza que deseja excluir este cliente?'))
-        return;
+    modalExcluir.show();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            alert('Cliente excluído com sucesso!');
             modalExcluir.hide();
+            modalSucesso.show();
             pesquisarClientes();
         }
     };
     xhttp.open('DELETE', `${url}/${codCliente}`, true);
     xhttp.send();
 }
-
-        // mostrarAnimais: function (codCliente) {
-        //     var xhttp = new XMLHttpRequest();
-        //     xhttp.onreadystatechange = function () {
-        //         if (this.readyState == 4 && this.status == 200) {
-        //             var resposta = JSON.parse(this.response);
-        //             app.infos = resposta;
-        //         } else if (this.readyState == 4) {
-        //             corpoTabela.innerHTML = 'Erro ao pesquisar.';
-        //         }
-        //     };
-        //     xhttp.open('GET', `${app.url}​/Animais​/cliente​/${codCliente}`, true);
-        //     xhttp.send();
-        //     modalAnimais.show();
-
-        // }
-  
-// var modalAnimais = new bootstrap.Modal(document.getElementById('modalAnimais'), {});
-

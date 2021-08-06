@@ -142,6 +142,69 @@
         </div>
     </div>
 
+    <!-- Modal de Alerta de sucesso de operação -->
+    <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodySucesso">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Operação realizada com sucesso!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Preencha os dados -->
+    <div class="modal fade" id="modalAlerta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlerta">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Campo não informado corretamente!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Não foi possivel realizar...  -->
+    <div class="modal fade" id="modalAlertaDeOperacao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlertaDeOperacao">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Não foi possivel realizar a operação!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Todas Consultas -->
     <div class="modal fade" id="modalTodasConsultasReceitas" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -333,7 +396,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Excluir consulta</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Tem certeza que deseja excluir ?</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">

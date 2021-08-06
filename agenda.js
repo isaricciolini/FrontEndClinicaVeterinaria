@@ -33,6 +33,9 @@ var modalListaClientes = new bootstrap.Modal(document.getElementById('modalLista
 var modalListaAnimais = new bootstrap.Modal(document.getElementById('modalListaAnimais'), {});
 var modalListaVeterinarios = new bootstrap.Modal(document.getElementById('modalListaVeterinarios'), {});
 var modalConfirmarCadastrar = new bootstrap.Modal(document.getElementById('modalConfirmarCadastrar'), {});
+var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
+var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
+var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
 
 
 exibirAgenda();
@@ -74,16 +77,15 @@ function exibirAgenda() {
 
 
 function excluirConsulta(codConsulta) {
-    if (!confirm('Tem certeza que deseja excluir esta consulta?'))
-        return;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            alert('Consulta excluída com sucesso!');
             exibirAgenda();
+            modalExcluir.hide();
+            modalSucesso.show();
         }
     };
-    xhttp.open('DELETE', `${url}/${codConsulta}`, true);
+    xhttp.open('DELETE', `${url}?codConsulta=${codConsulta}`, true);
     xhttp.send();
 }
 
@@ -97,7 +99,7 @@ function confirmarCadastrarDataHora() {
 
 
     if (!dataConsultaCadastrar || !horaConsultaCadastrar) {
-        alert('Preencha todos os dados para alterar!');
+        modalAlertaDeOperacao.show();
         return;
     }
     else {
@@ -215,7 +217,7 @@ function cadastrarConsulta() {
 
 
     if (!codAnimalCadastrar || !codVeterinarioCadastrar || !dataConsultaCadastrar || !horaConsultaCadastrar) {
-        alert('Preencha todos os dados para cadastrar!');
+        modalAlerta.show();
         return;
     }
     var novaConsulta = {
@@ -228,12 +230,11 @@ function cadastrarConsulta() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`Consulta cadastrada com sucesso!`);
             modalConfirmarCadastrar.hide();
             exibirAgenda();
-
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível cadastrar a consulta.');
+           modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);
@@ -264,7 +265,7 @@ function alterarConsulta() {
     var codVeterinario = textCodVeterinarioAlterar.value;
 
     if (!dataConsulta || !horaConsulta) {
-        alert('Preencha todos os dados para alterar!');
+        modalAlerta.show();
         return;
     }
     var consulta = {
@@ -278,11 +279,11 @@ function alterarConsulta() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(`Consulta alterada com sucesso!`);
             exibirAgenda();
             modalAlterar.hide();
+            modalSucesso.show();
         } else if (this.readyState == 4) {
-            alert('Não foi possível alterar a consulta.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('PUT', `${url}`, true);
