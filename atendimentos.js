@@ -388,3 +388,8 @@ function abrirDescricao(codConsulta) {
     xhttp.send();
     modalDescricao.show();
 }
+
+
+if (getCookie("codVeterinario") == "" || getCookie("codVeterinario") == null) {
+    document.getElementById("corpoTabela").innerHTML = '<b><h5>Nenhum codVeterinario associado ao seu login.</h5></b>';
+}
