@@ -9,6 +9,8 @@ var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {}
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
 var modalAlertaDeCEP = new bootstrap.Modal(document.getElementById('modalAlertaDeCEP'))
 
+
+
 var textNovoNomeFuncionario = document.getElementById('textNovoNomeFuncionario');
 var textNovoCodVeterinario = document.getElementById('textNovoCodVeterinario');
 var textNovoNascimento = document.getElementById('textNovoNascimento');
@@ -22,7 +24,7 @@ var textNovoCEP = document.getElementById('textNovoCEP');
 var textNovoBairro = document.getElementById('textNovoBairro');
 var textNovoCidade = document.getElementById('textNovoCidade');
 var codFuncionarioAlterar = 0;
-var textNomeFuncionarioAlterar = document.getElementById('textNomeClienteAlterar');
+var textNomeFuncionarioAlterar = document.getElementById('textNomeFuncionarioAlterar');
 var textNascimentoAlterar = document.getElementById('textNascimentoAlterar');
 var textCPFAlterar = document.getElementById('textCPFAlterar');
 var textTelefoneAlterar = document.getElementById('textTelefoneAlterar');
@@ -37,6 +39,7 @@ var textCodFuncionario = document.getElementById('textCodFuncionario');
 var textAtivoAlterar = document.getElementById('textAtivoAlterar');
 var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
 var textCodFuncionarioExcluir = document.getElementById('textCodFuncionarioExcluir');
+var textAtivo = document.getElementById('textAtivo');
 
 
 
@@ -53,7 +56,7 @@ function pesquisarFuncionarios() {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codFuncionario}</td>`;
-                linha += `<td>${info.codVeterinario}</td>`;
+                linha += `<td id="codVeterinario${info.codFuncionario}">${info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codFuncionario}">${info.nomeFuncionario}</td>`;
                 linha += `<td>${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</td>`;
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
@@ -113,7 +116,8 @@ function cadastrarFuncionario() {
     var complemento = textNovoComplemento.value;
     var bairro = textNovoBairro.value;
     var cidade = textNovoCidade.value;
-    if (!nascimento || !cpf || !telefone || !email || !nomeFuncionario || !cep || !rua || !numero || !bairro || !cidade) {
+    var ativo = textAtivo.value;
+    if (!nascimento || !cpf || !telefone || !email || !ativo || !nomeFuncionario || !cep || !rua || !numero || !bairro || !cidade) {
         modalAlerta.show();
         return;
     }
@@ -130,7 +134,7 @@ function cadastrarFuncionario() {
         bairro: bairro,
         cidade: cidade,
         cep: cep,
-        ativo: 1
+        ativo: ativo
     };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -184,10 +188,11 @@ function pesquisacep(textNovoCEP) {
 };
 
 function abrirAlterar(codFuncionario) {
-
+    nascimentoAlterar = document.getElementById(`nascimento${codFuncionario}`).innerHTML.split('/');
     document.getElementById('textCodFuncionario').value = codFuncionario;
+    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codFuncionario}`).innerHTML;
     document.getElementById('textNomeFuncionarioAlterar').value = document.getElementById(`nome${codFuncionario}`).innerHTML;
-    document.getElementById('textNascimentoAlterar').value = document.getElementById(`nascimento${codFuncionario}`).innerHTML.slice(0, 10);
+    document.getElementById('textNascimentoAlterar').value = new Date(nascimentoAlterar [2], nascimentoAlterar [1] - 1, nascimentoAlterar [0]).toISOString().substring(0, 10);
     document.getElementById('textTelefoneAlterar').value = document.getElementById(`telefone${codFuncionario}`).innerHTML;
     document.getElementById('textEmailAlterar').value = document.getElementById(`email${codFuncionario}`).innerHTML;
     document.getElementById('textCPFAlterar').value = document.getElementById(`cpf${codFuncionario}`).innerHTML;
@@ -202,6 +207,7 @@ function abrirAlterar(codFuncionario) {
 
 function alterarFuncionario() {
     var nomeFuncionario = textNomeFuncionarioAlterar.value;
+    var codVeterinario = textCodVeterinarioAlterar.value;
     var nascimento = textNascimentoAlterar.value;
     var cpf = textCPFAlterar.value.slice(0, 3);
     cpf += textCPFAlterar.value.slice(4, 7);
@@ -216,8 +222,12 @@ function alterarFuncionario() {
     var bairro = textBairroAlterar.value;
     var cidade = textCidadeAlterar.value;
     var codFuncionario = textCodFuncionario.value;
-    var ativo = textAtivoAlterar.value;
-    if (!codFuncionario || !email || !telefone || !ativo || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
+    if (textAtivoAlterar == 1) {
+        var ativo = true;
+    }else {
+        var ativo = false;
+    }
+    if ( !email || !telefone || ativo == null || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
         modalAlerta.show();
         return;
     }
@@ -237,6 +247,7 @@ function alterarFuncionario() {
         codVeterinario: codVeterinario,
         ativo: ativo
     };
+    console.log(alterarFuncionario);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -249,6 +260,7 @@ function alterarFuncionario() {
     };
     xhttp.open('PUT', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
+    console.log(JSON.stringify(alterarFuncionario));
     xhttp.send(JSON.stringify(alterarFuncionario));
 }
 

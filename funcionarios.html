@@ -161,8 +161,8 @@
                         </div>
                         <form>
                             <label>Ativo:</label><br>
-                            <input type="radio" name="textAtivoAlterar" class="form-label" value="1" checked> Sim
-                            <input type="radio" name="textAtivoAlterar" class="form-label" value="0"> Não
+                            <input type="radio" id="textAtivo" name="textAtivo" class="form-label" value="1" checked> Sim
+                            <input type="radio" id="textAtivo" name="textAtivo" class="form-label" value="0"> Não
                         </form>
                     </div>
                 </div>
@@ -230,17 +230,20 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <label>Ativo:</label>
-                            <input type="radio" name="textAtivoAlterar" class="form-label" value="1"> Sim
-                            <input TYPE="radio" name="textAtivoAlterar" class="form-label" value="0"> Não
+                            <input type="radio" name="textAtivoAlterar" id="textAtivoAlterar" value="1" checked> Sim
+                            <input type="radio" name="textAtivoAlterar" id="textAtivoAlterar" value="0"> Não
+                        </div>
+                        <div class="col-md-6 col-sm-12">
                             <input name="textCodFuncionario" type="hidden" id="textCodFuncionario" />
-                            <input name="textCodVeterinarioAlterar" type="hidden" id="textCodVeterinarioAlterar" />
+                            <label>CodVeterinario:</label>
+                            <input name="textCodVeterinarioAlterar" class="form-label" type="number" id="textCodVeterinarioAlterar" />
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Nome Completo:</label>
                             <input name="textNomeFuncionarioAlterar" class="form-label" type=" text"
                                 id="textNomeFuncionarioAlterar">
                             <label>Data de Nascimento:
-                                <input name="textNascimentoAlterar" class="form-label" type=" text"
+                                <input name="textNascimentoAlterar" class="form-label" type="date"
                                     id="textNascimentoAlterar"></label>
                             <label>Telefone:
                                 <input name="textTelefoneAlterar" class="form-label" type=" text"
