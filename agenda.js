@@ -249,12 +249,14 @@ function cadastrarConsulta() {
 
 function abrirAlterarConsulta(codConsulta) {
     modalAlterar.show();
+    DataConsultaAlterar = document.getElementById(`dataConsulta${codConsulta}`).innerHTML.split('/');
+    DataConsultaAlterar = new Date(DataConsultaAlterar[2], DataConsultaAlterar[1] - 1, DataConsultaAlterar[0]).toISOString().substring(0, 10);
     document.getElementById('textCodConsultaAlterar').value = codConsulta
     document.getElementById('textNomeVeterinarioAlterar').value = document.getElementById(`nomeVeterinario${codConsulta}`).innerHTML;
     document.getElementById('textNomeClienteAlterar').value = document.getElementById(`nomeCliente${codConsulta}`).innerHTML;
     document.getElementById('textNomeAnimalAlterar').value = document.getElementById(`nomeAnimal${codConsulta}`).innerHTML;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
-    document.getElementById('textDataConsultaAlterar').value = document.getElementById(`dataConsulta${codConsulta}`).innerHTML;
+    document.getElementById('textDataConsultaAlterar').value = DataConsultaAlterar;
     document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
     document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML;
 

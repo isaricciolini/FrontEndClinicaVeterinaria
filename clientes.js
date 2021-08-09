@@ -61,7 +61,7 @@ function pesquisarClientes() {
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="telefone${info.codCliente}">${info.telefone}</p>`;
-                linha += `<p id="nascimento${info.codCliente}">${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</p>`;
+                linha += `<p id="nascimento${info.codCliente}">${info.nascimento}</p>`;
                 linha += `<p id="cpf${info.codCliente}">${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</p>`;
                 linha += `<p id="cep${info.codCliente}">${info.cep}</p>`
                 linha += `<p id="rua${info.codCliente}">${info.rua}</p>`
@@ -177,7 +177,6 @@ function pesquisacep(textNovoCEP) {
 };
 
 function abrirAlterar(codCliente) {
-
     document.getElementById('textCodCliente').value = codCliente
     document.getElementById('textNomeClienteAlterar').value = document.getElementById(`nome${codCliente}`).innerHTML;
     document.getElementById('textNascimentoAlterar').value = document.getElementById(`nascimento${codCliente}`).innerHTML.slice(0,10);

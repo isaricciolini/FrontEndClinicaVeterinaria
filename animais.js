@@ -53,6 +53,7 @@ function pesquisarAnimais() {
                 linha += '</tr>';
                 linha += '<div style="display: none">'
                 linha += `<p id="codCliente${animal.codAnimal}">${animal.codCliente}</p>`
+                linha += `<p id="nascimento${animal.codAnimal}">${animal.nascimento}</p>`
                 linha += '</div>'
                 corpoTabela.innerHTML += linha;
                 idade(animal.codAnimal);
@@ -163,12 +164,12 @@ function cadastrarAnimal() {
 function abrirAlterar(codAnimal) {
     codAnimalAlterar = codAnimal;
     var nomeAnimal = document.getElementById(`nomeAnimal${codAnimal}`).innerHTML;
-    var nascimento = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
+    var nascimento = document.getElementById(`nascimento${codAnimal}`).innerHTML.slice(0,10);
     var raca = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
     var tipo = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
     var codCliente = document.getElementById(`codCliente${codAnimal}`).innerHTML;
     textNomeAnimalAlterar.value = nomeAnimal;
-    textNascimentoAlterar.value = nascimento.slice(0,10);
+    textNascimentoAlterar.value = nascimento;
     textRacaAlterar.value = raca;
     textTipoAlterar.value = tipo;
     textCodClienteAlterar.value = codCliente;
@@ -177,9 +178,7 @@ function abrirAlterar(codAnimal) {
 
 function alterarAnimal() {
     var nomeAnimal = textNomeAnimalAlterar.value;
-    var nascimentoAnimal = textNascimentoAlterar.value.slice(6,10) + "/";
-    nascimentoAnimal += textNascimentoAlterar.value.slice(3,6);
-    nascimentoAnimal += textNascimentoAlterar.value.slice(0,2);
+    var nascimentoAnimal = nascimentoAnimal.value;
     var racaAnimal = textRacaAlterar.value;
     var tipoAnimal = textTipoAlterar.value; 
     var codCliente = textCodClienteAlterar.value;
