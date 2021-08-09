@@ -53,11 +53,14 @@
             <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
             <button onclick="location.href='atendimentos.html'" type="button"
                 class="btn _botaosidebar">Atendimentos</button>
-            <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar text-muted">Consultas</button>
+            <button onclick="location.href='consultas.html'" type="button"
+                class="btn _botaosidebar text-muted">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
             <button onclick="location.href='veterinarios.html'" type="button"
                 class="btn _botaosidebar">Veterinários</button>
+            <button onclick="location.href='funcionarios.html'" type="button"
+                class="btn _botaosidebar">Funcionarios</button>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="navbar()">
             <button type="button" class="btn _botaosidebar">Menu</button></a>
@@ -85,16 +88,16 @@
                     <input type="date" class="form-control" id="textSemanasFim" style="width: 170px;">
                 </div>
                 <div class="col-md-1 col-sm-12 my-2">
-                    <input type="number" class="form-control" id="textCodVeterinarioFiltro" placeholder="CodVet" style="width: 100px;">
+                    <input type="number" class="form-control" id="textCodVeterinarioFiltro" placeholder="CodVet"
+                        style="width: 100px;">
                 </div>
                 <div class="col-md-1 col-sm-12 my-2">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button onclick="pesquisarConsultas()" class="btn btn-dark">🔍 Filtrar</button>
-                      </div>
+                    </div>
                 </div>
                 <div class="col-md-12">
-                    <input type="text" class="form-control" id="textFiltro"
-                        placeholder="Por data, números e caracteres"
+                    <input type="text" class="form-control" id="textFiltro" placeholder="Por data, números e caracteres"
                         oninput="w3.filterHTML('#tabela', '.item', this.value)">
                 </div>
             </div>
@@ -338,7 +341,7 @@
         </div>
     </div>
 
-    
+
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
