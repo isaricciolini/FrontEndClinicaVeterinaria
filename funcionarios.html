@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style copy.css">
+
+    <script>
+        function getCookie(usuario) {
+            let login = usuario + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(login) == 0) {
+                    return c.substring(login.length, c.length);
+                }
+            }
+            return "";
+        }
+        if (getCookie("usuario") == "") {
+            window.location = "index.html";
+        }
+    </script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <link rel="shortcut icon" href="p_Logo-veterinaria.ico" />
+    <title>Colaboradores - Centro Veterinário</title>
+</head>
+
+<body>
+    <!-- * Inicio Sidebar/Navbar -->
+    <div class="sidebar" id="sidebar">
+        <div class="active">
+            <a class="fs-5" href="index.html"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
+                Veterinário</a>
+            <h6 id="usuario" class="_texto"></h6>
+        </div>
+        <div class="login">
+            <button onclick="expireCookie()" type="button" class="btn _botaosidebar">Deslogar</button>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="navbar()">
+            <button type="button" class="btn _botaosidebar">Menu</button></a>
+        <div class="hide" id="hide">
+            <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
+            <button onclick="location.href='atendimentos.html'" type="button"
+                class="btn _botaosidebar">Atendimentos</button>
+            <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
+            <button onclick="location.href='clientes.html'" type="button"
+                class="btn _botaosidebar text-muted">Clientes</button>
+            <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
+            <button onclick="location.href='veterinarios.html'" type="button"
+                class="btn _botaosidebar">Veterinários</button>
+        </div>
+    </div>
+    <!-- * Fim Sidebar/Navbar -->
+    <div class="content">
+        <p class="h1 text-center">Colaboradores</p>
+        <hr>
+        <div class="_botoes my-2">
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" id="btn_form" onclick="abrirCadastrar()" class="btn btn-dark">Cadastrar</button>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
+
+        <div id="divFiltro" style="display: none;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control my-2" id="textFiltro" placeholder="Por data, nome e números"
+                        oninput="w3.filterHTML('#tabela', '.item', this.value)">
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover text-center" id="tabela">
+            <thead>
+                <tr>
+                    <th>CodFuncionario</th>
+                    <th>CodVeterinario</th>
+                    <th>Nome</th>
+                    <th>Data Nascimento</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Endereço</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabela">
+                <!-- aqui serão listadas as consultas cadastradas no banco -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Cadastrar -->
+    <div class="modal fade" id="modalCadastrar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Cadastrar</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label>CodVeterinario:
+                                <input name="textNovoCodVeterinario" class="form-label" type="number"
+                                    id="textNovoCodVeterinario" size="10"></label>
+                            <label>Nome Completo:</label>
+                            <input name="textNovoNomeCliente" class="form-label" type=" text" id="textNovoNomeCliente">
+                            <label>Data de Nascimento:
+                                <input name="textNovoNascimento" class="form-label" type="date"
+                                    id="textNovoNascimento"></label>
+                            <label>Telefone:
+                                <input name="textNovoTelefone" class="form-label" type="text"
+                                    id="textNovoTelefone"></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>CPF:
+                                <input name="textNovoCPF" class="form-label" type=" text" id="textNovoCPF"></label>
+                            <label>Email:
+                                <input name="textNovoEmail" class="form-label" type=" text" id="textNovoEmail"
+                                    placeholder="nome@exemplo.com"></label>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group" method="get" action=".">
+                                <label>CEP:
+                                    <input name="textNovoCEP" type="text" class="form-label" id="textNovoCEP" value=""
+                                        size="10" maxlength="9" oninput="pesquisacep(this.value)" /></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Rua:
+                                <input name="textNovoRua" type="text" class="form-label" id="textNovoRua"></label>
+                            <label>Complemento:
+                                <input name="textNovoComplemento" type="text" class="form-label"
+                                    id="textNovoComplemento"></label>
+                            <label>Cidade:
+                                <input name="textNovoCidade" type="text" class="form-label" id="textNovoCidade"></label>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Número:
+                                <input name="textNovoNumero" type="text" class="form-label" id="textNovoNumero"></label>
+                            <label>Bairro:
+                                <input name="textNovoBairro" type="text" class="form-label" id="textNovoBairro"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="cadastrarCliente()">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Endereco -->
+    <div class="modal fade" id="modalEndereco" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Endereço</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group" method="get" action=".">
+                                <label>CEP:
+                                    <input name="textCEP" type="text" id="textCEP" disabled /></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Rua:
+                                <input name="textRua" type="text" class="form-label" id="textRua" disabled></label>
+                            <label>Complemento:
+                                <input name="textComplemento" type="text" class="form-label" id="textComplemento"
+                                    disabled></label>
+                            <label>Cidade:
+                                <input name="textCidade" type="text" class="form-label" id="textCidade"
+                                    disabled></label>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Número:
+                                <input name="textNumero" type="text" class="form-label" id="textNumero"
+                                    disabled></label>
+                            <label>Bairro:
+                                <input name="textBairro" type="text" class="form-label" id="textBairro"
+                                    disabled></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Alterar -->
+    <div class="modal fade" id="modalAlterar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Alterar</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input name="textCodFuncionario" type="hidden" id="textCodFuncionario" />
+                            <input name="textCodVeterinario" type="hidden" id="textCodVeterinario" />
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Nome Completo:</label>
+                            <input name="textNomeClienteAlterar" class="form-label" type=" text"
+                                id="textNomeClienteAlterar">
+                            <label>Data de Nascimento:
+                                <input name="textNascimentoAlterar" class="form-label" type=" text"
+                                    id="textNascimentoAlterar"></label>
+                            <label>Telefone:
+                                <input name="textTelefoneAlterar" class="form-label" type=" text"
+                                    id="textTelefoneAlterar"></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>CPF:
+                                <input name="textCPFAlterar" class="form-label" type=" text"
+                                    id="textCPFAlterar"></label>
+                            <label>Email:
+                                <input name="textEmailAlterar" class="form-label" type=" text" id="textEmailAlterar"
+                                    placeholder="nome@exemplo.com"></label>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group" method="get" action=".">
+                                <label>CEP:
+                                    <input name="textCEPAlterar" type="text" id="textCEPAlterar" value="" size="10"
+                                        maxlength="9" oninput="pesquisaCEPAlterar(this.value)" /></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Rua:
+                                <input name="textRuaAlterar" class="form-label" type="text" id="textRuaAlterar"></label>
+                            <label>Complemento:
+                                <input name="textComplementoAlterar" class="form-label" type="text"
+                                    id="textComplementoAlterar"></label>
+                            <label>Cidade:
+                                <input name="textCidadeAlterar" class="form-label" type="text"
+                                    id="textCidadeAlterar"></label>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Número:
+                                <input name="textNumeroAlterar" class="form-label" type="text"
+                                    id="textNumeroAlterar"></label>
+                            <label>Bairro:
+                                <input name="textBairroAlterar" class="form-label" type="text"
+                                    id="textBairroAlterar"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="alterarCliente()">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Excluir -->
+    <div class="modal fade" id="modalExcluir" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Excluir cliente?</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Excluir cliente nº
+                                <input name="textCodClienteExcluir" class="form-label" type="number"
+                                    id="textCodClienteExcluir" disabled /></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="apagarDadosCliente()">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta de sucesso de operação -->
+    <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodySucesso">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Operação realizada com sucesso!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Preencha os dados -->
+    <div class="modal fade" id="modalAlerta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlerta">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Campo não informado corretamente!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Não foi possivel realizar...  -->
+    <div class="modal fade" id="modalAlertaDeOperacao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlertaDeOperacao">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Não foi possivel realizar a operação!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta CEP NÃO ENCONTRADO  -->
+    <div class="modal fade" id="modalAlertaDeCEP" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAlertaDeCEP">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">CEP NÃO ENCONTRADO!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="clientes.js"></script>
+    <script src="cookies.js"></script>
+    <script src="sort.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    <script>
+        function navbar() {
+            var x = document.getElementById("hide");
+            if (x.className === "hide") {
+                x.className += " responsive";
+            } else {
+                x.className = "hide";
+            }
+        }
+    </script>
+</body>
+
+</html>
