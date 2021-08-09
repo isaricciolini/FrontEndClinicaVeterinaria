@@ -58,10 +58,10 @@
                 class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
             <button onclick="location.href='clientes.html'" type="button"
-                class="btn _botaosidebar text-muted">Clientes</button>
+                class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
-            <button onclick="location.href='veterinarios.html'" type="button"
-                class="btn _botaosidebar">Veterinários</button>
+            <button onclick="location.href='funcionarios.html'" type="button"
+                class="btn _botaosidebar text-muted">Colaboradores</button>
         </div>
     </div>
     <!-- * Fim Sidebar/Navbar -->
@@ -94,6 +94,7 @@
                     <th>CPF</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th>Ativo</th>
                     <th>Endereço</th>
                     <th></th>
                     <th></th>
@@ -120,7 +121,7 @@
                                 <input name="textNovoCodVeterinario" class="form-label" type="number"
                                     id="textNovoCodVeterinario" size="10"></label>
                             <label>Nome Completo:</label>
-                            <input name="textNovoNomeCliente" class="form-label" type=" text" id="textNovoNomeCliente">
+                            <input name="textNovoNomeFuncionario" class="form-label" type=" text" id="textNovoNomeFuncionario">
                             <label>Data de Nascimento:
                                 <input name="textNovoNascimento" class="form-label" type="date"
                                     id="textNovoNascimento"></label>
@@ -158,10 +159,15 @@
                             <label>Bairro:
                                 <input name="textNovoBairro" type="text" class="form-label" id="textNovoBairro"></label>
                         </div>
+                        <form>
+                            <label>Ativo:</label><br>
+                            <input type="radio" name="textAtivoAlterar" class="form-label" value="1" checked> Sim
+                            <input type="radio" name="textAtivoAlterar" class="form-label" value="0"> Não
+                        </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="cadastrarCliente()">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="cadastrarFuncionario()">Confirmar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -222,14 +228,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-md-6 col-sm-12">
+                            <label>Ativo:</label>
+                            <input type="radio" name="textAtivoAlterar" class="form-label" value="1"> Sim
+                            <input TYPE="radio" name="textAtivoAlterar" class="form-label" value="0"> Não
                             <input name="textCodFuncionario" type="hidden" id="textCodFuncionario" />
-                            <input name="textCodVeterinario" type="hidden" id="textCodVeterinario" />
+                            <input name="textCodVeterinarioAlterar" type="hidden" id="textCodVeterinarioAlterar" />
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>Nome Completo:</label>
-                            <input name="textNomeClienteAlterar" class="form-label" type=" text"
-                                id="textNomeClienteAlterar">
+                            <input name="textNomeFuncionarioAlterar" class="form-label" type=" text"
+                                id="textNomeFuncionarioAlterar">
                             <label>Data de Nascimento:
                                 <input name="textNascimentoAlterar" class="form-label" type=" text"
                                     id="textNascimentoAlterar"></label>
@@ -274,7 +283,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="alterarCliente()">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="alterarFuncionario()">Confirmar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -287,7 +296,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Excluir cliente?</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Excluir funcionário?</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -405,7 +414,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script src="clientes.js"></script>
+    <script src="funcionarios.js"></script>
     <script src="cookies.js"></script>
     <script src="sort.js"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->

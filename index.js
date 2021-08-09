@@ -1,7 +1,7 @@
 var url = 'https://localhost:5001/logins';
 var textUsuario = document.getElementById('textUsuario');
 var textSenha = document.getElementById('textSenha');
-var codVeterinario = document.getElementById('textcodVeterinario');
+var codFuncionario = document.getElementById('textCodFuncionario');
 var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar'), {});
 var textUsuarioCadastrar = document.getElementById('textUsuarioCadastrar');
 var textSenhaCadastrar = document.getElementById('textSenhaCadastrar')
@@ -42,22 +42,21 @@ function abrirCadastrar() {
 
 
 function cadastrarLogin() {
-    var codVeterinario = textcodVeterinario.value;
+    var codFuncionario = textCodFuncionario.value;
     var Usuario = textUsuarioCadastrar.value;
     var Senha = textSenhaCadastrar.value;
-    if (!codVeterinario || !Usuario || !Senha) {
+    if (!codFuncionario || !Usuario || !Senha) {
         alert('Preencha todos os dados para cadastrar!');
         return;
     }
     var novoLogin = {
-        codVeterinario: codVeterinario,
+        codFuncionario: codFuncionario,
         usuario: Usuario,
         senha: Senha
     };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //alert(`Login cadastrado com sucesso!`);
             limparCadastro();
             modalCadastrar.hide();
         } else if (this.readyState == 4) {
@@ -89,5 +88,5 @@ function limpar() {
 function limparCadastro() {
     textUsuario.value = '';
     textSenha.value = '';
-    codVeterinario.value = '';
+    codFuncionario.value = '';
 }

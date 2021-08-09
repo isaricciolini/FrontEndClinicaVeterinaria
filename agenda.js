@@ -54,7 +54,7 @@ function exibirAgenda() {
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td id="nomeAnimal${info.codConsulta}">${info.nomeAnimal}</td>`;
                 linha += `<td id="nomeCliente${info.codConsulta}">${info.nomeCliente}</td>`;
-                linha += `<td id="nomeVeterinario${info.codConsulta}">${info.nomeVeterinario}</td>`;
+                linha += `<td id="nomeVeterinario${info.codConsulta}">${info.nomeFuncionario}</td>`;
                 linha += `<td><button class="btn btn-dark " onclick="abrirAlterarConsulta(${info.codConsulta})">Alterar</button></td>`;
                 linha += `<td><button class="btn btn-dark " onclick="excluirConsulta(${info.codConsulta})">Excluir</button></td>`;
                 linha += '</tr>';

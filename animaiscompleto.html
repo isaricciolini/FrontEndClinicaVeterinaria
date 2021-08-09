@@ -38,7 +38,7 @@
 </head>
 
 <body>
-    <!-- Inicio Sidebar/Navbar -->
+    <!-- * Inicio Sidebar/Navbar -->
     <div class="sidebar" id="sidebar">
         <div class="active">
             <a class="fs-5" href="index.html"><img src="logo.png" class="img-fluid mx-auto _logo" alt="">Centro
@@ -46,22 +46,23 @@
             <h6 id="usuario" class="_texto"></h6>
         </div>
         <div class="login">
-            <button onclick="location.href='index.html'" type="button" class="btn _botaosidebar">Login</button>
+            <button onclick="expireCookie()" type="button" class="btn _botaosidebar">Deslogar</button>
         </div>
+        <a href="javascript:void(0);" class="icon" onclick="navbar()">
+            <button type="button" class="btn _botaosidebar">Menu</button></a>
         <div class="hide" id="hide">
             <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar">Agenda</button>
             <button onclick="location.href='atendimentos.html'" type="button"
                 class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
-            <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
-            <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
-            <button onclick="location.href='veterinarios.html'" type="button"
-                class="btn _botaosidebar">Veterinários</button>
+            <button onclick="location.href='clientes.html'" type="button"
+                class="btn _botaosidebar">Clientes</button>
+            <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar text-muted">Animais</button>
+            <button onclick="location.href='funcionarios.html'" type="button"
+                class="btn _botaosidebar">Colaboradores</button>
         </div>
-        <a href="javascript:void(0);" class="icon" onclick="navbar()">
-            <button type="button" class="btn _botaosidebar">Menu</button></a>
     </div>
-    <!-- Fim Sidebar/Navbar -->
+    <!-- * Fim Sidebar/Navbar -->
     <div class="content" id="app">
         <p class="h1 text-center">Relatório Completo</p>
         <hr>

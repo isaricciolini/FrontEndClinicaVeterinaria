@@ -21,8 +21,8 @@ var textNovoComplemento = document.getElementById('textNovoComplemento');
 var textNovoCEP = document.getElementById('textNovoCEP');
 var textNovoBairro = document.getElementById('textNovoBairro');
 var textNovoCidade = document.getElementById('textNovoCidade');
-var codClienteAlterar = 0;
-var textNomeClienteAlterar = document.getElementById('textNomeClienteAlterar');
+var codFuncionarioAlterar = 0;
+var textNomeFuncionarioAlterar = document.getElementById('textNomeClienteAlterar');
 var textNascimentoAlterar = document.getElementById('textNascimentoAlterar');
 var textCPFAlterar = document.getElementById('textCPFAlterar');
 var textTelefoneAlterar = document.getElementById('textTelefoneAlterar');
@@ -33,8 +33,10 @@ var textComplementoAlterar = document.getElementById('textComplementoAlterar');
 var textCEPAlterar = document.getElementById('textCEPAlterar');
 var textBairroAlterar = document.getElementById('textBairroAlterar');
 var textCidadeAlterar = document.getElementById('textCidadeAlterar');
-var textCodCliente = document.getElementById('textCodCliente');
-var textCodClienteExcluir = document.getElementById('textCodClienteExcluir');
+var textCodFuncionario = document.getElementById('textCodFuncionario');
+var textAtivoAlterar = document.getElementById('textAtivoAlterar');
+var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
+var textCodFuncionarioExcluir = document.getElementById('textCodFuncionarioExcluir');
 
 
 
@@ -51,14 +53,15 @@ function pesquisarFuncionarios() {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codFuncionario}</td>`;
+                linha += `<td>${info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codFuncionario}">${info.nomeFuncionario}</td>`;
                 linha += `<td>${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</td>`;
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
                 linha += `<td>${info.telefone}</td>`;
-                linha += `<td id="email${info.codCliente}">${info.email}</td>`;
+                linha += `<td id="email${info.codFuncionario}">${info.email}</td>`;
+                linha += `<td id="ativo${info.codFuncionario}">${info.ativo}</td>`;
                 linha += `<td><button onclick="abrirEndereco(${info.codFuncionario})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirAlterar(${info.codFuncionario})" class="btn btn-dark">Alterar</button></td>`
-                linha += `<td><button onclick="abrirExcluir(${info.codFuncionario})" class="btn btn-dark">Excluir</button></td>`
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="telefone${info.codFuncionario}">${info.telefone}</p>`;
@@ -75,7 +78,7 @@ function pesquisarFuncionarios() {
             }
             w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
         } else if (this.readyState == 4) {
-            corpoTabela.innerHTML = 'Erro ao pesquisar clientes.';
+            corpoTabela.innerHTML = 'Erro ao pesquisar colaboradores.';
         }
     };
     xhttp.open('GET', url, true);
@@ -83,12 +86,12 @@ function pesquisarFuncionarios() {
 }
 
 function abrirEndereco(codFuncionario) {
-    document.getElementById('textCEP').value =  document.getElementById(`cep${codFuncionario}`).innerHTML.replace(/(\d{5})(\d{3})/, "$1-$2");
-    document.getElementById('textRua').value =  document.getElementById(`rua${codFuncionario}`).innerHTML;
-    document.getElementById('textNumero').value =  document.getElementById(`numero${codFuncionario}`).innerHTML;
-    document.getElementById('textComplemento').value =  document.getElementById(`complemento${codFuncionario}`).innerHTML;
-    document.getElementById('textBairro').value =  document.getElementById(`bairro${codFuncionario}`).innerHTML;
-    document.getElementById('textCidade').value =  document.getElementById(`cidade${codFuncionario}`).innerHTML;
+    document.getElementById('textCEP').value = document.getElementById(`cep${codFuncionario}`).innerHTML.replace(/(\d{5})(\d{3})/, "$1-$2");
+    document.getElementById('textRua').value = document.getElementById(`rua${codFuncionario}`).innerHTML;
+    document.getElementById('textNumero').value = document.getElementById(`numero${codFuncionario}`).innerHTML;
+    document.getElementById('textComplemento').value = document.getElementById(`complemento${codFuncionario}`).innerHTML;
+    document.getElementById('textBairro').value = document.getElementById(`bairro${codFuncionario}`).innerHTML;
+    document.getElementById('textCidade').value = document.getElementById(`cidade${codFuncionario}`).innerHTML;
     modalEndereco.show();
 }
 
@@ -110,12 +113,12 @@ function cadastrarFuncionario() {
     var complemento = textNovoComplemento.value;
     var bairro = textNovoBairro.value;
     var cidade = textNovoCidade.value;
-    if (!nascimento || !cpf || !telefone || !email || !nomeCliente || !cep || !rua || !numero || !bairro || !cidade) {
+    if (!nascimento || !cpf || !telefone || !email || !nomeFuncionario || !cep || !rua || !numero || !bairro || !cidade) {
         modalAlerta.show();
         return;
     }
     var novoFuncionario = {
-        nomeCliente: nomeCliente,
+        nomeFuncionario: nomeFuncionario,
         codVeterinario: codVeterinario,
         nascimento: nascimento,
         cpf: cpf,
@@ -126,7 +129,8 @@ function cadastrarFuncionario() {
         complemento: complemento,
         bairro: bairro,
         cidade: cidade,
-        cep: cep
+        cep: cep,
+        ativo: 1
     };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -181,28 +185,28 @@ function pesquisacep(textNovoCEP) {
 
 function abrirAlterar(codFuncionario) {
 
-    document.getElementById('textCodFuncionario').value = codFuncionario
+    document.getElementById('textCodFuncionario').value = codFuncionario;
     document.getElementById('textNomeFuncionarioAlterar').value = document.getElementById(`nome${codFuncionario}`).innerHTML;
-    document.getElementById('textNascimentoAlterar').value = document.getElementById(`nascimento${codFuncionario}`).innerHTML.slice(0,10);
+    document.getElementById('textNascimentoAlterar').value = document.getElementById(`nascimento${codFuncionario}`).innerHTML.slice(0, 10);
     document.getElementById('textTelefoneAlterar').value = document.getElementById(`telefone${codFuncionario}`).innerHTML;
     document.getElementById('textEmailAlterar').value = document.getElementById(`email${codFuncionario}`).innerHTML;
     document.getElementById('textCPFAlterar').value = document.getElementById(`cpf${codFuncionario}`).innerHTML;
-    document.getElementById('textCEPAlterar').value =  document.getElementById(`cep${codFuncionario}`).innerHTML;
-    document.getElementById('textRuaAlterar').value =  document.getElementById(`rua${codFuncionario}`).innerHTML;
-    document.getElementById('textNumeroAlterar').value =  document.getElementById(`numero${codFuncionario}`).innerHTML;
-    document.getElementById('textComplementoAlterar').value =  document.getElementById(`complemento${codFuncionario}`).innerHTML;
-    document.getElementById('textBairroAlterar').value =  document.getElementById(`bairro${codFuncionario}`).innerHTML;
-    document.getElementById('textCidadeAlterar').value =  document.getElementById(`cidade${codFuncionario}`).innerHTML;
+    document.getElementById('textCEPAlterar').value = document.getElementById(`cep${codFuncionario}`).innerHTML;
+    document.getElementById('textRuaAlterar').value = document.getElementById(`rua${codFuncionario}`).innerHTML;
+    document.getElementById('textNumeroAlterar').value = document.getElementById(`numero${codFuncionario}`).innerHTML;
+    document.getElementById('textComplementoAlterar').value = document.getElementById(`complemento${codFuncionario}`).innerHTML;
+    document.getElementById('textBairroAlterar').value = document.getElementById(`bairro${codFuncionario}`).innerHTML;
+    document.getElementById('textCidadeAlterar').value = document.getElementById(`cidade${codFuncionario}`).innerHTML;
     modalAlterar.show();
 }
 
-function alterarCliente() {
+function alterarFuncionario() {
     var nomeFuncionario = textNomeFuncionarioAlterar.value;
     var nascimento = textNascimentoAlterar.value;
-    var cpf = textCPFAlterar.value.slice(0,3);
-    cpf += textCPFAlterar.value.slice(4,7);
-    cpf += textCPFAlterar.value.slice(8,11);
-    cpf += textCPFAlterar.value.slice(12,14);
+    var cpf = textCPFAlterar.value.slice(0, 3);
+    cpf += textCPFAlterar.value.slice(4, 7);
+    cpf += textCPFAlterar.value.slice(8, 11);
+    cpf += textCPFAlterar.value.slice(12, 14);
     var telefone = textTelefoneAlterar.value;
     var email = textEmailAlterar.value;
     var cep = textCEPAlterar.value;
@@ -212,7 +216,8 @@ function alterarCliente() {
     var bairro = textBairroAlterar.value;
     var cidade = textCidadeAlterar.value;
     var codFuncionario = textCodFuncionario.value;
-    if (!codFuncionario || !email || !telefone || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
+    var ativo = textAtivoAlterar.value;
+    if (!codFuncionario || !email || !telefone || !ativo || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
         modalAlerta.show();
         return;
     }
@@ -229,7 +234,8 @@ function alterarCliente() {
         cidade: cidade,
         cep: cep,
         codFuncionario: codFuncionario,
-        codVeterinario: codVeterinario
+        codVeterinario: codVeterinario,
+        ativo: ativo
     };
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -282,10 +288,17 @@ function pesquisaCEPAlterar(textCEPAlterar) {
     }
 };
 
-function abrirExcluir(codFuncionario) {
-    document.getElementById("textCodFuncionarioExcluir").value = codFuncionario;
-    modalExcluir.show();
+function getSimNao() {
+    if (ativo == 1) {
+        return "SIM";
+    } else 
+    { return "NÃO"; }
 }
+
+// function abrirExcluir(codFuncionario) {
+//     document.getElementById("textCodFuncionarioExcluir").value = codFuncionario;
+//     modalExcluir.show();
+// }
 
 // function excluirFuncionario(codFuncionario) {
 //     var codFuncionario = textCodFuncionarioExcluir.value;
