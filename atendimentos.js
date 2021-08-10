@@ -108,7 +108,6 @@ function abrirReceitasHistorico(codAnimal) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
-            console.log(resposta)
             if (resposta == 0 || resposta == undefined) {
                 cardBodyReceitasHistorico.innerHTML = "<p>Nenhuma receita foi encontrada.</p>";
                 return;

@@ -247,7 +247,6 @@ function alterarFuncionario() {
         codVeterinario: codVeterinario,
         ativo: ativo
     };
-    console.log(alterarFuncionario);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -260,7 +259,6 @@ function alterarFuncionario() {
     };
     xhttp.open('PUT', url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    console.log(JSON.stringify(alterarFuncionario));
     xhttp.send(JSON.stringify(alterarFuncionario));
 }
 

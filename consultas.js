@@ -259,7 +259,6 @@ function abrirReceitas(codConsulta) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
-            console.log(resposta);
             if (resposta.receita == 0 || resposta.receita == undefined) {
                 cardBodyReceitas.innerHTML = "<p>Nenhuma receita para este animal foi encontrada.</p>";
                 return;
