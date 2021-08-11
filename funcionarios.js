@@ -62,7 +62,7 @@ function pesquisarFuncionarios() {
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
                 linha += `<td>${info.telefone}</td>`;
                 linha += `<td id="email${info.codFuncionario}">${info.email}</td>`;
-                linha += `<td id="ativo${info.codFuncionario}">${info.ativo}</td>`;
+                linha += `<td id="ativo${info.codFuncionario}">${info.ativo == true ? "Sim" : "Não"}</td>`;
                 linha += `<td><button onclick="abrirEndereco(${info.codFuncionario})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirAlterar(${info.codFuncionario})" class="btn btn-dark">Alterar</button></td>`
                 linha += '</tr>';
@@ -116,10 +116,14 @@ function cadastrarFuncionario() {
     var complemento = textNovoComplemento.value;
     var bairro = textNovoBairro.value;
     var cidade = textNovoCidade.value;
-    var ativo = textAtivo.value;
-    if (!nascimento || !cpf || !telefone || !email || !ativo || !nomeFuncionario || !cep || !rua || !numero || !bairro || !cidade) {
+    if (!nascimento || !cpf || !telefone || !email || !nomeFuncionario || !cep || !rua || !numero || !bairro || !cidade) {
         modalAlerta.show();
         return;
+    }
+    if (textAtivo.checked == true) {
+        var ativo = true;
+    }else {
+        var ativo = false;
     }
     var novoFuncionario = {
         nomeFuncionario: nomeFuncionario,
@@ -222,14 +226,14 @@ function alterarFuncionario() {
     var bairro = textBairroAlterar.value;
     var cidade = textCidadeAlterar.value;
     var codFuncionario = textCodFuncionario.value;
-    if (textAtivoAlterar == 1) {
+    if ( !email || !telefone || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
+        modalAlerta.show();
+        return;
+    }
+    if (textAtivoAlterar.checked == true) {
         var ativo = true;
     }else {
         var ativo = false;
-    }
-    if ( !email || !telefone || ativo == null || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
-        modalAlerta.show();
-        return;
     }
     var alterarFuncionario = {
         nomeFuncionario: nomeFuncionario,
