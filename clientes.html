@@ -93,6 +93,7 @@
                     <th>CPF</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th>Animais</th>
                     <th>Endereço</th>
                     <th></th>
                     <th></th>
@@ -234,8 +235,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label>CPF:
-                                <input name="textCPFAlterar" class="form-label" type="text"
-                                    id="textCPFAlterar"></label>
+                                <input name="textCPFAlterar" class="form-label" type="text" id="textCPFAlterar"></label>
                             <label>Email:
                                 <input name="textEmailAlterar" class="form-label" type="text" id="textEmailAlterar"
                                     placeholder="nome@exemplo.com"></label>
@@ -374,6 +374,30 @@
                         <div class="card col-12">
                             <div class="card-body">
                                 <h5 class="card-title">CEP NÃO ENCONTRADO!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Animais -->
+    <div class="modal fade" id="modalAnimais" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Animais</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="cardBodyAnimais">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="card-body">
+                                <!-- Aqui serão listadas as receitas cadastradas no banco-->
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), 
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
 var modalAlertaDeCEP = new bootstrap.Modal(document.getElementById('modalAlertaDeCEP'))
+var modalAnimais = new bootstrap.Modal(document.getElementById('modalAnimais'))
 
 var textNovoNomeCliente = document.getElementById('textNovoNomeCliente');
 var textNovoNascimento = document.getElementById('textNovoNascimento');
@@ -59,6 +60,7 @@ function pesquisarClientes() {
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
                 linha += `<td>${"(" + (info.telefone.toString().slice(0,2)) + ") " + (info.telefone.toString().slice(2,7)) + "-" + (info.telefone.toString().slice(7,11))}</td>`;
                 linha += `<td id="email${info.codCliente}">${info.email}</td>`;
+                linha += `<td><button onclick="abrirAnimais(${info.codCliente})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirEndereco(${info.codCliente})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirAlterar(${info.codCliente})" class="btn btn-dark">Alterar</button></td>`
                 linha += `<td><button onclick="abrirExcluir(${info.codCliente})" class="btn btn-dark">Excluir</button></td>`
@@ -334,20 +336,34 @@ function apagarDadosCliente(codCliente) {
     xhttp.send(JSON.stringify(apagarDadosCliente));
 }
 
-        // mostrarAnimais: function (codCliente) {
-        //     var xhttp = new XMLHttpRequest();
-        //     xhttp.onreadystatechange = function () {
-        //         if (this.readyState == 4 && this.status == 200) {
-        //             var resposta = JSON.parse(this.response);
-        //             app.infos = resposta;
-        //         } else if (this.readyState == 4) {
-        //             corpoTabela.innerHTML = 'Erro ao pesquisar.';
-        //         }
-        //     };
-        //     xhttp.open('GET', `${app.url}​/Animais​/cliente​/${codCliente}`, true);
-        //     xhttp.send();
-        //     modalAnimais.show();
-
-        // }
-  
-// var modalAnimais = new bootstrap.Modal(document.getElementById('modalAnimais'), {});
+function abrirAnimais(codCliente) {
+    cardBodyAnimais.innerHTML = '';
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            if (resposta.animais == 0 || resposta.animais == undefined) {
+                cardBodyAnimais.innerHTML = "<p>Nenhum animal foi encontrado para este cliente.</p>";
+                return;
+            }
+            for (var i = 0; i < resposta.animais.length; i++) {
+                var animal = resposta.animais[i];
+                var linha = `
+                <div class="card col-12 col-md-6">
+                                    <div class="card-body">
+                                        <h6><b>Noma do animal:</b> ${animal.nomeAnimal}</h6>
+                                        <h6><b>CodAnimal:</b> ${animal.codAnimal}</h6>
+                                        <h6><b>Tipo:</b> ${animal.tipo}</h6>
+                                        <h6><b>Raça:</b> ${animal.raca}</h6>
+                                    </div>
+                                </div>`;
+                cardBodyAnimais.innerHTML += linha;
+            }
+        } else if (this.readyState == 4) {
+            cardBodyAnimais.innerHTML = 'Erro ao pesquisar Animais';
+        }
+    };
+    xhttp.open('GET', `https://localhost:5001/Clientes/animais/${codCliente}`, true);
+    xhttp.send();
+    modalAnimais.show();
+}
