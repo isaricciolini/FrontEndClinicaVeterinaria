@@ -8,8 +8,9 @@ var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), 
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
 var modalAlertaDeCEP = new bootstrap.Modal(document.getElementById('modalAlertaDeCEP'))
-
-
+var modalCadastrarVeterinario = new bootstrap.Modal(document.getElementById('modalCadastrarVeterinario'));
+var modalListaVeterinarios = new bootstrap.Modal(document.getElementById('modalListaVeterinarios'));
+var modalListaFuncionarios = new bootstrap.Modal(document.getElementById('modalListaFuncionarios'));
 
 var textNovoNomeFuncionario = document.getElementById('textNovoNomeFuncionario');
 var textNovoCodVeterinario = document.getElementById('textNovoCodVeterinario');
@@ -40,6 +41,9 @@ var textAtivoAlterar = document.getElementById('textAtivoAlterar');
 var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
 var textCodFuncionarioExcluir = document.getElementById('textCodFuncionarioExcluir');
 var textAtivo = document.getElementById('textAtivo');
+var textVeterinario = document.getElementById('textVeterinario');
+var textCRMV = document.getElementById('textCRMV');
+var textCodFuncionarioVeterinario = document.getElementById('textCodFuncionarioVeterinario');
 
 
 
@@ -55,12 +59,12 @@ function pesquisarFuncionarios() {
             for (var i = 0; i < resposta.length; i++) {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
-                linha += `<td>${info.codFuncionario}</td>`;
+                linha += `<td id="codFuncionario${info.codFuncionario}">${info.codFuncionario}</td>`;
                 linha += `<td id="codVeterinario${info.codFuncionario}">${info.codVeterinario == null ? "" : info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codFuncionario}">${info.nomeFuncionario}</td>`;
                 linha += `<td>${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</td>`;
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
-                linha += `<td>${"(" + (info.telefone.toString().slice(0,2)) + ") " + (info.telefone.toString().slice(2,7)) + "-" + (info.telefone.toString().slice(7,11))}</td>`;
+                linha += `<td>${"(" + (info.telefone.toString().slice(0, 2)) + ") " + (info.telefone.toString().slice(2, 7)) + "-" + (info.telefone.toString().slice(7, 11))}</td>`;
                 linha += `<td id="email${info.codFuncionario}">${info.email}</td>`;
                 linha += `<td id="ativo${info.codFuncionario}">${info.ativo == true ? "Sim" : "Não"}</td>`;
                 linha += `<td><button onclick="abrirEndereco(${info.codFuncionario})" class="btn btn-dark">Exibir</button></td>`
@@ -102,6 +106,121 @@ function abrirCadastrar() {
     modalCadastrar.show();
 }
 
+function abrirCadastrarVeterinario() {
+    modalCadastrarVeterinario.show();
+}
+
+
+function abrirListaFuncionarios(codVeterinario) {
+    modalListaVeterinarios.hide();
+    modalListaFuncionarios.show();
+    corpoTabelaFuncionarios.innerHTML = '';
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            for (var i = 0; i < resposta.length; i++) {
+                var info = resposta[i];
+                var linha = '<tr class="item">';
+                linha += `<td id="codFuncionario${info.codFuncionario}">${info.codFuncionario}</td>`;
+                linha += `<td id="nome${info.codFuncionario}">${info.nomeFuncionario}</td>`;
+                linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
+                linha += `<td><button onclick="atualizarFuncionario(${info.codFuncionario}, ${codVeterinario})" class="btn btn-dark">+</button></td>`;
+                corpoTabelaFuncionarios.innerHTML += linha;
+            }
+        } else if (this.readyState == 4) {
+            corpoTabelaFuncionarios.innerHTML = 'Erro ao pesquisar colaboradores.';
+        }
+    };
+    xhttp.open('GET', url, true);
+    xhttp.send();
+}
+
+
+function atualizarFuncionario(codFuncionario, codVeterinario) {
+    nascimento = document.getElementById(`nascimento${codFuncionario}`).innerHTML.split('/');
+    cpf = document.getElementById(`cpf${codFuncionario}`).innerHTML;
+    var alterarFuncionarioVeterinario = {
+        nomeFuncionario: document.getElementById(`nome${codFuncionario}`).innerHTML,
+        nascimento: new Date(nascimento[2], nascimento[1] - 1, nascimento[0]).toISOString().substring(0, 10),
+        cpf: (cpf.slice(0, 3)) + (cpf.slice(4,7)) + (cpf.slice(8,11)) + (cpf.slice(12,14)),
+        email: document.getElementById(`email${codFuncionario}`).innerHTML,
+        telefone: document.getElementById(`telefone${codFuncionario}`).innerHTML,
+        rua: document.getElementById(`rua${codFuncionario}`).innerHTML,
+        numero: document.getElementById(`numero${codFuncionario}`).innerHTML,
+        complemento: document.getElementById(`complemento${codFuncionario}`).innerHTML,
+        bairro: document.getElementById(`bairro${codFuncionario}`).innerHTML,
+        cidade: document.getElementById(`cidade${codFuncionario}`).innerHTML,
+        cep: document.getElementById(`cep${codFuncionario}`).innerHTML,
+        codFuncionario: codFuncionario,
+        codVeterinario: codVeterinario,
+        ativo: document.getElementById(`ativo${codFuncionario}`).innerHTML == "Sim" ? true : false
+    };
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            pesquisarFuncionarios();
+            modalSucesso.show();
+        } else if (this.readyState == 4) {
+            console.log(alterarFuncionarioVeterinario);
+            modalAlertaDeOperacao.show();
+        }
+    };
+    xhttp.open('PUT', url, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    console.log(JSON.stringify(alterarFuncionarioVeterinario));
+    xhttp.send(JSON.stringify(alterarFuncionarioVeterinario));
+};
+
+
+function cadastrarCRMV() {
+    var crmv = textCRMV.value;
+    var novoVeterinario = {
+        crmv: crmv
+    };
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            modalCadastrarVeterinario.hide();
+            pesquisarVeterinarios();
+            modalListaVeterinarios.show();
+        } else if (this.readyState == 4) {
+            modalAlertaDeOperacao.show();
+        }
+    };
+    xhttp.open('POST', 'https://localhost:5001/veterinarios', true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(novoVeterinario));
+}
+
+function pular() {
+    modalCadastrarVeterinario.hide();
+    pesquisarVeterinarios();
+    modalListaVeterinarios.show();
+}
+
+function pesquisarVeterinarios() {
+    corpoTabelaVeterinarios.innerHTML = '';
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            console.log(resposta);
+            for (var i = 0; i < resposta.length; i++) {
+                var veterinario = resposta[i];
+                var linha = '<tr class="item">';
+                linha += `<td>${veterinario.codVeterinario}</td>`;
+                linha += `<td>${veterinario.crmv}</td>`;
+                linha += `<td><button onclick="abrirListaFuncionarios(${veterinario.codVeterinario})" class="btn btn-dark">+</button></td>`;
+                linha += `</tr>`;
+                corpoTabelaVeterinarios.innerHTML += linha;
+            }
+        }
+    }
+    xhttp.open('GET', 'https://localhost:5001/veterinarios', true);
+    xhttp.send();
+}
+
 
 function cadastrarFuncionario() {
     var nascimento = textNovoNascimento.value;
@@ -122,7 +241,7 @@ function cadastrarFuncionario() {
     }
     if (textAtivo.checked == true) {
         var ativo = true;
-    }else {
+    } else {
         var ativo = false;
     }
     var novoFuncionario = {
@@ -154,6 +273,7 @@ function cadastrarFuncionario() {
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(novoFuncionario));
 }
+
 
 function limpa_formulário_cep() {
     document.getElementById('textNovoRua').value = ("");
@@ -196,7 +316,7 @@ function abrirAlterar(codFuncionario) {
     document.getElementById('textCodFuncionario').value = codFuncionario;
     document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codFuncionario}`).innerHTML;
     document.getElementById('textNomeFuncionarioAlterar').value = document.getElementById(`nome${codFuncionario}`).innerHTML;
-    document.getElementById('textNascimentoAlterar').value = new Date(nascimentoAlterar [2], nascimentoAlterar [1] - 1, nascimentoAlterar [0]).toISOString().substring(0, 10);
+    document.getElementById('textNascimentoAlterar').value = new Date(nascimentoAlterar[2], nascimentoAlterar[1] - 1, nascimentoAlterar[0]).toISOString().substring(0, 10);
     document.getElementById('textTelefoneAlterar').value = document.getElementById(`telefone${codFuncionario}`).innerHTML;
     document.getElementById('textEmailAlterar').value = document.getElementById(`email${codFuncionario}`).innerHTML;
     document.getElementById('textCPFAlterar').value = document.getElementById(`cpf${codFuncionario}`).innerHTML;
@@ -226,13 +346,13 @@ function alterarFuncionario() {
     var bairro = textBairroAlterar.value;
     var cidade = textCidadeAlterar.value;
     var codFuncionario = textCodFuncionario.value;
-    if ( !email || !telefone || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
+    if (!email || !telefone || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
         modalAlerta.show();
         return;
     }
     if (textAtivoAlterar.checked == true) {
         var ativo = true;
-    }else {
+    } else {
         var ativo = false;
     }
     var alterarFuncionario = {
@@ -305,8 +425,7 @@ function pesquisaCEPAlterar(textCEPAlterar) {
 function getSimNao() {
     if (ativo == 1) {
         return "SIM";
-    } else 
-    { return "NÃO"; }
+    } else { return "NÃO"; }
 }
 
 // function abrirExcluir(codFuncionario) {

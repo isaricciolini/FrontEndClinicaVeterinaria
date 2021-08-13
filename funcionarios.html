@@ -69,7 +69,12 @@
         <hr>
         <div class="_botoes my-2">
             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" id="btn_form" onclick="abrirCadastrar()" class="btn btn-dark">Cadastrar</button>
+                <button type="button" id="btn_form" onclick="abrirCadastrar()" class="btn btn-dark">Cadastrar
+                    Funcionário</button>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" id="btn_form" onclick="abrirCadastrarVeterinario()" class="btn btn-dark">Cadastrar
+                    Veterinário</button>
             </div>
         </div>
 
@@ -116,15 +121,14 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <label>CodVeterinario:
-                                <input name="textNovoCodVeterinario" class="form-label" type="number"
-                                    id="textNovoCodVeterinario" size="10"></label>
+                            <input name="textNovoCodVeterinario" class="form-label" type="hidden"
+                                id="textNovoCodVeterinario" size="10">
                             <label>Nome Completo:</label>
                             <input name="textNovoNomeFuncionario" class="form-label" type=" text"
                                 id="textNovoNomeFuncionario">
                             <label>Data de Nascimento:
-                                <input name="textNovoNascimento" class="form-label" type="date"
-                                    id="textNovoNascimento"></label>
+                                <input name="textNovoNascimento" class="form-label" type="date" id="textNovoNascimento"
+                                    size="10"></label>
                             <label>Telefone:
                                 <input name="textNovoTelefone" class="form-label" type="text"
                                     id="textNovoTelefone"></label>
@@ -163,13 +167,106 @@
                             <label class="form-label mx-2">Ativo:</label>
                             <label class="form-label mx-2">Sim<input type="radio" id="textAtivo" name="textAtivo"
                                     class="form-label" value="1" checked></label>
-                            <label class="form-label mx-2">Não<input type="radio" name="textAtivo"
-                                    class="form-label" value="0"></label>
+                            <label class="form-label mx-2">Não<input type="radio" name="textAtivo" class="form-label"
+                                    value="0"></label>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="cadastrarFuncionario()">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Lista Veterinários-->
+    <div class="modal fade" id="modalListaVeterinarios" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Veterinários</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-hover text-center" id="tabelaVeterinarios">
+                                <thead>
+                                    <tr>
+                                        <th>CodVeterinario</th>
+                                        <th>CRMV</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="corpoTabelaVeterinarios">
+                                    <!-- aqui serão listadas as consultas cadastradas no banco -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Lista Funcionarios-->
+    <div class="modal fade" id="modalListaFuncionarios" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Funcionários</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-hover text-center" id="tabelaFuncionarios">
+                                <thead>
+                                    <tr>
+                                        <th>CodFuncionario</th>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="corpoTabelaFuncionarios">
+                                    <!-- aqui serão listadas as consultas cadastradas no banco -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cadastrar Veterinário-->
+    <div class="modal fade" id="modalCadastrarVeterinario" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Cadastrar Veterinário</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <label>CRMV:
+                                <input name="textCRMV" class="form-label" type="text" id="textCRMV"></label>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="cadastrarCRMV()">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="pular()">Pular</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -281,8 +378,8 @@
                         </div>
                         <form>
                             <label class="form-label mx-2">Ativo:</label>
-                            <label class="form-label mx-2">Sim<input type="radio" id="textAtivoAlterar" name="textAtivoAlterar"
-                                    class="form-label" value="1" checked></label>
+                            <label class="form-label mx-2">Sim<input type="radio" id="textAtivoAlterar"
+                                    name="textAtivoAlterar" class="form-label" value="1" checked></label>
                             <label class="form-label mx-2">Não<input type="radio" name="textAtivoAlterar"
                                     class="form-label" value="0"></label>
                         </form>
