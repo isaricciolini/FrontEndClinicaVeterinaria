@@ -343,7 +343,7 @@ function abrirAnimais(codCliente) {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             if (resposta.animais == 0 || resposta.animais == undefined) {
-                cardBodyAnimais.innerHTML = "<p>Nenhuma animal foi encontrada para este cliente.</p>";
+                cardBodyAnimais.innerHTML = "<p>Nenhum animal foi encontrado para este cliente.</p>";
                 return;
             }
             for (var i = 0; i < resposta.animais.length; i++) {
