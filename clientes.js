@@ -48,6 +48,10 @@ function pesquisarClientes() {
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
                 var info = resposta[i];
+                if (info.cpf == 00000000000){
+
+                }
+                else{
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codCliente}</td>`;
                 linha += `<td id="nome${info.codCliente}">${info.nomeCliente}</td>`;
@@ -71,6 +75,7 @@ function pesquisarClientes() {
                 linha += `<p id="cidade${info.codCliente}">${info.cidade}</p>`;
                 linha += '</div>'
                 corpoTabela.innerHTML += linha;
+                }
             }
             w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
         } else if (this.readyState == 4) {
