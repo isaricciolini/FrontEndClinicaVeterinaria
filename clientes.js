@@ -53,7 +53,7 @@ function pesquisarClientes() {
                 linha += `<td id="nome${info.codCliente}">${info.nomeCliente}</td>`;
                 linha += `<td>${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</td>`;
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
-                linha += `<td>${info.telefone}</td>`;
+                linha += `<td>${"(" + (info.telefone.toString().slice(0,2)) + ") " + (info.telefone.toString().slice(2,7)) + "-" + (info.telefone.toString().slice(7,11))}</td>`;
                 linha += `<td id="email${info.codCliente}">${info.email}</td>`;
                 linha += `<td><button onclick="abrirEndereco(${info.codCliente})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirAlterar(${info.codCliente})" class="btn btn-dark">Alterar</button></td>`

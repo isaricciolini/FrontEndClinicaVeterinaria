@@ -56,11 +56,11 @@ function pesquisarFuncionarios() {
                 var info = resposta[i];
                 var linha = '<tr class="item">';
                 linha += `<td>${info.codFuncionario}</td>`;
-                linha += `<td id="codVeterinario${info.codFuncionario}">${info.codVeterinario}</td>`;
+                linha += `<td id="codVeterinario${info.codFuncionario}">${info.codVeterinario == null ? "" : info.codVeterinario}</td>`;
                 linha += `<td id="nome${info.codFuncionario}">${info.nomeFuncionario}</td>`;
                 linha += `<td>${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</td>`;
                 linha += `<td>${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
-                linha += `<td>${info.telefone}</td>`;
+                linha += `<td>${"(" + (info.telefone.toString().slice(0,2)) + ") " + (info.telefone.toString().slice(2,7)) + "-" + (info.telefone.toString().slice(7,11))}</td>`;
                 linha += `<td id="email${info.codFuncionario}">${info.email}</td>`;
                 linha += `<td id="ativo${info.codFuncionario}">${info.ativo == true ? "Sim" : "Não"}</td>`;
                 linha += `<td><button onclick="abrirEndereco(${info.codFuncionario})" class="btn btn-dark">Exibir</button></td>`

@@ -70,7 +70,7 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
                 linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
-                linha += `<td>${info.nomeCliente} | ${info.tipo} | ${info.nomeAnimal}</td>`
+                linha += `<td> ${info.tipo} | ${info.nomeAnimal} | ${info.nomeCliente}</td>`
                 linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Exibir</button></td>`;
