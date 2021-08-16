@@ -6,6 +6,8 @@ var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar
 var textUsuarioCadastrar = document.getElementById('textUsuarioCadastrar');
 var textSenhaCadastrar = document.getElementById('textSenhaCadastrar')
 
+var modalSenhaIncorreta = new bootstrap.Modal(document.getElementById('modalSenhaIncorreta'), {});
+var modalUsuarioInvalido = new bootstrap.Modal(document.getElementById('modalUsuarioInvalido'), {});
 var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
@@ -24,10 +26,10 @@ function logar() {
                 window.location = "agenda.html";
                 return false;
             } else {
-                return alert('Senha incorreta!');
+                modalSenhaIncorreta.show();
             }
         } else if (this.readyState == 4) {
-            return alert('Usuário inválido.');
+            modalUsuarioInvalido.show();
         }
     };
     xhttp.open('GET', `${url}/${textUsuario.value}`, true);
