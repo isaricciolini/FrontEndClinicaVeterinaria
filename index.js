@@ -18,11 +18,9 @@ function logar() {
         if (this.readyState == 4 && this.status == 200) {
             login = JSON.parse(this.response);
             if (senhaDigitada == login.senha) {
-                setCookie("usuario",login.usuario)
-                setCookie("codFuncionario",login.codFuncionario)
-                pesquisarCRMV()
-                window.location = "agenda.html";
-                return false;
+                setCookie("usuario", login.usuario)
+                setCookie("codFuncionario", login.codFuncionario)
+                pesquisarCRMV();
             } else {
                 return alert('Senha incorreta!');
             }
@@ -35,15 +33,16 @@ function logar() {
 }
 
 function pesquisarCRMV() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
             funcionario = JSON.parse(this.response)
-            setCookie("CRMV",funcionario.CRMV)
+            setCookie("CRMV", funcionario.CRMV)
+            window.location = "agenda.html";
         };
-        xhttp.open('GET', `https://localhost:5001/funcionarios/${getCookie("codFuncionario")}`, true);
-        xhttp.send();
     }
+    xhttp.open('GET', `https://localhost:5001/funcionarios/${getCookie("codFuncionario")}`, true);
+    xhttp.send();
 }
 
 
@@ -84,7 +83,7 @@ function cadastrarLogin() {
  * @param  {String} usuario Nome do cookie
  * @param  {String} nomeUsuario Valor do cookie
  */
- function setCookie(usuario, nomeUsuario) {
+function setCookie(usuario, nomeUsuario) {
     const d = new Date();
     d.setTime(d.getTime() + (24 * 60 * 60 * 1000)); // cookie válido por 24 horas
     let expires = "expires=" + d.toUTCString();
