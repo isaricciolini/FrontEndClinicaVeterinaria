@@ -423,7 +423,7 @@ function abrirDescricao(codConsulta) {
 }
 
 
-if (getCookie("CRMV") == "" || getCookie("CRVM") == null) {
+if (getCookie("CRMV") == "" || getCookie("CRVM") == null || getCookie("CRVM") == undefined) {
     document.getElementById("corpoTabela").innerHTML = `<b><h5>Nenhum CRMV associado ao seu login.</h5></b>
                                                         <b><h5>Caso você seja um veterinário, entre em contato com o administrador do sistema.</h5></b>`;
 }
