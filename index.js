@@ -12,7 +12,6 @@ var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAl
 
 
 function logar() {
-    //textUsuario = textUsuario.value;
     var senhaDigitada = textSenha.value;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -20,8 +19,7 @@ function logar() {
             login = JSON.parse(this.response);
             if (senhaDigitada == login.senha) {
                 setCookie("usuario",login.usuario)
-                setCookie("codVeterinario",login.codVeterinario)
-                //alert("Login realizado com sucesso!");
+                setCookie("codFuncionario",login.codFuncionario)
                 window.location = "agenda.html";
                 return false;
             } else {
@@ -46,7 +44,7 @@ function cadastrarLogin() {
     var Usuario = textUsuarioCadastrar.value;
     var Senha = textSenhaCadastrar.value;
     if (!codFuncionario || !Usuario || !Senha) {
-        alert('Preencha todos os dados para cadastrar!');
+        modalAlerta.show();
         return;
     }
     var novoLogin = {
@@ -60,7 +58,7 @@ function cadastrarLogin() {
             limparCadastro();
             modalCadastrar.hide();
         } else if (this.readyState == 4) {
-            alert('Não foi possível cadastrar o usuário e senha.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);

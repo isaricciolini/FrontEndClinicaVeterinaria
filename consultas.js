@@ -3,7 +3,7 @@ var textSemanasInicio = document.getElementById('textSemanasInicio')
 var textSemanasFim = document.getElementById('textSemanasFim')
 var corpoTabela = document.getElementById('corpoTabela');
 var textCodAnimal = document.getElementById('textCodAnimal');
-var textCodVeterinario = document.getElementById('textCodVeterinario');
+var textCodFuncionario = document.getElementById('textCodFuncionario');
 var textDataConsulta = document.getElementById('textDataConsulta');
 var textPeso = document.getElementById('textPeso');
 var textDescricao = document.getElementById('textDescricao');
@@ -12,7 +12,7 @@ var textHoraConsulta = document.getElementById('textHoraConsulta');
 var textCodConsulta = document.getElementById('textCodConsulta');
 var codConsultaCadastrarReceita = 0;
 var textCodAnimalAlterar = document.getElementById('textCodAnimalAlterar');
-var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
+var textCodFuncionarioAlterar = document.getElementById('textCodFuncionarioAlterar');
 var textDataConsultaAlterar = document.getElementById('textDataConsultaAlterar');
 var textHoraConsultaAlterar = document.getElementById('textHoraConsultaAlterar');
 var textPesoAlterar = document.getElementById('textPesoAlterar');
@@ -56,7 +56,7 @@ function pesquisarConsultas(inicio, fim) {
     corpoTabela.innerHTML = '';
     inicio = textSemanasInicio.value;
     fim = textSemanasFim.value;
-    codVeterinario = document.getElementById("textCodVeterinarioFiltro").value
+    codFuncionario = document.getElementById("textCodFuncionarioFiltro").value
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -68,7 +68,7 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td id="codAnimal${info.codConsulta}">${info.codAnimal} - ${info.nomeAnimal}</td>`;
-                linha += `<td id="codVeterinario${info.codConsulta}">${info.codVeterinario} - ${info.nomeFuncionario}</td>`;
+                linha += `<td id="codFuncionario${info.codConsulta}">${info.codFuncionario} - ${info.nomeFuncionario}</td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
@@ -83,12 +83,12 @@ function pesquisarConsultas(inicio, fim) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
     };
-    if(codVeterinario == null || codVeterinario == "") {
+    if(codFuncionario == null || codFuncionario == "") {
         xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}`, true);
         xhttp.send();
     }
     else {
-        xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${codVeterinario}`, true);
+        xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${codFuncionario}`, true);
         xhttp.send();
     }
 }
@@ -99,16 +99,16 @@ function abrirCadastrar() {
 
 function cadastrarConsulta() {
     var codAnimal = textCodAnimal.value;
-    var codVeterinario = textCodVeterinario.value;
+    var codFuncionario = textCodFuncionario.value;
     var dataConsulta = textDataConsulta.value;
     var horaConsulta = textHoraConsulta.value;
-    if (!codAnimal || !codVeterinario || !dataConsulta || !horaConsulta) {
+    if (!codAnimal || !codFuncionario || !dataConsulta || !horaConsulta) {
         modalAlerta.show();
         return;
     }
     var novaConsulta = {
         codAnimal: codAnimal,
-        codVeterinario: codVeterinario,
+        codFuncionario: codFuncionario,
         dataConsulta: dataConsulta + 'T' + horaConsulta + ':00.000',
         peso: 0,
         descricao: '-'
@@ -155,7 +155,7 @@ function abrirAlterar(codConsulta) {
     DataConsultaAlterar = new Date(DataConsultaAlterar[2], DataConsultaAlterar[1] - 1, DataConsultaAlterar[0]).toISOString().substring(0, 10);
     document.getElementById('textCodConsultaAlterar').value = codConsulta
     document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
-    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML.slice(0, 10);
+    document.getElementById('textCodFuncionarioAlterar').value = document.getElementById(`codFuncionario${codConsulta}`).innerHTML.slice(0, 10);
     document.getElementById('textDataConsultaAlterar').value = DataConsultaAlterar;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
     document.getElementById('textPesoAlterar').value = document.getElementById(`peso${codConsulta}`).innerHTML;
@@ -166,18 +166,18 @@ function abrirAlterar(codConsulta) {
 function alterarConsulta() {
     var codConsulta = textCodConsultaAlterar.value;
     var codAnimal = textCodAnimalAlterar.value;
-    var codVeterinario = textCodVeterinarioAlterar.value;
+    var codFuncionario = textCodFuncionarioAlterar.value;
     var dataConsulta = textDataConsultaAlterar.value;
     var horaConsulta = textHoraConsultaAlterar.value;
     var peso = textPesoAlterar.value;
     var descricao = textDescricaoAlterar.value;
-    if (!codAnimal || !codVeterinario || !dataConsulta || !horaConsulta || !peso || !descricao || !codConsulta) {
+    if (!codAnimal || !codFuncionario || !dataConsulta || !horaConsulta || !peso || !descricao || !codConsulta) {
         modalAlerta.show();
         return;
     }
     var alterarConsulta = {
         codAnimal: codAnimal,
-        codVeterinario: codVeterinario,
+        codFuncionario: codFuncionario,
         dataConsulta: dataConsulta + 'T' + horaConsulta + ':00.000',
         peso: peso,
         descricao: descricao,
@@ -205,7 +205,7 @@ function limparExclusao() {
 
 function limparCadastro() {
     textCodAnimal.value = '';
-    textCodVeterinario.value = '';
+    textCodFuncionario.value = '';
     textDataConsulta.value = '';
     textHoraConsulta.value = '';
     textPesoAlterar.value = '';
@@ -215,7 +215,7 @@ function limparCadastro() {
 function limparAlteracao() {
     textCodConsultaAlterar.value = '';
     textCodAnimalAlterar.value = '';
-    textCodVeterinarioAlterar.value = '';
+    textCodFuncionarioAlterar.value = '';
     textDataConsultaAlterar.value = '';
     textHoraConsultaAlterar.value = '';
     textPesoAlterar.value = '';
