@@ -20,6 +20,7 @@ function logar() {
             if (senhaDigitada == login.senha) {
                 setCookie("usuario",login.usuario)
                 setCookie("codFuncionario",login.codFuncionario)
+                pesquisarCRMV()
                 window.location = "agenda.html";
                 return false;
             } else {
@@ -31,6 +32,19 @@ function logar() {
     };
     xhttp.open('GET', `${url}/${textUsuario.value}`, true);
     xhttp.send();
+}
+
+function pesquisarCRMV() {
+        corpoTabela.innerHTML = '';
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+            funcionario = JSON.parse(this.response)
+            setCookie("CRMV",funcionario.CRMV)
+        };
+        xhttp.open('GET', `https://localhost:5001/funcionarios/${getCookie("codFuncionario")}`, true);
+        xhttp.send();
+    }
 }
 
 
