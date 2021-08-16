@@ -63,5 +63,7 @@ function expireCookie() {
     document.cookie = usuario + "=" + nomeUsuario + ";" + expires + ";path=/";
     usuario = "codVeterinario"
     document.cookie = usuario + "=" + nomeUsuario + ";" + expires + ";path=/";
+    usuario = "CRMV"
+    document.cookie = usuario + "=" + nomeUsuario + ";" + expires + ";path=/";
     window.location = "index.html";
 }
