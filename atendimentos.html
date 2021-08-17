@@ -261,9 +261,9 @@
                         <div class="col-md-6 col-sm-12">
                             <label>Código do Animal:
                                 <input name="textCodAnimal" class="form-label" type="text" id="textCodAnimal"></label>
-                            <label>Código do Veterinário:
-                                <input name="textCodVeterinario" class="form-label" type="text"
-                                    id="textCodVeterinario"></label>
+                            <label>Código do Funcionário:
+                                <input name="textCodFuncionario" class="form-label" type="text"
+                                    id="textCodFuncionario"></label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label> Data Consulta:
@@ -298,9 +298,9 @@
                             <label>Código do Animal:
                                 <input name="textCodAnimalAlterar" class="form-label" type="number"
                                     id="textCodAnimalAlterar" disabled></label>
-                            <label>Código do Veterinário:
-                                <input name="textCodVeterinarioAlterar" class="form-label" type="number"
-                                    id="textCodVeterinarioAlterar" disabled></label>
+                            <label>Código do Funcionário:
+                                <input name="textCodFuncionarioAlterar" class="form-label" type="number"
+                                    id="textCodFuncionarioAlterar" disabled></label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label> Data:
@@ -353,8 +353,33 @@
         </div>
     </div>
 
-    <!-- Modal de Alerta de sucesso de operação -->
-    <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Modal Receitas com Histórico -->
+    <div class="modal fade" id="modalReceitasHistorico" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Receitas</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="cardBodyReceitasHistorico">
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">Histórico</h5>
+                                <!-- Aqui serão listado o historico de receitas -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal de Alerta de sucesso de operação -->
+        <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -405,30 +430,6 @@
                         <div class="card col-12">
                             <div class="card-body">
                                 <h5 class="card-title">Não foi possivel realizar a operação!</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Receitas com Histórico -->
-    <div class="modal fade" id="modalReceitasHistorico" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Receitas</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="row" id="cardBodyReceitasHistorico">
-                        <div class="card col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">Histórico</h5>
-                                <!-- Aqui serão listado o historico de receitas -->
                             </div>
                         </div>
                     </div>

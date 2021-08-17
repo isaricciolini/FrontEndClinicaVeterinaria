@@ -3,7 +3,7 @@ var textSemanasInicio = document.getElementById('textSemanasInicio')
 var textSemanasFim = document.getElementById('textSemanasFim')
 var corpoTabela = document.getElementById('corpoTabela');
 var textCodAnimal = document.getElementById('textCodAnimal');
-var textCodVeterinario = document.getElementById('textCodVeterinario');
+var textCodFuncionario = document.getElementById('textCodFuncionario');
 var textDataConsulta = document.getElementById('textDataConsulta');
 var textPeso = document.getElementById('textPeso');
 var textDescricao = document.getElementById('textDescricao');
@@ -13,7 +13,7 @@ var textCodConsulta = document.getElementById('textCodConsulta');
 var codConsultaCadastrarReceita = 0;
 
 var textCodAnimalAlterar = document.getElementById('textCodAnimalAlterar');
-var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
+var textCodFuncionarioAlterar = document.getElementById('textCodFuncionarioAlterar');
 var textDataConsultaAlterar = document.getElementById('textDataConsultaAlterar');
 var textHoraConsultaAlterar = document.getElementById('textHoraConsultaAlterar');
 var textPesoAlterar = document.getElementById('textPesoAlterar');
@@ -88,7 +88,7 @@ function pesquisarConsultas(inicio, fim) {
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="descricao${info.codConsulta}">${info.descricao}</p>`;
-                linha += `<p id="codVeterinario${info.codConsulta}">${info.codVeterinario}</p>`;
+                linha += `<p id="codFuncionario${info.codConsulta}">${info.codFuncionario}</p>`;
                 linha += `<p id="codAnimal${info.codConsulta}">${info.codAnimal}</p>`;
                 linha += '</div>'
                 corpoTabela.innerHTML += linha;
@@ -98,7 +98,7 @@ function pesquisarConsultas(inicio, fim) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
     };
-    xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${getCookie("codVeterinario")}`, true);
+    xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${getCookie("CRMV")}`, true);
     xhttp.send();
 }
 
@@ -157,7 +157,7 @@ function excluirConsulta() {
 function abrirAlterar(codConsulta) {
     document.getElementById('textCodConsultaAlterar').value = codConsulta
     document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
-    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML.slice(0, 10);
+    document.getElementById('textCodFuncionarioAlterar').value = document.getElementById(`codFuncionario${codConsulta}`).innerHTML.slice(0, 10);
     document.getElementById('textDataConsultaAlterar').value = document.getElementById(`dataConsulta${codConsulta}`).innerHTML;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
     document.getElementById('textPesoAlterar').value = document.getElementById(`peso${codConsulta}`).innerHTML;
@@ -168,20 +168,20 @@ function abrirAlterar(codConsulta) {
 function alterarConsulta() {
     var codConsulta = textCodConsultaAlterar.value;
     var codAnimal = textCodAnimalAlterar.value;
-    var codVeterinario = textCodVeterinarioAlterar.value;
+    var codFuncionario = textCodFuncionarioAlterar.value;
     var dataConsulta = textDataConsultaAlterar.value.slice(6,10) + "/";
     dataConsulta += textDataConsultaAlterar.value.slice(3,6);
     dataConsulta += textDataConsultaAlterar.value.slice(0,2);
     var horaConsulta = textHoraConsultaAlterar.value;
     var peso = textPesoAlterar.value;
     var descricao = textDescricaoAlterar.value;
-    if (!codAnimal || !codVeterinario || !dataConsulta || !horaConsulta || !peso || !descricao || !codConsulta) {
+    if (!codAnimal || !codFuncionario || !dataConsulta || !horaConsulta || !peso || !descricao || !codConsulta) {
         modalAlerta.show();
         return;
     }
     var alterarConsulta = {
         codAnimal: codAnimal,
-        codVeterinario: codVeterinario,
+        codFuncionario: codFuncionario,
         dataConsulta: dataConsulta + 'T' + horaConsulta + ':00.000',
         peso: peso,
         descricao: descricao,
@@ -209,7 +209,7 @@ function limparExclusao() {
 
 function limparCadastro() {
     textCodAnimal.value = '';
-    textCodVeterinario.value = '';
+    textCodFuncionario.value = '';
     textDataConsulta.value = '';
     textHoraConsulta.value = '';
     textPesoAlterar.value = '';
@@ -219,7 +219,7 @@ function limparCadastro() {
 function limparAlteracao() {
     textCodConsultaAlterar.value = '';
     textCodAnimalAlterar.value = '';
-    textCodVeterinarioAlterar.value = '';
+    textCodFuncionarioAlterar.value = '';
     textDataConsultaAlterar.value = '';
     textHoraConsultaAlterar.value = '';
     textPesoAlterar.value = '';
@@ -346,7 +346,7 @@ function abrirTodasConsultasReceitas(codAnimal) {
                                         <b>Data da consulta: </b>${(consulta.dataConsulta.slice(8, 10)) + "/" + (consulta.dataConsulta.slice(5, 7)) + "/" + (consulta.dataConsulta.slice(0, 4))} ${(consulta.dataConsulta.slice(11,16) )}<br>
                                         <b>Peso: </b>${consulta.peso}<br>
                                         <b>Descrição: </b>${consulta.descricao}<br>
-                                        <b>Código do Veterinário: </b>${consulta.codVeterinario}</p>
+                                        <b>Código do Funcionário: </b>${consulta.codFuncionario}</p>
                                         <button class="btn btn-dark" onclick="abrirTodasReceitas(${consulta.codConsulta})">Exibir Receitas</button>
                                       </div>
                                 </div>`;
@@ -423,6 +423,7 @@ function abrirDescricao(codConsulta) {
 }
 
 
-if (getCookie("codVeterinario") == "" || getCookie("codVeterinario") == null) {
-    document.getElementById("corpoTabela").innerHTML = '<b><h5>Nenhum codVeterinario associado ao seu login.</h5></b>';
+if (getCookie("crmv") == "" || getCookie("crmv") == null) {
+    document.getElementById("corpoTabela").innerHTML = `<b><h5>Nenhum CRMV associado ao seu login.</h5></b>
+                                                        <b><h5>Caso você seja um veterinário, entre em contato com o administrador do sistema.</h5></b>`;
 }

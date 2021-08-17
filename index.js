@@ -6,32 +6,45 @@ var modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastrar
 var textUsuarioCadastrar = document.getElementById('textUsuarioCadastrar');
 var textSenhaCadastrar = document.getElementById('textSenhaCadastrar')
 
+var modalSenhaIncorreta = new bootstrap.Modal(document.getElementById('modalSenhaIncorreta'), {});
+var modalUsuarioInvalido = new bootstrap.Modal(document.getElementById('modalUsuarioInvalido'), {});
 var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'))
 
 
 function logar() {
-    //textUsuario = textUsuario.value;
     var senhaDigitada = textSenha.value;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             login = JSON.parse(this.response);
             if (senhaDigitada == login.senha) {
-                setCookie("usuario",login.usuario)
-                setCookie("codVeterinario",login.codVeterinario)
-                //alert("Login realizado com sucesso!");
-                window.location = "agenda.html";
-                return false;
+                setCookie("usuario", login.usuario)
+                setCookie("codFuncionario", login.codFuncionario)
+                pesquisarCRMV(login.codFuncionario);
             } else {
-                return alert('Senha incorreta!');
+                modalSenhaIncorreta.show();
             }
         } else if (this.readyState == 4) {
-            return alert('Usuário inválido.');
+            modalUsuarioInvalido.show();
         }
     };
     xhttp.open('GET', `${url}/${textUsuario.value}`, true);
+    xhttp.send();
+}
+
+function pesquisarCRMV(codFuncionario) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            funcionario = JSON.parse(this.response);
+            if (funcionario.crmv == undefined) setCookie("crmv", "");
+            else setCookie("crmv", funcionario.crmv);
+            window.location = "agenda.html";
+        };
+    }
+    xhttp.open('GET', `https://localhost:5001/funcionarios/${codFuncionario}`, true);
     xhttp.send();
 }
 
@@ -46,7 +59,7 @@ function cadastrarLogin() {
     var Usuario = textUsuarioCadastrar.value;
     var Senha = textSenhaCadastrar.value;
     if (!codFuncionario || !Usuario || !Senha) {
-        alert('Preencha todos os dados para cadastrar!');
+        modalAlerta.show();
         return;
     }
     var novoLogin = {
@@ -60,7 +73,7 @@ function cadastrarLogin() {
             limparCadastro();
             modalCadastrar.hide();
         } else if (this.readyState == 4) {
-            alert('Não foi possível cadastrar o usuário e senha.');
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);
@@ -73,7 +86,7 @@ function cadastrarLogin() {
  * @param  {String} usuario Nome do cookie
  * @param  {String} nomeUsuario Valor do cookie
  */
- function setCookie(usuario, nomeUsuario) {
+function setCookie(usuario, nomeUsuario) {
     const d = new Date();
     d.setTime(d.getTime() + (24 * 60 * 60 * 1000)); // cookie válido por 24 horas
     let expires = "expires=" + d.toUTCString();

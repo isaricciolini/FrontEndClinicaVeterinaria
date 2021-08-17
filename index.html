@@ -34,8 +34,7 @@
             <button onclick="location.href='atendimentos.html'" type="button"
                 class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
-            <button onclick="location.href='clientes.html'" type="button"
-                class="btn _botaosidebar">Clientes</button>
+            <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
             <button onclick="location.href='funcionarios.html'" type="button"
                 class="btn _botaosidebar">Colaboradores</button>
@@ -102,51 +101,157 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Option 1: Bootstrap Bundle with Popper -->
+        <!-- Modal Senha incorreta...  -->
+        <div class="modal fade" id="modalSenhaIncorreta" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row" id="cardBodySenhaIncorreta">
+                            <div class="card col-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">Senha incorreta!</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-            <script src="https://www.w3schools.com/lib/w3.js"></script>
-            <script src="index.js"></script>
-            <script src="cookies.js"></script>
-            <script src="cookies.js"></script>
+        <!-- Modal Usuario invalido...  -->
+        <div class="modal fade" id="modalUsuarioInvalido" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row" id="cardBodyUsuarioInvalido">
+                            <div class="card col-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">Usuario inválido.</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Alerta de sucesso de operação -->
+        <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row" id="cardBodySucesso">
+                            <div class="card col-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">Operação realizada com sucesso!</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Alerta Preencha os dados -->
+        <div class="modal fade" id="modalAlerta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row" id="cardBodyAlerta">
+                            <div class="card col-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">Campo não informado corretamente!</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Alerta Não foi possivel realizar...  -->
+        <div class="modal fade" id="modalAlertaDeOperacao" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row" id="cardBodyAlertaDeOperacao">
+                            <div class="card col-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">Não foi possivel realizar a operação!</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <script src="index.js"></script>
+        <script src="cookies.js"></script>
+        <script src="cookies.js"></script>
 
 
-            <script>
-                let inputs = document.getElementsByClassName('input-form');
-                for (let input of inputs) {
-                    input.addEventListener("blur", function () {
-                        if (input.value.trim() != "") {
-                            input.classList.add("has-val");
-                        } else {
-                            input.classList.remove("has-val");
-                        }
-                    });
-                }
-            </script>
-            <script>
-                function navbar() {
-                    var x = document.getElementById("hide");
-                    if (x.className === "hide") {
-                        x.className += " responsive";
+        <script>
+            let inputs = document.getElementsByClassName('input-form');
+            for (let input of inputs) {
+                input.addEventListener("blur", function () {
+                    if (input.value.trim() != "") {
+                        input.classList.add("has-val");
                     } else {
-                        x.className = "hide";
+                        input.classList.remove("has-val");
                     }
+                });
+            }
+        </script>
+        <script>
+            function navbar() {
+                var x = document.getElementById("hide");
+                if (x.className === "hide") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "hide";
                 }
-            </script>
+            }
+        </script>
 </body>
 
 </html>
