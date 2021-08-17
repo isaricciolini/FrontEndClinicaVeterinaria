@@ -12,19 +12,7 @@ var modalCadastrarFuncionario = new bootstrap.Modal(document.getElementById('mod
 var modalListaFuncionarios = new bootstrap.Modal(document.getElementById('modalListaFuncionarios'));
 var modalListaFuncionarios = new bootstrap.Modal(document.getElementById('modalListaFuncionarios'));
 
-var textCRMVFuncionario = document.getElementById('textCRMVFuncionario');
-var textNovoNomeFuncionario = document.getElementById('textNovoNomeFuncionario');
-var textNovoCodFuncionario = document.getElementById('textNovoCodFuncionario');
-var textNovoNascimento = document.getElementById('textNovoNascimento');
-var textNovoCPF = document.getElementById('textNovoCPF');
-var textNovoTelefone = document.getElementById('textNovoTelefone');
-var textNovoEmail = document.getElementById('textNovoEmail');
-var textNovoRua = document.getElementById('textNovoRua');
-var textNovoNumero = document.getElementById('textNovoNumero');
-var textNovoComplemento = document.getElementById('textNovoComplemento');
-var textNovoCEP = document.getElementById('textNovoCEP');
-var textNovoBairro = document.getElementById('textNovoBairro');
-var textNovoCidade = document.getElementById('textNovoCidade');
+
 var codFuncionarioAlterar = 0;
 var textNomeFuncionarioAlterar = document.getElementById('textNomeFuncionarioAlterar');
 var textNascimentoAlterar = document.getElementById('textNascimentoAlterar');
@@ -45,6 +33,7 @@ var textAtivo = document.getElementById('textAtivo');
 var textFuncionario = document.getElementById('textFuncionario');
 var textCRMV = document.getElementById('textCRMV');
 var textCodFuncionarioFuncionario = document.getElementById('textCodFuncionarioFuncionario');
+var textCRMVAlterar = document.getElementById('textCRMVAlterar');
 
 
 
@@ -74,7 +63,7 @@ function pesquisarFuncionarios() {
                 linha += '<div style="display: none;">'
                 linha += `<p id="telefone${info.codFuncionario}">${info.telefone}</p>`;
                 linha += `<p id="nascimento${info.codFuncionario}">${(info.nascimento.slice(8, 10)) + "/" + (info.nascimento.slice(5, 7)) + "/" + (info.nascimento.slice(0, 4))}</p>`;
-                linha += `<p id="cpf${info.codFuncionario}">${info.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</p>`;
+                linha += `<p id="cpf${info.codFuncionario}">${info.cpf}</p>`;
                 linha += `<p id="cep${info.codFuncionario}">${info.cep}</p>`
                 linha += `<p id="rua${info.codFuncionario}">${info.rua}</p>`
                 linha += `<p id="numero${info.codFuncionario}">${info.numero}</p>`;
@@ -302,27 +291,25 @@ function abrirAlterar(codFuncionario) {
 }
 
 function alterarFuncionario() {
-    var nomeFuncionario = textNomeFuncionarioAlterar.value;
-    var codFuncionario = textCodFuncionarioAlterar.value;
-    var nascimento = textNascimentoAlterar.value;
-    var cpf = textCPFAlterar.value.slice(0, 3);
-    cpf += textCPFAlterar.value.slice(4, 7);
-    cpf += textCPFAlterar.value.slice(8, 11);
-    cpf += textCPFAlterar.value.slice(12, 14);
-    var telefone = textTelefoneAlterar.value;
-    var email = textEmailAlterar.value;
-    var cep = textCEPAlterar.value;
-    var rua = textRuaAlterar.value;
-    var numero = textNumeroAlterar.value;
-    var complemento = textComplementoAlterar.value;
-    var bairro = textBairroAlterar.value;
-    var cidade = textCidadeAlterar.value;
-    var codFuncionario = textCodFuncionario.value;
+    var nomeFuncionario = document.getElementById('textNomeFuncionarioAlterar').value;
+    var codFuncionario = document.getElementById('textCodFuncionarioAlterar').value;
+    var nascimento = document.getElementById('textNascimentoAlterar').value;
+    var cpf = document.getElementById('textCPFAlterar').value;
+    var telefone = document.getElementById('textTelefoneAlterar').value;
+    var email = document.getElementById('textEmailAlterar').value;
+    var cep = document.getElementById('textCEPAlterar').value;
+    var rua = document.getElementById('textRuaAlterar').value;
+    var numero = document.getElementById('textNumeroAlterar').value;
+    var complemento = document.getElementById('textComplementoAlterar').value;
+    var bairro = document.getElementById('textBairroAlterar').value;
+    var cidade = document.getElementById('textCidadeAlterar').value;
+    var codFuncionario = document.getElementById('textCodFuncionario').value;
+    var crmv = document.getElementById('textCRMVAlterar').value;
     if (!email || !telefone || !cpf || !nomeFuncionario || !nascimento || !cep || !rua || !numero || !bairro || !cidade) {
         modalAlerta.show();
         return;
     }
-    if (textAtivoAlterar.checked == true) {
+    if (document.getElementById('textAtivoAlterar').checked == true) {
         var ativo = true;
     } else {
         var ativo = false;
@@ -340,7 +327,7 @@ function alterarFuncionario() {
         cidade: cidade,
         cep: cep,
         codFuncionario: codFuncionario,
-        codFuncionario: codFuncionario,
+        crmv: crmv,
         ativo: ativo
     };
     var xhttp = new XMLHttpRequest();
@@ -399,6 +386,8 @@ function getSimNao() {
         return "SIM";
     } else { return "NÃO"; }
 }
+
+
 
 // function abrirExcluir(codFuncionario) {
 //     document.getElementById("textCodFuncionarioExcluir").value = codFuncionario;
