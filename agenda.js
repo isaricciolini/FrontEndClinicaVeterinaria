@@ -10,28 +10,28 @@ const descricaoCadastrar = "-";
 
 var codConsultaAlterar = 0;
 var textNomeAnimalAlterar = document.getElementById('textNomeAnimalAlterar');
-var textNomeVeterinarioAlterar = document.getElementById('textNomeVeterinarioAlterar');
+var textNomeFuncionarioAlterar = document.getElementById('textNomeFuncionarioAlterar');
 var textDataConsultaAlterar = document.getElementById('textDataConsultaAlterar');
 var textHoraConsultaAlterar = document.getElementById('textHoraConsultaAlterar');
 var textNomeClienteAlterar = document.getElementById('textNomeClienteAlterar');
 
 var textCodAnimal = document.getElementById('textCodAnimal');
 var textCodCliente = document.getElementById('textCodCliente');
-var textCodVeterinario = document.getElementById('textCodVeterinario');
+var textCodFuncionario = document.getElementById('textCodFuncionario');
 var textPeso = document.getElementById('textPeso');
 var textDescricao = document.getElementById('textDescricao');
 
 var textPesoAlterar = document.getElementById('textPesoAlterar');
 var textDescricaoAlterar = document.getElementById('textDescricaoAlterar');
 var textCodAnimalAlterar = document.getElementById('textCodAnimalAlterar');
-var textCodVeterinarioAlterar = document.getElementById('textCodVeterinarioAlterar');
+var textCodFuncionarioAlterar = document.getElementById('textCodFuncionarioAlterar');
 
 var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), {});
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 var modalCadastrarDataHora = new bootstrap.Modal(document.getElementById('modalCadastrarDataHora'), {});
 var modalListaClientes = new bootstrap.Modal(document.getElementById('modalListaClientes'), {});
 var modalListaAnimais = new bootstrap.Modal(document.getElementById('modalListaAnimais'), {});
-var modalListaVeterinarios = new bootstrap.Modal(document.getElementById('modalListaVeterinarios'), {});
+var modalListaFuncionarios = new bootstrap.Modal(document.getElementById('modalListaFuncionarios'), {});
 var modalConfirmarCadastrar = new bootstrap.Modal(document.getElementById('modalConfirmarCadastrar'), {});
 var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
@@ -61,7 +61,7 @@ function exibirAgenda() {
                 linha += '<div style="display: none;">';
                 linha += `<p id="codAnimal${info.codConsulta}">${info.codAnimal}</p>`;
                 linha += `<p id="codCiente${info.codConsulta}">${info.codCliente}</p>`;
-                linha += `<p id="codVeterinario${info.codConsulta}">${info.codVeterinario}</p>`;
+                linha += `<p id="codFuncionario${info.codConsulta}">${info.codFuncionario}</p>`;
                 linha += `<p id="peso${info.codConsulta}">${info.peso}</p>`;
                 linha += `<p id="descricao${info.codConsulta}">${info.descricao}</p>`;
                 linha += '</div>';
@@ -154,7 +154,7 @@ function abrirCadastrarListaAnimais(codCliente) {
                 linha += `<td id="nomeAnimalConsultaCadastrar${animal.codAnimal}">${animal.nomeAnimal}</td>`;
                 linha += `<td>${animal.raca}</td>`;
                 linha += `<td>${animal.tipo}</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarListaVeterinarios(${animal.codAnimal})">+</button></td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarListaFuncionarios(${animal.codAnimal})">+</button></td>`;
                 linha += '</tr>';
                 corpoTabelaAnimais.innerHTML += linha;
             }
@@ -167,47 +167,47 @@ function abrirCadastrarListaAnimais(codCliente) {
 
 }
 
-function abrirCadastrarListaVeterinarios(codAnimal) {
+function abrirCadastrarListaFuncionarios(codAnimal) {
     codAnimalConsultaCadastrar = codAnimal;
     nomeAnimalConsultaCadastrar = document.getElementById(`nomeAnimalConsultaCadastrar${codAnimal}`).innerHTML;
     modalListaAnimais.hide();
-    modalListaVeterinarios.show();
-    corpoTabelaVeterinarios.innerHTML = "";
+    modalListaFuncionarios.show();
+    corpoTabelaFuncionarios.innerHTML = "";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
-                var vet = resposta[i];
-                var linha = '<tr class="itemVeterinarios">';
-                linha += `<td>${vet.codVeterinario}</td>`;
-                linha += `<td id="nomeVeterinarioConsultaCadastrar${vet.codVeterinario}">${vet.nomeVeterinario}</td>`;
-                linha += `<td>${vet.crmv}</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${vet.codVeterinario})">+</button></td>`;
+                var fun = resposta[i];
+                var linha = '<tr class="itemFuncionarios">';
+                linha += `<td>${fun.codFuncionario}</td>`;
+                linha += `<td id="nomeVeterinarioConsultaCadastrar${fun.codFuncionario}">${fun.nomeVeterinario}</td>`;
+                linha += `<td>${fun.crmv}</td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${fun.codFuncionario})">+</button></td>`;
                 linha += '</tr>';
-                corpoTabelaVeterinarios.innerHTML += linha;
+                corpoTabelaFuncionarios.innerHTML += linha;
             }
         } else if (this.readyState == 4) {
-            corpoTabelaVeterinarios.innerHTML = 'Nenhum animal cadastrado.';
+            corpoTabelaFuncionarios.innerHTML = 'Nenhum animal cadastrado.';
         }
     };
-    xhttp.open('GET', `https://localhost:5001/Veterinarios`, true);
+    xhttp.open('GET', `https://localhost:5001/Funcionarios`, true);
     xhttp.send();
 
 
 }
 
-function abrirConfirmarCadastrar(codVeterinario) {
+function abrirConfirmarCadastrar(codFuncionario) {
     modalConfirmarCadastrar.show();
-    modalListaVeterinarios.hide();
-    nomeVeterinarioConsultaCadastrar = document.getElementById(`nomeVeterinarioConsultaCadastrar${codVeterinario}`).innerHTML
-    codVeterinarioConsultaCadastrar = codVeterinario
+    modalListaFuncionarios.hide();
+    nomeVeterinarioConsultaCadastrar = document.getElementById(`nomeVeterinarioConsultaCadastrar${codFuncionario}`).innerHTML
+    codFuncionarioConsultaCadastrar = codFuncionario
     document.getElementById('textDataConsultaConfirmar').value = dataConsultaCadastrar;
     document.getElementById('textHoraConsultaConfirmar').value = horaConsultaCadastrar;
     document.getElementById('textNomeAnimalCadastrar').value = nomeAnimalConsultaCadastrar;
     document.getElementById('textNomeAnimalCadastrar').value = codAnimalConsultaCadastrar;
-    document.getElementById('textNomeVeterinarioCadastrar').value = nomeVeterinarioConsultaCadastrar;
-    document.getElementById('textCodVeterinarioCadastrar').value = codVeterinarioConsultaCadastrar;
+    document.getElementById('textNomeFuncionarioCadastrar').value = nomeFuncionarioConsultaCadastrar;
+    document.getElementById('textCodFuncionarioCadastrar').value = codFuncionarioConsultaCadastrar;
     document.getElementById('textNomeClienteCadastrar').value = nomeClienteConsultaCadastrar;
 
 }
@@ -217,16 +217,16 @@ function cadastrarConsulta() {
     dataConsultaCadastrar = document.getElementById('textDataConsultaConfirmar').value;
     horaConsultaCadastrar = document.getElementById('textHoraConsultaConfirmar').value;
     codAnimalCadastrar = codAnimalConsultaCadastrar;
-    codVeterinarioCadastrar = codVeterinarioConsultaCadastrar;
+    codFuncionarioCadastrar = codFuncionarioConsultaCadastrar;
 
 
-    if (!codAnimalCadastrar || !codVeterinarioCadastrar || !dataConsultaCadastrar || !horaConsultaCadastrar) {
+    if (!codAnimalCadastrar || !codFuncionarioCadastrar || !dataConsultaCadastrar || !horaConsultaCadastrar) {
         modalAlerta.show();
         return;
     }
     var novaConsulta = {
         codAnimal: codAnimalCadastrar,
-        codVeterinario: codVeterinarioCadastrar,
+        codFuncionario: codFuncionarioCadastrar,
         dataConsulta: dataConsultaCadastrar + 'T' + horaConsultaCadastrar + ':00.000',
         peso: pesoCadastrar,
         descricao: descricaoCadastrar
@@ -258,7 +258,7 @@ function abrirAlterarConsulta(codConsulta) {
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
     document.getElementById('textDataConsultaAlterar').value = DataConsultaAlterar;
     document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
-    document.getElementById('textCodVeterinarioAlterar').value = document.getElementById(`codVeterinario${codConsulta}`).innerHTML;
+    document.getElementById('textCodFuncionarioAlterar').value = document.getElementById(`codFuncionario${codConsulta}`).innerHTML;
 
 }
 
@@ -268,7 +268,7 @@ function alterarConsulta() {
     var horaConsulta = textHoraConsultaAlterar.value;
     var codConsulta = textCodConsultaAlterar.value;
     var codAnimal = textCodAnimalAlterar.value;
-    var codVeterinario = textCodVeterinarioAlterar.value;
+    var codFuncionario = textCodFuncionarioAlterar.value;
 
     if (!dataConsulta || !horaConsulta) {
         modalAlerta.show();
@@ -278,7 +278,7 @@ function alterarConsulta() {
         dataConsulta: dataConsulta + 'T' + horaConsulta + ':00.000Z',
         codConsulta: codConsulta,
         codAnimal: codAnimal,
-        codVeterinario: codVeterinario,
+        codFuncionario: codFuncionario,
         peso: pesoCadastrar,
         descricao: descricaoCadastrar
     };
@@ -301,5 +301,5 @@ function limpar() {
     textDataConsulta.value = '';
     textNomeAnimal.value = '';
     textNomeCliente.value = '';
-    textNomeVeterinario.value = '';
+    textNomeFuncionario.value = '';
 }

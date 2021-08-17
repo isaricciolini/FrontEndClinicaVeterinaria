@@ -70,11 +70,7 @@
         <div class="_botoes my-2">
             <div class="btn-group" role="group" aria-label="Basic outlined example">
                 <button type="button" id="btn_form" onclick="abrirCadastrar()" class="btn btn-dark">Cadastrar
-                    Funcionário</button>
-            </div>
-            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" id="btn_form" onclick="abrirCadastrarVeterinario()" class="btn btn-dark">Cadastrar
-                    Veterinário</button>
+                    </button>
             </div>
         </div>
 
@@ -92,7 +88,7 @@
             <thead>
                 <tr>
                     <th>CodFuncionario</th>
-                    <th>CodVeterinario</th>
+                    <th>CRMV</th>
                     <th>Nome</th>
                     <th>Data Nascimento</th>
                     <th>CPF</th>
@@ -121,8 +117,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <input name="textNovoCodVeterinario" class="form-label" type="hidden"
-                                id="textNovoCodVeterinario" size="10">
+                            <label>CRMV:</label>
+                            <input name="textCRMVFuncionario" class="form-label" type="text"
+                                id="textCRMVFuncionario">
+                        </div>
+                        <hr>
+                        <div class="col-md-6 col-sm-12">
                             <label>Nome Completo:</label>
                             <input name="textNovoNomeFuncionario" class="form-label" type=" text"
                                 id="textNovoNomeFuncionario">
@@ -181,7 +181,7 @@
     </div>
 
     <!-- Modal Lista Veterinários-->
-    <div class="modal fade" id="modalListaVeterinarios" data-bs-backdrop="static" data-bs-keyboard="false"
+    <div class="modal fade" id="modalListaFuncionarios" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -191,15 +191,15 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <table class="table table-hover text-center" id="tabelaVeterinarios">
+                            <table class="table table-hover text-center" id="tabelaFuncionarios">
                                 <thead>
                                     <tr>
-                                        <th>CodVeterinario</th>
+                                        <th>CodFuncionario</th>
                                         <th>CRMV</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody id="corpoTabelaVeterinarios">
+                                <tbody id="corpoTabelaFuncionarios">
                                     <!-- aqui serão listadas as consultas cadastradas no banco -->
                                 </tbody>
                             </table>
@@ -247,31 +247,6 @@
         </div>
     </div>
 
-    <!-- Modal Cadastrar Veterinário-->
-    <div class="modal fade" id="modalCadastrarVeterinario" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Cadastrar Veterinário</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <label>CRMV:
-                                <input name="textCRMV" class="form-label" type="text" id="textCRMV"></label>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="cadastrarCRMV()">Confirmar</button>
-                    <button type="button" class="btn btn-secondary" onclick="pular()">Pular</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Endereco -->
     <div class="modal fade" id="modalEndereco" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -329,9 +304,9 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <input name="textCodFuncionario" type="hidden" id="textCodFuncionario" />
-                            <label>CodVeterinario:</label>
-                            <input name="textCodVeterinarioAlterar" class="form-label" type="number"
-                                id="textCodVeterinarioAlterar" />
+                            <label>CodFuncionario:</label>
+                            <input name="textCodFuncionarioAlterar" class="form-label" type="number"
+                                id="textCodFuncionarioAlterar" />
                             <label>CPF:
                                 <input name="textCPFAlterar" class="form-label" type=" text"
                                     id="textCPFAlterar"></label>
