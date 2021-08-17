@@ -1,7 +1,7 @@
 var url = 'https://localhost:5001/consultas';
 var corpoTabela = document.getElementById('corpoTabela');
 var textNomeAnimal = document.getElementById('textNomeAnimal');
-var textNomeVeterinario = document.getElementById('textNomeVeterinario');
+var textNomeFuncionario = document.getElementById('textNomeFuncionario');
 var textDataConsulta = document.getElementById('textDataConsulta');
 var textNomeCliente = document.getElementById('textNomeCliente');
 
@@ -54,7 +54,7 @@ function exibirAgenda() {
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td id="nomeAnimal${info.codConsulta}">${info.nomeAnimal}</td>`;
                 linha += `<td id="nomeCliente${info.codConsulta}">${info.nomeCliente}</td>`;
-                linha += `<td id="nomeVeterinario${info.codConsulta}">${info.nomeFuncionario}</td>`;
+                linha += `<td id="nomeFuncionario${info.codConsulta}">${info.nomeFuncionario}</td>`;
                 linha += `<td><button class="btn btn-dark " onclick="abrirAlterarConsulta(${info.codConsulta})">Alterar</button></td>`;
                 linha += `<td><button class="btn btn-dark " onclick="excluirConsulta(${info.codConsulta})">Excluir</button></td>`;
                 linha += '</tr>';
@@ -178,12 +178,12 @@ function abrirCadastrarListaFuncionarios(codAnimal) {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
-                var fun = resposta[i];
+                var vet = resposta[i];
                 var linha = '<tr class="itemFuncionarios">';
-                linha += `<td>${fun.codFuncionario}</td>`;
-                linha += `<td id="nomeVeterinarioConsultaCadastrar${fun.codFuncionario}">${fun.nomeVeterinario}</td>`;
-                linha += `<td>${fun.crmv}</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${fun.codFuncionario})">+</button></td>`;
+                linha += `<td>${vet.codFuncionario}</td>`;
+                linha += `<td id="nomeFuncionarioConsultaCadastrar${vet.codFuncionario}">${vet.nomeFuncionario}</td>`;
+                linha += `<td>${vet.crmv}</td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${vet.codFuncionario})">+</button></td>`;
                 linha += '</tr>';
                 corpoTabelaFuncionarios.innerHTML += linha;
             }
@@ -200,7 +200,7 @@ function abrirCadastrarListaFuncionarios(codAnimal) {
 function abrirConfirmarCadastrar(codFuncionario) {
     modalConfirmarCadastrar.show();
     modalListaFuncionarios.hide();
-    nomeVeterinarioConsultaCadastrar = document.getElementById(`nomeVeterinarioConsultaCadastrar${codFuncionario}`).innerHTML
+    nomeFuncionarioConsultaCadastrar = document.getElementById(`nomeFuncionarioConsultaCadastrar${codFuncionario}`).innerHTML
     codFuncionarioConsultaCadastrar = codFuncionario
     document.getElementById('textDataConsultaConfirmar').value = dataConsultaCadastrar;
     document.getElementById('textHoraConsultaConfirmar').value = horaConsultaCadastrar;
@@ -252,7 +252,7 @@ function abrirAlterarConsulta(codConsulta) {
     DataConsultaAlterar = document.getElementById(`dataConsulta${codConsulta}`).innerHTML.split('/');
     DataConsultaAlterar = new Date(DataConsultaAlterar[2], DataConsultaAlterar[1] - 1, DataConsultaAlterar[0]).toISOString().substring(0, 10);
     document.getElementById('textCodConsultaAlterar').value = codConsulta
-    document.getElementById('textNomeVeterinarioAlterar').value = document.getElementById(`nomeVeterinario${codConsulta}`).innerHTML;
+    document.getElementById('textNomeFuncionarioAlterar').value = document.getElementById(`nomeFuncionario${codConsulta}`).innerHTML;
     document.getElementById('textNomeClienteAlterar').value = document.getElementById(`nomeCliente${codConsulta}`).innerHTML;
     document.getElementById('textNomeAnimalAlterar').value = document.getElementById(`nomeAnimal${codConsulta}`).innerHTML;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
