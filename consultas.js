@@ -67,14 +67,14 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
                 linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
-                linha += `<td id="codAnimal${info.codConsulta}">${info.codAnimal} - ${info.nomeAnimal}</td>`;
-                linha += `<td id="codFuncionario${info.codConsulta}">${info.codFuncionario} - ${info.nomeFuncionario}</td>`;
+                linha += `<td><span id="codAnimal${info.codConsulta}">${info.codAnimal}</span> - ${info.nomeAnimal}</td>`;
+                linha += `<td><span id="codFuncionario${info.codConsulta}">${info.codFuncionario}</span> - ${info.nomeFuncionario}</td>`;
                 linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirReceitas(${info.codConsulta})">Exibir</button></td>`;
-                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`;
-                linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`;
+                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-warning">Alterar</button></td>`;
+                linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-danger">Excluir</button></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }
@@ -155,7 +155,7 @@ function abrirAlterar(codConsulta) {
     DataConsultaAlterar = new Date(DataConsultaAlterar[2], DataConsultaAlterar[1] - 1, DataConsultaAlterar[0]).toISOString().substring(0, 10);
     document.getElementById('textCodConsultaAlterar').value = codConsulta
     document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
-    document.getElementById('textCodFuncionarioAlterar').value = document.getElementById(`codFuncionario${codConsulta}`).innerHTML.slice(0, 10);
+    document.getElementById('textCodFuncionarioAlterar').value = document.getElementById(`codFuncionario${codConsulta}`).innerHTML;
     document.getElementById('textDataConsultaAlterar').value = DataConsultaAlterar;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
     document.getElementById('textPesoAlterar').value = document.getElementById(`peso${codConsulta}`).innerHTML;

@@ -55,8 +55,8 @@ function exibirAgenda() {
                 linha += `<td id="nomeAnimal${info.codConsulta}">${info.nomeAnimal}</td>`;
                 linha += `<td id="nomeCliente${info.codConsulta}">${info.nomeCliente}</td>`;
                 linha += `<td id="nomeFuncionario${info.codConsulta}">${info.nomeFuncionario}</td>`;
-                linha += `<td><button class="btn btn-dark " onclick="abrirAlterarConsulta(${info.codConsulta})">Alterar</button></td>`;
-                linha += `<td><button class="btn btn-dark " onclick="excluirConsulta(${info.codConsulta})">Excluir</button></td>`;
+                linha += `<td><button class="btn btn-warning " onclick="abrirAlterarConsulta(${info.codConsulta})">Alterar</button></td>`;
+                linha += `<td><button class="btn btn-danger " onclick="excluirConsulta(${info.codConsulta})">Excluir</button></td>`;
                 linha += '</tr>';
                 linha += '<div style="display: none;">';
                 linha += `<p id="codAnimal${info.codConsulta}">${info.codAnimal}</p>`;

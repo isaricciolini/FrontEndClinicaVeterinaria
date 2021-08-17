@@ -79,11 +79,11 @@ function pesquisarConsultas(inicio, fim) {
                                 <button onclick="abrirReceitasHistorico(${info.codAnimal})" class="btn btn-dark">Receitas</button>
                             </div></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+</button></td>`;
-                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-dark">Alterar</button></td>`
+                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-warning">Alterar</button></td>`
                 if (info.peso != 0) {
                     linha += `<td></td>`
                 } else {
-                    linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-dark">Excluir</button></td>`
+                    linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-danger">Excluir</button></td>`
                 }
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
