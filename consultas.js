@@ -270,7 +270,6 @@ function abrirReceitas(codConsulta) {
                                     <div class="card-body">
                                         <h5 class="card-tittle">Receita ${receita.codReceita}</h5>
                                         <b>Data: </b>${(receita.dataReceita.slice(8, 10)) + "/" + (receita.dataReceita.slice(5, 7)) + "/" + (receita.dataReceita.slice(0, 4))}<br>
-                                        <b>Hora: </b>${receita.dataReceita.slice(11, 16)}<br>
                                         <b>Prescrição: </b>${receita.prescricao}</p>
                                     </div>
                                 </div>`;
