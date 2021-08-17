@@ -163,32 +163,27 @@ function cadastrarAnimal() {
 
 function abrirAlterar(codAnimal) {
     codAnimalAlterar = codAnimal;
-    var nomeAnimal = document.getElementById(`nomeAnimal${codAnimal}`).innerHTML;
-    var nascimento = document.getElementById(`nascimento${codAnimal}`).innerHTML.slice(0,10);
-    var raca = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
-    var tipo = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
-    var codCliente = document.getElementById(`codCliente${codAnimal}`).innerHTML;
-    textNomeAnimalAlterar.value = nomeAnimal;
-    textNascimentoAlterar.value = nascimento;
-    textRacaAlterar.value = raca;
-    textTipoAlterar.value = tipo;
-    textCodClienteAlterar.value = codCliente;
+    textNomeAnimalAlterar.value = document.getElementById(`nomeAnimal${codAnimal}`).innerHTML;
+    textNascimentoAlterar.value = document.getElementById(`nascimento${codAnimal}`).innerHTML.slice(0,10);
+    textRacaAlterar.value = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
+    textTipoAlterar.value = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
+    textCodClienteAlterar.value = document.getElementById(`codCliente${codAnimal}`).innerHTML;
     modalAlterar.show();
 }
 
 function alterarAnimal() {
     var nomeAnimal = textNomeAnimalAlterar.value;
-    var nascimentoAnimal = nascimentoAnimal.value;
+    var nascimento = textNascimentoAlterar.value;
     var racaAnimal = textRacaAlterar.value;
     var tipoAnimal = textTipoAlterar.value; 
     var codCliente = textCodClienteAlterar.value;
-    if (!nomeAnimal || !nascimentoAnimal || !racaAnimal || !tipoAnimal || !codCliente) {
+    if (!nomeAnimal || !nascimento || !racaAnimal || !tipoAnimal || !codCliente) {
         modalAlerta.show();
         return;
     }
     var animal = {
         nomeAnimal: nomeAnimal,
-        nascimento: nascimentoAnimal,
+        nascimento: nascimento,
         raca: racaAnimal,
         tipo: tipoAnimal,
         codAnimal: codAnimalAlterar,

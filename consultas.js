@@ -56,7 +56,7 @@ function pesquisarConsultas(inicio, fim) {
     corpoTabela.innerHTML = '';
     inicio = textSemanasInicio.value;
     fim = textSemanasFim.value;
-    codFuncionario = document.getElementById("textCodFuncionarioFiltro").value
+    crmv = document.getElementById("textCRMV").value
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -88,7 +88,7 @@ function pesquisarConsultas(inicio, fim) {
         xhttp.send();
     }
     else {
-        xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${codFuncionario}`, true);
+        xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${crmv}`, true);
         xhttp.send();
     }
 }
