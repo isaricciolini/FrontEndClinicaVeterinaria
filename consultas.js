@@ -83,7 +83,7 @@ function pesquisarConsultas(inicio, fim) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
     };
-    if(codFuncionario == null || codFuncionario == "") {
+    if(crmv == null || crmv == "") {
         xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}`, true);
         xhttp.send();
     }
