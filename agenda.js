@@ -178,14 +178,16 @@ function abrirCadastrarListaFuncionarios(codAnimal) {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
-                var vet = resposta[i];
-                var linha = '<tr class="itemFuncionarios">';
-                linha += `<td>${vet.codFuncionario}</td>`;
-                linha += `<td id="nomeFuncionarioConsultaCadastrar${vet.codFuncionario}">${vet.nomeFuncionario}</td>`;
-                linha += `<td>${vet.crmv}</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${vet.codFuncionario})">+</button></td>`;
-                linha += '</tr>';
-                corpoTabelaFuncionarios.innerHTML += linha;
+                    var vet = resposta[i];
+                    if(!vet.crmv == null|| !vet.crmv == undefined|| !vet.crmv == "") {
+                        var linha = '<tr class="itemFuncionarios">';
+                        linha += `<td>${vet.codFuncionario}</td>`;
+                        linha += `<td id="nomeFuncionarioConsultaCadastrar${vet.codFuncionario}">${vet.nomeFuncionario}</td>`;
+                        linha += `<td>${vet.crmv}</td>`;
+                        linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${vet.codFuncionario})">+</button></td>`;
+                        linha += '</tr>';
+                        corpoTabelaFuncionarios.innerHTML += linha;
+                    }
             }
         } else if (this.readyState == 4) {
             corpoTabelaFuncionarios.innerHTML = 'Nenhum animal cadastrado.';

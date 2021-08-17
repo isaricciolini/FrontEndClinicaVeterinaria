@@ -58,7 +58,7 @@ function pesquisarFuncionarios() {
                 linha += `<td id="email${info.codFuncionario}">${info.email}</td>`;
                 linha += `<td id="ativo${info.codFuncionario}">${info.ativo == true ? "Sim" : "Não"}</td>`;
                 linha += `<td><button onclick="abrirEndereco(${info.codFuncionario})" class="btn btn-dark">Exibir</button></td>`
-                linha += `<td><button onclick="abrirAlterar(${info.codFuncionario})" class="btn btn-dark">Alterar</button></td>`
+                linha += `<td><button onclick="abrirAlterar(${info.codFuncionario})" class="btn btn-warning">Alterar</button></td>`
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="telefone${info.codFuncionario}">${info.telefone}</p>`;

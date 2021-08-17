@@ -62,8 +62,8 @@ function pesquisarClientes() {
                 linha += `<td id="email${info.codCliente}">${info.email}</td>`;
                 linha += `<td><button onclick="abrirAnimais(${info.codCliente})" class="btn btn-dark">Exibir</button></td>`
                 linha += `<td><button onclick="abrirEndereco(${info.codCliente})" class="btn btn-dark">Exibir</button></td>`
-                linha += `<td><button onclick="abrirAlterar(${info.codCliente})" class="btn btn-dark">Alterar</button></td>`
-                linha += `<td><button onclick="abrirExcluir(${info.codCliente})" class="btn btn-dark">Excluir</button></td>`
+                linha += `<td><button onclick="abrirAlterar(${info.codCliente})" class="btn btn-warning">Alterar</button></td>`
+                linha += `<td><button onclick="abrirExcluir(${info.codCliente})" class="btn btn-danger">Excluir</button></td>`
                 linha += '</tr>';
                 linha += '<div style="display: none;">'
                 linha += `<p id="telefone${info.codCliente}">${info.telefone}</p>`;

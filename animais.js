@@ -48,8 +48,8 @@ function pesquisarAnimais() {
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirExcluir(${animal.codAnimal})">Excluir</button></td>`;
+                linha += `<td><button class="btn btn-warning" onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
+                linha += `<td><button class="btn btn-danger" onclick="abrirExcluir(${animal.codAnimal})">Excluir</button></td>`;
                 linha += '</tr>';
                 linha += '<div style="display: none">'
                 linha += `<p id="codCliente${animal.codAnimal}">${animal.codCliente}</p>`
