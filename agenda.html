@@ -124,13 +124,13 @@
                         <div style="display: none;">
                             <input id="textCodConsultaAlterar" disabled>
                             <input id="textCodAnimalAlterar" disabled>
-                            <input id="textCodVeterinarioAlterar" disabled>
+                            <input id="textCodFuncionarioAlterar" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="textNomeAnimalAlterar" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="textNomeAnimalAlterar" disabled>
-                            <label for="textNomeVeterinarioAlterar" class="form-label">Veterinário</label>
-                            <input type="text" class="form-control" id="textNomeVeterinarioAlterar" disabled>
+                            <label for="textNomeFuncionarioAlterar" class="form-label">Veterinário</label>
+                            <input type="text" class="form-control" id="textNomeFuncionarioAlterar" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="textNomeClienteAlterar" class="form-label">Dono</label>
@@ -302,8 +302,8 @@
     </div>
 
 
-    <!-- Modal Cadastrar (lista veterinarios) -->
-    <div class="modal fade" id="modalListaVeterinarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Modal Cadastrar (lista Funcionarios) -->
+    <div class="modal fade" id="modalListaFuncionarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -315,11 +315,11 @@
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <input placeholder="Filtrar por CodVeterinario, Nome ou CRMV"
-                                        oninput="w3.filterHTML('#tabelaVeterinarios', '.itemVeterinarios', this.value)">
+                                    <input placeholder="Filtrar por CodFuncionario, Nome ou CRMV"
+                                        oninput="w3.filterHTML('#tabelaFuncionarios', '.itemFuncionarios', this.value)">
                                 </div>
                                 <div class="col-sm-12">
-                                    <table class="table table-hover text-center" id="tabelaVeterinarios">
+                                    <table class="table table-hover text-center" id="tabelaFuncionarios">
                                         <thead>
                                             <tr>
                                                 <th>Cod</th>
@@ -328,7 +328,7 @@
                                                 <th>Adicinar a consulta</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="corpoTabelaVeterinarios">
+                                        <tbody id="corpoTabelaFuncionarios">
                                             <!-- aqui serão listadas as consultas cadastradas no banco -->
                                         </tbody>
                                     </table>
@@ -369,13 +369,13 @@
                             <input type="text" class="form-control" id="textNomeAnimalCadastrar" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <label for="textNomeVeterinarioCadastrar" class="form-label">Veterinário</label>
-                            <input type="text" class="form-control" id="textNomeVeterinarioCadastrar" disabled>
+                            <label for="textNomeFuncionarioCadastrar" class="form-label">Veterinário</label>
+                            <input type="text" class="form-control" id="textNomeFuncionarioCadastrar" disabled>
                         </div>
                         <div style="display: none;">
                             <input id="textCodConsultaCadastrar" disabled>
                             <input id="textCodAnimalCadastrar" disabled>
-                            <input id="textCodVeterinarioCadastrar" disabled>
+                            <input id="textCodFuncionarioCadastrar" disabled>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
