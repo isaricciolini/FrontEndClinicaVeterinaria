@@ -69,7 +69,7 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                 linha += `<td><span id="codAnimal${info.codConsulta}">${info.codAnimal}</span> - ${info.nomeAnimal}</td>`;
                 linha += `<td><span id="codFuncionario${info.codConsulta}">${info.codFuncionario}</span> - ${info.nomeFuncionario}</td>`;
-                linha += `<td><span id="peso${info.codConsulta}">${info.peso}</span> Kg</td>`;
+                linha += `<td><span id="peso${info.codConsulta}">${info.peso}</span>Kg</td>`;
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirReceitas(${info.codConsulta})">Exibir</button></td>`;
