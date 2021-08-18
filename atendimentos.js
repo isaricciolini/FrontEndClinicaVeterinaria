@@ -48,7 +48,7 @@ var smm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
 var syyyy = now.getFullYear();
 var fim = syyyy + '-' + smm + '-' + sdd;
 textSemanasInicio.value = inicio;
-textSemanasFim.value = fim; 
+textSemanasFim.value = fim;
 
 
 
@@ -59,47 +59,49 @@ pesquisarConsultas(inicio, fim);
 function pesquisarConsultas(inicio, fim) {
     corpoTabela.innerHTML = '';
     inicio = textSemanasInicio.value;
-    fim = textSemanasFim.value; 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var resposta = JSON.parse(this.response);
-            for (var i = 0; i < resposta.length; i++) {
-                var info = resposta[i];
-                var linha = '<tr class="item">';
-                linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
-                linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
-                linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
-                linha += `<td> ${info.tipo} | ${info.nomeAnimal} | ${info.nomeCliente}</td>`
-                linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Exibir</button></td>`;
-                linha += `<td><div class="btn-group" role="group" aria-label="Basic example">
+    fim = textSemanasFim.value;
+    if (getCookie("crmv")) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var resposta = JSON.parse(this.response);
+                for (var i = 0; i < resposta.length; i++) {
+                    var info = resposta[i];
+                    var linha = '<tr class="item">';
+                    linha += `<td id="codConsulta${info.codConsulta}">${info.codConsulta}</td>`;
+                    linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
+                    linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
+                    linha += `<td> ${info.tipo} | ${info.nomeAnimal} | ${info.nomeCliente}</td>`
+                    linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
+                    linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
+                    linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Exibir</button></td>`;
+                    linha += `<td><div class="btn-group" role="group" aria-label="Basic example">
                                 <button onclick="abrirTodasConsultasReceitas(${info.codAnimal})" class="btn btn-dark">Consultas</button>
                                 <button onclick="abrirReceitasHistorico(${info.codAnimal})" class="btn btn-dark">Receitas</button>
                             </div></td>`;
-                linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+</button></td>`;
-                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-warning">Alterar</button></td>`
-                if (info.peso != 0) {
-                    linha += `<td></td>`
-                } else {
-                    linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-danger">Excluir</button></td>`
+                    linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+</button></td>`;
+                    linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-warning">Alterar</button></td>`
+                    if (info.peso != 0) {
+                        linha += `<td></td>`
+                    } else {
+                        linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-danger">Excluir</button></td>`
+                    }
+                    linha += '</tr>';
+                    linha += '<div style="display: none;">'
+                    linha += `<p id="descricao${info.codConsulta}">${info.descricao}</p>`;
+                    linha += `<p id="codFuncionario${info.codConsulta}">${info.codFuncionario}</p>`;
+                    linha += `<p id="codAnimal${info.codConsulta}">${info.codAnimal}</p>`;
+                    linha += '</div>'
+                    corpoTabela.innerHTML += linha;
                 }
-                linha += '</tr>';
-                linha += '<div style="display: none;">'
-                linha += `<p id="descricao${info.codConsulta}">${info.descricao}</p>`;
-                linha += `<p id="codFuncionario${info.codConsulta}">${info.codFuncionario}</p>`;
-                linha += `<p id="codAnimal${info.codConsulta}">${info.codAnimal}</p>`;
-                linha += '</div>'
-                corpoTabela.innerHTML += linha;
+                w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
+            } else if (this.readyState == 4) {
+                corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
             }
-            w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
-        } else if (this.readyState == 4) {
-            corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
-        }
-    };
-    xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${getCookie("crmv")}`, true);
-    xhttp.send();
+        };
+        xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${getCookie("crmv")}`, true);
+        xhttp.send();
+    }
 }
 
 function abrirReceitasHistorico(codAnimal) {
@@ -169,9 +171,9 @@ function alterarConsulta() {
     var codConsulta = textCodConsultaAlterar.value;
     var codAnimal = textCodAnimalAlterar.value;
     var codFuncionario = textCodFuncionarioAlterar.value;
-    var dataConsulta = textDataConsultaAlterar.value.slice(6,10) + "/";
-    dataConsulta += textDataConsultaAlterar.value.slice(3,6);
-    dataConsulta += textDataConsultaAlterar.value.slice(0,2);
+    var dataConsulta = textDataConsultaAlterar.value.slice(6, 10) + "/";
+    dataConsulta += textDataConsultaAlterar.value.slice(3, 6);
+    dataConsulta += textDataConsultaAlterar.value.slice(0, 2);
     var horaConsulta = textHoraConsultaAlterar.value;
     var peso = textPesoAlterar.value;
     var descricao = textDescricaoAlterar.value;
@@ -295,16 +297,16 @@ function idade(codAnimal) {
     var mes = dataAtual.getMonth().toString() + 1;
     var dia = dataAtual.getDay().toString();
     var nascimentoAnimal = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
-    var anoAnimal = nascimentoAnimal.slice(6,10);
-    var mesAnimal = nascimentoAnimal.slice(3,5);
-    var diaAnimal = nascimentoAnimal.slice(0,2);
+    var anoAnimal = nascimentoAnimal.slice(6, 10);
+    var mesAnimal = nascimentoAnimal.slice(3, 5);
+    var diaAnimal = nascimentoAnimal.slice(0, 2);
     var idade;
     diferencaData = (ano - anoAnimal)
     if (mesAnimal < mes) {
         idade = diferencaData;
     }
     else {
-        if(diaAnimal < dia) {
+        if (diaAnimal < dia) {
             idade = diferencaData;
         } else {
             idade = diferencaData + 1;
@@ -343,7 +345,7 @@ function abrirTodasConsultasReceitas(codAnimal) {
                 <div class="card col-12 col-md-6">
                                     <div class="card-body">
                                         <p class="card-text"><b>Cod.Consulta: </b>${consulta.codConsulta}<br>
-                                        <b>Data da consulta: </b>${(consulta.dataConsulta.slice(8, 10)) + "/" + (consulta.dataConsulta.slice(5, 7)) + "/" + (consulta.dataConsulta.slice(0, 4))} ${(consulta.dataConsulta.slice(11,16) )}<br>
+                                        <b>Data da consulta: </b>${(consulta.dataConsulta.slice(8, 10)) + "/" + (consulta.dataConsulta.slice(5, 7)) + "/" + (consulta.dataConsulta.slice(0, 4))} ${(consulta.dataConsulta.slice(11, 16))}<br>
                                         <b>Peso: </b>${consulta.peso}<br>
                                         <b>Descrição: </b>${consulta.descricao}<br>
                                         <b>Código do Funcionário: </b>${consulta.codFuncionario}</p>
