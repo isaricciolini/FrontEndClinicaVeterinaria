@@ -51,12 +51,12 @@
         <a href="javascript:void(0);" class="icon" onclick="navbar()">
             <button type="button" class="btn _botaosidebar">Menu</button></a>
         <div class="hide" id="hide">
-            <button onclick="location.href='agenda.html'" type="button" class="btn _botaosidebar text-muted">Agenda</button>
+            <button onclick="location.href='agenda.html'" type="button"
+                class="btn _botaosidebar text-muted">Agenda</button>
             <button onclick="location.href='atendimentos.html'" type="button"
                 class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
-            <button onclick="location.href='clientes.html'" type="button"
-                class="btn _botaosidebar">Clientes</button>
+            <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
             <button onclick="location.href='funcionarios.html'" type="button"
                 class="btn _botaosidebar">Colaboradores</button>
@@ -129,22 +129,25 @@
                         <div class="col-sm-12 col-md-6">
                             <label for="textNomeAnimalAlterar" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="textNomeAnimalAlterar" disabled>
-                            <label for="textNomeFuncionarioAlterar" class="form-label">Veterinário</label>
-                            <input type="text" class="form-control" id="textNomeFuncionarioAlterar" disabled>
+                            <label for="textNomeClienteAlterar" class="form-label">Dono</label>
+                        <input type="text" class="form-control" id="textNomeClienteAlterar" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <label for="textNomeClienteAlterar" class="form-label">Dono</label>
-                            <input type="text" class="form-control" id="textNomeClienteAlterar" disabled>
+                            <label class="form-label">Veterinário</label>
+                            <div class="input-group form-control">
+                                <select class="" id="dropdownVet"></select>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                onclick="alterarConsulta()">Confirmar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
+                        <!-- <input type="text" class="form-control" id="textNomeFuncionarioAlterar" disabled> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="alterarConsulta()">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Modal Excluir Consulta -->
@@ -423,7 +426,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     </div>
                 </div>
             </div>
@@ -444,7 +447,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     </div>
                 </div>
             </div>

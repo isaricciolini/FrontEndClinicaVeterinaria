@@ -1,5 +1,6 @@
 var url = 'https://localhost:5001/consultas';
 var corpoTabela = document.getElementById('corpoTabela');
+var dropdownVet = document.getElementById('dropdownVet');
 var textNomeAnimal = document.getElementById('textNomeAnimal');
 var textNomeFuncionario = document.getElementById('textNomeFuncionario');
 var textDataConsulta = document.getElementById('textDataConsulta');
@@ -199,6 +200,30 @@ function abrirCadastrarListaFuncionarios(codAnimal) {
 
 }
 
+
+
+function abrirListaFuncionarios() {
+    dropdownVet.innerHTML = "";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            var linha = `<option selected>Selecione um veterinário</option>`;
+            for (var i = 0; i < resposta.length; i++) {
+                    var vet = resposta[i];
+                    if(!vet.crmv == null|| !vet.crmv == undefined|| !vet.crmv == "") {
+                        linha += `<option value=${vet.codFuncionario}>${vet.nomeFuncionario}</option>`;
+                    }
+            }
+            dropdownVet.innerHTML += linha;
+        } else if (this.readyState == 4) {
+            dropdownVet.innerHTML = 'Nenhum veterinário cadastrado.';
+        }
+    };
+    xhttp.open('GET', `https://localhost:5001/Funcionarios`, true);
+    xhttp.send();
+}
+
 function abrirConfirmarCadastrar(codFuncionario) {
     modalConfirmarCadastrar.show();
     modalListaFuncionarios.hide();
@@ -250,18 +275,17 @@ function cadastrarConsulta() {
 }
 
 function abrirAlterarConsulta(codConsulta) {
-    modalAlterar.show();
     DataConsultaAlterar = document.getElementById(`dataConsulta${codConsulta}`).innerHTML.split('/');
     DataConsultaAlterar = new Date(DataConsultaAlterar[2], DataConsultaAlterar[1] - 1, DataConsultaAlterar[0]).toISOString().substring(0, 10);
     document.getElementById('textCodConsultaAlterar').value = codConsulta
-    document.getElementById('textNomeFuncionarioAlterar').value = document.getElementById(`nomeFuncionario${codConsulta}`).innerHTML;
     document.getElementById('textNomeClienteAlterar').value = document.getElementById(`nomeCliente${codConsulta}`).innerHTML;
     document.getElementById('textNomeAnimalAlterar').value = document.getElementById(`nomeAnimal${codConsulta}`).innerHTML;
     document.getElementById('textHoraConsultaAlterar').value = document.getElementById(`horaConsulta${codConsulta}`).innerHTML;
     document.getElementById('textDataConsultaAlterar').value = DataConsultaAlterar;
     document.getElementById('textCodAnimalAlterar').value = document.getElementById(`codAnimal${codConsulta}`).innerHTML;
     document.getElementById('textCodFuncionarioAlterar').value = document.getElementById(`codFuncionario${codConsulta}`).innerHTML;
-
+    abrirListaFuncionarios();
+    modalAlterar.show();
 }
 
 
@@ -270,7 +294,7 @@ function alterarConsulta() {
     var horaConsulta = textHoraConsultaAlterar.value;
     var codConsulta = textCodConsultaAlterar.value;
     var codAnimal = textCodAnimalAlterar.value;
-    var codFuncionario = textCodFuncionarioAlterar.value;
+    var codFuncionario = dropdownVet.value;
 
     if (!dataConsulta || !horaConsulta) {
         modalAlerta.show();
@@ -305,3 +329,22 @@ function limpar() {
     textNomeCliente.value = '';
     textNomeFuncionario.value = '';
 }
+
+function ListaVeterinarios()
+    {
+        var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            for (var i = 0; i < resposta.length; i++) {
+                var info = resposta[i];
+                linha += `<td id="nomeFuncionario${info.codConsulta}">${info.nomeFuncionario}</td>`;
+                corpoTabela.innerHTML += linha;
+            }
+        } else if (this.readyState == 4) {
+            corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
+        }
+    };
+    xhttp.open('GET', `${url}/lista/veterinarios`, true);
+    xhttp.send();
+    }

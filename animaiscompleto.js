@@ -45,7 +45,7 @@ function pesquisarAnimaisCompleto() {
             corpoTabela.innerHTML = 'Erro ao pesquisar animais';
         }
     };
-    xhttp.open('GET', `${url}`, true);
+    xhttp.open('GET', url, true);
     xhttp.send();
 }
 
@@ -104,7 +104,6 @@ function abrirReceita(codAnimal) {
                                         <h5 class="card-tittle">Receita ${receita.codReceita}</h5>
                                         <p class="card-text"><b>Cod.Consulta: </b>${receita.codConsulta}<br>
                                         <b>Data: </b>${(receita.dataReceita.slice(8, 10)) + "/" + (receita.dataReceita.slice(5, 7)) + "/" + (receita.dataReceita.slice(0, 4))}<br>
-                                        <b>Hora: </b>${receita.dataReceita.slice(11,16)}<br>
                                         <b>Prescrição: </b>${receita.prescricao}</p>
                                     </div>
                                 </div>`;

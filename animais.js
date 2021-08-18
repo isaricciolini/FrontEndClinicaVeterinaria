@@ -43,7 +43,11 @@ function pesquisarAnimais() {
                 linha += `<td id="nascimentoAnimal${animal.codAnimal}">${(animal.nascimento.slice(8, 10)) + "/" + (animal.nascimento.slice(5, 7)) + "/" + (animal.nascimento.slice(0, 4))}</td>`;
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
-                linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
+                if (animal.deficiencia == null) {
+                    linha += `<td>-</td>`
+                }else {
+                    linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
+                }
                 linha += `<td><button class="btn btn-dark" onclick="abrirDono(${animal.codCliente})">Exibir</button></td>`;
                 linha += `<td><button class="btn btn-warning" onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
                 linha += `<td><button class="btn btn-danger" onclick="abrirExcluir(${animal.codAnimal})">Excluir</button></td>`;
@@ -166,15 +170,15 @@ function abrirDono(CodClienteAnimal) {
             var resposta = JSON.parse(this.response);
             var cliente = resposta;
             var linha = `<div class="card-body">
-                            <h6><b>Nome do animal:</b> ${cliente.nomeCliente}</h6>
+                            <h6><b>Nome:</b> ${cliente.nomeCliente}</h6>
                             <h6><b>CodCliente:</b> ${cliente.codCliente}</h6>
                             <h6><b>Telefone:</b> ${cliente.telefone}</h6>
                             <h6><b>Email:</b> ${cliente.email}</h6>
-                            <h6><b>Endereço:</b> ${cliente.rua}, ${cliente.numero} ${cliente.bairro} - ${cliente.cidade} ${cliente.complemento == null ? "":cliente.complemento}</h6>
+                            <h6><b>Endereço:</b> ${cliente.rua}, ${cliente.numero} ${cliente.complemento == null ? "":cliente.complemento} ${cliente.bairro} - ${cliente.cidade}</h6>
                             </div>`
             cardBodyDono.innerHTML += linha;
         } else if (this.readyState == 4) {
-            cardBodyDono.innerHTML = 'Erro ao pesquisar clientes.';
+            cardBodyDono.innerHTML = 'Erro ao pesquisar o dono do animal.';
         }
     };
     xhttp.open('GET', `https://localhost:5001/clientes/${CodClienteAnimal}`, true);
@@ -190,6 +194,7 @@ function abrirAlterar(codAnimal) {
     textRacaAlterar.value = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
     textTipoAlterar.value = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
     textCodClienteAlterar.value = document.getElementById(`codCliente${codAnimal}`).innerHTML;
+    textDeficienciaAlterar.value = document.getElementById(`deficienciaAnimal${codAnimal}`).innerHTML;
     modalAlterar.show();
 }
 
@@ -199,6 +204,7 @@ function alterarAnimal() {
     var racaAnimal = textRacaAlterar.value;
     var tipoAnimal = textTipoAlterar.value;
     var codCliente = textCodClienteAlterar.value;
+    var deficiencia = textDeficienciaAlterar.value;
     if (!nomeAnimal || !nascimento || !racaAnimal || !tipoAnimal || !codCliente) {
         modalAlerta.show();
         return;
@@ -208,6 +214,7 @@ function alterarAnimal() {
         nascimento: nascimento,
         raca: racaAnimal,
         tipo: tipoAnimal,
+        deficiencia: deficiencia,
         codAnimal: codAnimalAlterar,
         codCliente: codCliente
     };
