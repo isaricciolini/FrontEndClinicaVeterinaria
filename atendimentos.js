@@ -98,7 +98,7 @@ function pesquisarConsultas(inicio, fim) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
     };
-    xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${getCookie("CRMV")}`, true);
+    xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}/${getCookie("crmv")}`, true);
     xhttp.send();
 }
 

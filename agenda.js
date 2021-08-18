@@ -207,7 +207,7 @@ function abrirConfirmarCadastrar(codFuncionario) {
     document.getElementById('textDataConsultaConfirmar').value = dataConsultaCadastrar;
     document.getElementById('textHoraConsultaConfirmar').value = horaConsultaCadastrar;
     document.getElementById('textNomeAnimalCadastrar').value = nomeAnimalConsultaCadastrar;
-    document.getElementById('textNomeAnimalCadastrar').value = codAnimalConsultaCadastrar;
+    document.getElementById('textCodAnimalCadastrar').value = codAnimalConsultaCadastrar;
     document.getElementById('textNomeFuncionarioCadastrar').value = nomeFuncionarioConsultaCadastrar;
     document.getElementById('textCodFuncionarioCadastrar').value = codFuncionarioConsultaCadastrar;
     document.getElementById('textNomeClienteCadastrar').value = nomeClienteConsultaCadastrar;

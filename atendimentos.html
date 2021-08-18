@@ -56,8 +56,7 @@
             <button onclick="location.href='atendimentos.html'" type="button"
                 class="btn _botaosidebar text-muted">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
-            <button onclick="location.href='clientes.html'" type="button"
-                class="btn _botaosidebar">Clientes</button>
+            <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
             <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar">Animais</button>
             <button onclick="location.href='funcionarios.html'" type="button"
                 class="btn _botaosidebar">Colaboradores</button>
@@ -73,30 +72,24 @@
         </div> -->
 
 
-
-
-        <button type="button" class="btn btn-dark _filtrar my-2" onclick="w3.toggleShow('#divFiltro')">Filtrar</button>
-
         <div id="divFiltro">
-            <div class="row">
-                <div class="col-md-2 col-sm-12 my-2">
-                    <input type="date" class="form-control" id="textSemanasInicio" style="width: 170px;">
+            <div class="d-inline-flex m-2">
+                <input type="date" class="form-control" id="textSemanasInicio" style="width: 170px;">
+            </div>
+            <div class="d-inline-flex m-2">
+                <h6 style="padding: 6px 12px;">Até</h6>
+            </div>
+            <div class="d-inline-flex m-2">
+                <input type="date" class="form-control" id="textSemanasFim" style="width: 170px;">
+            </div>
+            <div class="d-inline-flex m-2">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button onclick="pesquisarConsultas()" class="btn btn-dark">🔍 Filtrar</button>
                 </div>
-                <div class="col-md-1 col-sm-12 my-2">
-                    <h6 style="padding: 6px 12px;">Até</h6>
-                </div>
-                <div class="col-md-2 col-sm-12 my-2">
-                    <input type="date" class="form-control" id="textSemanasFim" style="width: 170px;">
-                </div>
-                <div class="col-md-1 col-sm-12 my-2">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button onclick="pesquisarConsultas()" class="btn btn-dark">🔍 Filtrar</button>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <input type="text" class="form-control" id="textFiltro" placeholder="Por data, números e caracteres"
-                        oninput="w3.filterHTML('#tabela', '.item', this.value)">
-                </div>
+            </div>
+            <div class="col-md-12 m-2">
+                <input type="text" class="form-control" id="textFiltro" placeholder="Por data, números e caracteres"
+                    oninput="w3.filterHTML('#tabela', '.item', this.value)">
             </div>
         </div>
         <table class="table table-hover text-center" id="tabela">
@@ -377,8 +370,8 @@
         </div>
     </div>
 
-        <!-- Modal de Alerta de sucesso de operação -->
-        <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Modal de Alerta de sucesso de operação -->
+    <div class="modal fade" id="modalSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
