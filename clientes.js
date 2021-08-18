@@ -72,7 +72,7 @@ function pesquisarClientes() {
                 linha += `<p id="cep${info.codCliente}">${info.cep}</p>`
                 linha += `<p id="rua${info.codCliente}">${info.rua}</p>`
                 linha += `<p id="numero${info.codCliente}">${info.numero}</p>`;
-                linha += `<p id="complemento${info.codCliente}">${info.complemento}</p>`;
+                linha += `<p id="complemento${info.codCliente}">${info.complemento == null ? "" : info.complemento}</p>`;
                 linha += `<p id="bairro${info.codCliente}">${info.bairro}</p>`;
                 linha += `<p id="cidade${info.codCliente}">${info.cidade}</p>`;
                 linha += '</div>'

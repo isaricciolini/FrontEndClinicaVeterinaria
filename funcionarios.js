@@ -67,7 +67,7 @@ function pesquisarFuncionarios() {
                 linha += `<p id="cep${info.codFuncionario}">${info.cep}</p>`
                 linha += `<p id="rua${info.codFuncionario}">${info.rua}</p>`
                 linha += `<p id="numero${info.codFuncionario}">${info.numero}</p>`;
-                linha += `<p id="complemento${info.codFuncionario}">${info.complemento}</p>`;
+                linha += `<p id="complemento${info.codFuncionario}">${info.complemento == null ? "" : info.complemento}</p>`;
                 linha += `<p id="bairro${info.codFuncionario}">${info.bairro}</p>`;
                 linha += `<p id="cidade${info.codFuncionario}">${info.cidade}</p>`;
                 linha += '</div>'
