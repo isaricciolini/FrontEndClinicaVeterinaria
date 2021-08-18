@@ -351,7 +351,7 @@ function abrirAnimais(codCliente) {
                 var linha = `
                 <div class="card col-12 col-md-6">
                                     <div class="card-body">
-                                        <h6><b>Noma do animal:</b> ${animal.nomeAnimal}</h6>
+                                        <h6><b>Nome do animal:</b> ${animal.nomeAnimal}</h6>
                                         <h6><b>CodAnimal:</b> ${animal.codAnimal}</h6>
                                         <h6><b>Tipo:</b> ${animal.tipo}</h6>
                                         <h6><b>Raça:</b> ${animal.raca}</h6>

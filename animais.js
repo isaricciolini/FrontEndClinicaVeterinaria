@@ -21,12 +21,8 @@ var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), 
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
 var modalAlertaDeOperacao = new bootstrap.Modal(document.getElementById('modalAlertaDeOperacao'));
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'));
+var modalDono = new bootstrap.Modal(document.getElementById('modalDono'), {});
 
-
-// var nascimentoAnimal = textNascimentoAnimal.value;
-// var anoAnimal = nascimentoAnimal.getFullYear();
-// var mesAnimal = nascimentoAnimal.getMonth();
-// var diaAnimal = nascimentoAnimal.getDay();
 
 
 
@@ -48,6 +44,7 @@ function pesquisarAnimais() {
                 linha += `<td id="tipoAnimal${animal.codAnimal}">${animal.tipo}</td>`;
                 linha += `<td id="racaAnimal${animal.codAnimal}">${animal.raca}</td>`;
                 linha += `<td id="deficienciaAnimal${animal.codAnimal}">${animal.deficiencia}</td>`;
+                linha += `<td><button class="btn btn-dark" onclick="abrirDono(${animal.codCliente})">Exibir</button></td>`;
                 linha += `<td><button class="btn btn-warning" onclick="abrirAlterar(${animal.codAnimal})">Alterar</button></td>`;
                 linha += `<td><button class="btn btn-danger" onclick="abrirExcluir(${animal.codAnimal})">Excluir</button></td>`;
                 linha += '</tr>';
@@ -58,7 +55,7 @@ function pesquisarAnimais() {
                 corpoTabela.innerHTML += linha;
                 idade(animal.codAnimal);
             }
-            w3.sortHTML('#tabela','.item', 'td:nth-child(1)'); 
+            w3.sortHTML('#tabela', '.item', 'td:nth-child(1)');
         } else if (this.readyState == 4) {
             corpoTabela.innerHTML = 'Erro ao pesquisar animais';
         }
@@ -73,16 +70,16 @@ function idade(codAnimal) {
     var mes = dataAtual.getMonth().toString() + 1;
     var dia = dataAtual.getDay().toString();
     var nascimentoAnimal = document.getElementById(`nascimentoAnimal${codAnimal}`).innerHTML;
-    var anoAnimal = nascimentoAnimal.slice(6,10);
-    var mesAnimal = nascimentoAnimal.slice(3,5);
-    var diaAnimal = nascimentoAnimal.slice(0,2);
+    var anoAnimal = nascimentoAnimal.slice(6, 10);
+    var mesAnimal = nascimentoAnimal.slice(3, 5);
+    var diaAnimal = nascimentoAnimal.slice(0, 2);
     var idade;
     diferencaData = (ano - anoAnimal)
     if (mesAnimal < mes) {
         idade = diferencaData;
     }
     else {
-        if(diaAnimal < dia) {
+        if (diaAnimal < dia) {
             idade = diferencaData;
         } else {
             idade = diferencaData + 1;
@@ -151,7 +148,7 @@ function cadastrarAnimal() {
             pesquisarAnimais();
             modalCadastrar.hide();
             modalSucesso.show();
-        } 
+        }
         else if (this.readyState == 4) {
             modalAlertaDeOperacao.show();
         }
@@ -161,10 +158,35 @@ function cadastrarAnimal() {
     xhttp.send(JSON.stringify(animal));
 }
 
+function abrirDono(CodClienteAnimal) {
+    cardBodyDono.innerHTML = "";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var resposta = JSON.parse(this.response);
+            var cliente = resposta;
+            var linha = `<div class="card-body">
+                            <h6><b>Nome do animal:</b> ${cliente.nomeCliente}</h6>
+                            <h6><b>CodCliente:</b> ${cliente.codCliente}</h6>
+                            <h6><b>Telefone:</b> ${cliente.telefone}</h6>
+                            <h6><b>Email:</b> ${cliente.email}</h6>
+                            <h6><b>Endereço:</b> ${cliente.rua}, ${cliente.numero} ${cliente.bairro} - ${cliente.cidade} ${cliente.complemento == null ? "":cliente.complemento}</h6>
+                            </div>`
+            cardBodyDono.innerHTML += linha;
+        } else if (this.readyState == 4) {
+            cardBodyDono.innerHTML = 'Erro ao pesquisar clientes.';
+        }
+    };
+    xhttp.open('GET', `https://localhost:5001/clientes/${CodClienteAnimal}`, true);
+    xhttp.send();
+    modalDono.show()
+
+}
+
 function abrirAlterar(codAnimal) {
     codAnimalAlterar = codAnimal;
     textNomeAnimalAlterar.value = document.getElementById(`nomeAnimal${codAnimal}`).innerHTML;
-    textNascimentoAlterar.value = document.getElementById(`nascimento${codAnimal}`).innerHTML.slice(0,10);
+    textNascimentoAlterar.value = document.getElementById(`nascimento${codAnimal}`).innerHTML.slice(0, 10);
     textRacaAlterar.value = document.getElementById(`racaAnimal${codAnimal}`).innerHTML;
     textTipoAlterar.value = document.getElementById(`tipoAnimal${codAnimal}`).innerHTML;
     textCodClienteAlterar.value = document.getElementById(`codCliente${codAnimal}`).innerHTML;
@@ -175,7 +197,7 @@ function alterarAnimal() {
     var nomeAnimal = textNomeAnimalAlterar.value;
     var nascimento = textNascimentoAlterar.value;
     var racaAnimal = textRacaAlterar.value;
-    var tipoAnimal = textTipoAlterar.value; 
+    var tipoAnimal = textTipoAlterar.value;
     var codCliente = textCodClienteAlterar.value;
     if (!nomeAnimal || !nascimento || !racaAnimal || !tipoAnimal || !codCliente) {
         modalAlerta.show();

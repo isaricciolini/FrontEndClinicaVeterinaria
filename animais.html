@@ -55,9 +55,9 @@
             <button onclick="location.href='atendimentos.html'" type="button"
                 class="btn _botaosidebar">Atendimentos</button>
             <button onclick="location.href='consultas.html'" type="button" class="btn _botaosidebar">Consultas</button>
-            <button onclick="location.href='clientes.html'" type="button"
-                class="btn _botaosidebar">Clientes</button>
-            <button onclick="location.href='animais.html'" type="button" class="btn _botaosidebar text-muted">Animais</button>
+            <button onclick="location.href='clientes.html'" type="button" class="btn _botaosidebar">Clientes</button>
+            <button onclick="location.href='animais.html'" type="button"
+                class="btn _botaosidebar text-muted">Animais</button>
             <button onclick="location.href='funcionarios.html'" type="button"
                 class="btn _botaosidebar">Colaboradores</button>
         </div>
@@ -93,6 +93,7 @@
                     <th>Tipo</th>
                     <th>Raça</th>
                     <th>Deficiencia</th>
+                    <th>Dono</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -276,6 +277,26 @@
                                 <h5 class="card-title">Operação realizada com sucesso!</h5>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Dono -->
+    <div class="modal fade" id="modalDono" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Dono</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="cardBodyDono">
+                                <!-- Aqui será mostrado informações do dono-->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
