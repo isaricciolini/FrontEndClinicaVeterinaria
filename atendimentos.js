@@ -72,7 +72,7 @@ function pesquisarConsultas(inicio, fim) {
                     linha += `<td id="dataConsulta${info.codConsulta}">${(info.dataConsulta.slice(8, 10)) + "/" + (info.dataConsulta.slice(5, 7)) + "/" + (info.dataConsulta.slice(0, 4))}</td>`;
                     linha += `<td id="horaConsulta${info.codConsulta}">${info.dataConsulta.slice(11, 16)}</td>`;
                     linha += `<td> ${info.tipo} | ${info.nomeAnimal} | ${info.nomeCliente}</td>`
-                    linha += `<td id="peso${info.codConsulta}">${info.peso}Kg</td>`;
+                    linha += `<td>${info.peso}Kg</td>`;
                     linha += `<td><button class="btn btn-dark" onclick="abrirDados(${info.codAnimal})">Dados</button></td>`;
                     linha += `<td><button class="btn btn-dark" onclick="abrirDescricao(${info.codConsulta})">Exibir</button></td>`;
                     linha += `<td><div class="btn-group" role="group" aria-label="Basic example">
@@ -87,7 +87,8 @@ function pesquisarConsultas(inicio, fim) {
                         linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-danger">Excluir</button></td>`
                     }
                     linha += '</tr>';
-                    linha += '<div style="display: none;">'
+                    linha += '<div style="display: none;">';
+                    linha += `<p id="peso${info.codConsulta}">${info.peso}</p>`;
                     linha += `<p id="descricao${info.codConsulta}">${info.descricao}</p>`;
                     linha += `<p id="codFuncionario${info.codConsulta}">${info.codFuncionario}</p>`;
                     linha += `<p id="codAnimal${info.codConsulta}">${info.codAnimal}</p>`;
