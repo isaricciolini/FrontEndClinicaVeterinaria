@@ -11,7 +11,7 @@ var textTipoAnimalCompleto = document.getElementById('textTipoAnimalCompleto')
 var textDeficienciaAnimalCompleto = document.getElementById('textDeficienciaAnimalCompleto')
 var textCodClienteConsulta = document.getElementById('textCodClienteConsulta')
 var textCodAnimalConsulta = document.getElementById('textCodAnimalConsulta')
-var textCodVeterinarioConsulta = document.getElementById('textCodVeterinarioConsulta')
+var textcodFuncionarioConsulta = document.getElementById('textcodFuncionarioConsulta')
 var textDataConsulta = document.getElementById('textDataConsulta')
 var textPesoConsulta = document.getElementById('textPesoConsulta')
 var textDescricaoConsulta = document.getElementById('textDescricaoConsulta')
@@ -68,7 +68,7 @@ function abrirConsulta(codAnimal) {
                 <div class="card col-12 col-md-6">
                                     <div class="card-body">
                                         <h5 class="card-title">Consulta ${consulta.codConsulta}</h5>
-                                        <p class="card-text"><b>Cod.Veterinario: </b>${consulta.codVeterinario}<br>
+                                        <p class="card-text"><b>Cod.Veterinario: </b>${consulta.codFuncionario}<br>
                                         <b>Data: </b>${(consulta.dataConsulta.slice(8, 10)) + "/" + (consulta.dataConsulta.slice(5, 7)) + "/" + (consulta.dataConsulta.slice(0, 4))}<br>
                                         <b>Hora: </b>${consulta.dataConsulta.slice(11,16)}<br>
                                         <b>Peso do animal: </b>${consulta.peso}Kg<br>
