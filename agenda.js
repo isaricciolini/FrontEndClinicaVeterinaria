@@ -122,14 +122,18 @@ function abrirCadastrarListaClientes() {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
-                var cliente = resposta[i];
-                var linha = '<tr class="itemClientes">';
-                linha += `<td>${cliente.codCliente}</td>`;
-                linha += `<td id="nomeClienteConsultaCadastrar${cliente.codCliente}">${cliente.nomeCliente}</td>`;
-                linha += `<td>${cliente.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
-                linha += `<td><button onclick="abrirCadastrarListaAnimais(${cliente.codCliente})" class="btn btn-dark">+</button></td>`
-                linha += '</tr>';
-                corpoTabelaClientes.innerHTML += linha;
+                if (info.cpf == 00000000000) {
+                }
+                else {
+                    var cliente = resposta[i];
+                    var linha = '<tr class="itemClientes">';
+                    linha += `<td>${cliente.codCliente}</td>`;
+                    linha += `<td id="nomeClienteConsultaCadastrar${cliente.codCliente}">${cliente.nomeCliente}</td>`;
+                    linha += `<td>${cliente.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>`;
+                    linha += `<td><button onclick="abrirCadastrarListaAnimais(${cliente.codCliente})" class="btn btn-dark">+</button></td>`
+                    linha += '</tr>';
+                    corpoTabelaClientes.innerHTML += linha;
+                }
             }
         } else if (this.readyState == 4) {
             corpoTabelaClientes.innerHTML = 'Erro ao pesquisar clientes.';
@@ -179,16 +183,16 @@ function abrirCadastrarListaFuncionarios(codAnimal) {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
-                    var vet = resposta[i];
-                    if(!vet.crmv == null|| !vet.crmv == undefined|| !vet.crmv == "") {
-                        var linha = '<tr class="itemFuncionarios">';
-                        linha += `<td>${vet.codFuncionario}</td>`;
-                        linha += `<td id="nomeFuncionarioConsultaCadastrar${vet.codFuncionario}">${vet.nomeFuncionario}</td>`;
-                        linha += `<td>${vet.crmv}</td>`;
-                        linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${vet.codFuncionario})">+</button></td>`;
-                        linha += '</tr>';
-                        corpoTabelaFuncionarios.innerHTML += linha;
-                    }
+                var vet = resposta[i];
+                if (!vet.crmv == null || !vet.crmv == undefined || !vet.crmv == "") {
+                    var linha = '<tr class="itemFuncionarios">';
+                    linha += `<td>${vet.codFuncionario}</td>`;
+                    linha += `<td id="nomeFuncionarioConsultaCadastrar${vet.codFuncionario}">${vet.nomeFuncionario}</td>`;
+                    linha += `<td>${vet.crmv}</td>`;
+                    linha += `<td><button class="btn btn-dark" onclick="abrirConfirmarCadastrar(${vet.codFuncionario})">+</button></td>`;
+                    linha += '</tr>';
+                    corpoTabelaFuncionarios.innerHTML += linha;
+                }
             }
         } else if (this.readyState == 4) {
             corpoTabelaFuncionarios.innerHTML = 'Nenhum animal cadastrado.';
@@ -210,10 +214,10 @@ function abrirListaFuncionarios() {
             var resposta = JSON.parse(this.response);
             var linha = `<option selected>Selecione um veterinário</option>`;
             for (var i = 0; i < resposta.length; i++) {
-                    var vet = resposta[i];
-                    if(!vet.crmv == null|| !vet.crmv == undefined|| !vet.crmv == "") {
-                        linha += `<option value=${vet.codFuncionario}>${vet.nomeFuncionario}</option>`;
-                    }
+                var vet = resposta[i];
+                if (!vet.crmv == null || !vet.crmv == undefined || !vet.crmv == "") {
+                    linha += `<option value=${vet.codFuncionario}>${vet.nomeFuncionario}</option>`;
+                }
             }
             dropdownVet.innerHTML += linha;
         } else if (this.readyState == 4) {
@@ -265,7 +269,7 @@ function cadastrarConsulta() {
             exibirAgenda();
             modalSucesso.show();
         } else if (this.readyState == 4) {
-           modalAlertaDeOperacao.show();
+            modalAlertaDeOperacao.show();
         }
     };
     xhttp.open('POST', url, true);
@@ -330,9 +334,8 @@ function limpar() {
     textNomeFuncionario.value = '';
 }
 
-function ListaVeterinarios()
-    {
-        var xhttp = new XMLHttpRequest();
+function ListaVeterinarios() {
+    var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
@@ -347,4 +350,4 @@ function ListaVeterinarios()
     };
     xhttp.open('GET', `${url}/lista/veterinarios`, true);
     xhttp.send();
-    }
+}
