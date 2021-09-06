@@ -27,6 +27,7 @@ var modalAlterar = new bootstrap.Modal(document.getElementById('modalAlterar'), 
 var modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'), {});
 var modalCadastrarReceita = new bootstrap.Modal(document.getElementById('modalCadastrarReceita'), {});
 var modalReceitas = new bootstrap.Modal(document.getElementById('modalReceitas'), {});
+var modalAlertaVeterinario = new bootstrap.Modal(document.getElementById('modalAlertaVeterinario'), {});
 
 var modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {});
 var modalAlerta = new bootstrap.Modal(document.getElementById('modalAlerta'), {});
@@ -45,7 +46,7 @@ var smm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
 var syyyy = now.getFullYear();
 var fim = syyyy + '-' + smm + '-' + sdd;
 textSemanasInicio.value = inicio;
-textSemanasFim.value = fim; 
+textSemanasFim.value = fim;
 
 
 var textCodConsultaExcluir = document.getElementById('textCodConsultaExcluir');
@@ -73,8 +74,6 @@ function pesquisarConsultas(inicio, fim) {
                 linha += `<td id="descricao${info.codConsulta}">${info.descricao}</td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirCadastrarReceita(${info.codConsulta})">+ Receita</button></td>`;
                 linha += `<td><button class="btn btn-dark" onclick="abrirReceitas(${info.codConsulta})">Exibir</button></td>`;
-                linha += `<td><button onclick="abrirAlterar(${info.codConsulta})" class="btn btn-warning">Alterar</button></td>`;
-                linha += `<td><button onclick="abrirExcluir(${info.codConsulta})" class="btn btn-danger">Excluir</button></td>`;
                 linha += '</tr>';
                 corpoTabela.innerHTML += linha;
             }
@@ -83,7 +82,7 @@ function pesquisarConsultas(inicio, fim) {
             corpoTabela.innerHTML = 'Erro ao pesquisar consultas.';
         }
     };
-    if(crmv == null || crmv == "") {
+    if (crmv == null || crmv == "") {
         xhttp.open('GET', `${url}/atendimento/${inicio}ate${fim}`, true);
         xhttp.send();
     }
@@ -285,6 +284,12 @@ function abrirReceitas(codConsulta) {
 }
 
 function abrirCadastrarReceita(codConsulta) {
-    document.getElementById(`textCodConsultaModal`).value = codConsulta;
-    modalCadastrarReceita.show();
+    if (getCookie("crmv")) {
+        document.getElementById(`textCodConsultaModal`).value = codConsulta;
+        modalCadastrarReceita.show();
+    }
+    else {
+        modalAlertaVeterinario.show();
+    }
+
 }
