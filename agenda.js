@@ -122,10 +122,10 @@ function abrirCadastrarListaClientes() {
         if (this.readyState == 4 && this.status == 200) {
             var resposta = JSON.parse(this.response);
             for (var i = 0; i < resposta.length; i++) {
-                if (info.cpf == 00000000000) {
+                var cliente = resposta[i];
+                if (cliente.cpf == 00000000000) {
                 }
                 else {
-                    var cliente = resposta[i];
                     var linha = '<tr class="itemClientes">';
                     linha += `<td>${cliente.codCliente}</td>`;
                     linha += `<td id="nomeClienteConsultaCadastrar${cliente.codCliente}">${cliente.nomeCliente}</td>`;
